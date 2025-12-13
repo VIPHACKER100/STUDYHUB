@@ -1,0 +1,31 @@
+{
+    "name": "notes-assignment-platform",
+    "version": "1.0.0",
+    "description": "StudyHub - Comprehensive educational platform for sharing notes, assignments, and real-time collaboration",
+    "private": true,
+    "workspaces": [
+        "server",
+        "client"
+    ],
+    "scripts": {
+        "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+        "server:dev": "npm run dev --workspace=server",
+        "client:dev": "npm run dev --workspace=client",
+        "server:start": "npm start --workspace=server",
+        "client:build": "npm run build --workspace=client",
+        "install:all": "npm install && npm install --workspace=server && npm install --workspace=client"
+    },
+    "keywords": [
+        "education",
+        "notes-sharing",
+        "messaging",
+        "collaboration"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "jest": "^30.2.0",
+        "supertest": "^7.1.4"
+    }
+}

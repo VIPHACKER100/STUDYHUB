@@ -1,0 +1,35 @@
+{
+    "name": "client",
+    "version": "1.0.0",
+    "description": "Frontend client for StudyHub Platform",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@tanstack/react-query": "^5.17.9",
+        "axios": "^1.6.5",
+        "date-fns": "^2.30.0",
+        "emoji-picker-react": "^4.5.16",
+        "lucide-react": "^0.303.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-hot-toast": "^2.4.1",
+        "react-router-dom": "^6.21.1",
+        "socket.io-client": "^4.7.2",
+        "vite-plugin-pwa": "^1.2.0",
+        "workbox-window": "^7.4.0",
+        "zustand": "^4.4.7"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.48",
+        "@types/react-dom": "^18.2.18",
+        "@vitejs/plugin-react": "^4.2.1",
+        "autoprefixer": "^10.4.16",
+        "postcss": "^8.4.33",
+        "tailwindcss": "^3.4.1",
+        "vite": "^7.2.7"
+    }
+}

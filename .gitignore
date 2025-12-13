@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Uploads
+server/uploads/
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+
+# Testing
+coverage/
+.nyc_output/
+*.test.js.snap
+
+# Error logs
+error_log*.txt
+
+# Temporary files
+*.tmp
+*.temp
+test_output*.txt
+
+# Cache
+.cache/
+.parcel-cache/
+
+# PM2
+.pm2/
