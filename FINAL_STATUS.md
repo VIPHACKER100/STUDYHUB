@@ -8,7 +8,7 @@
 
 ---
 
-## 📦 What's Included
+## 📦 What's Included,
 
 ### Complete Application
 - ✅ Full-stack educational collaboration platform
