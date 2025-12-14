@@ -11,18 +11,41 @@ dotenv.config({ path: path.join(__dirname, '../../../.env') });
 dotenv.config(); // fallback to default
 
 // MySQL connection pool
-const pool = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 3306,
-    database: process.env.DB_NAME || 'studyhub',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD,
-    waitForConnections: true,
-    connectionLimit: 20,
-    queueLimit: 0,
-    enableKeepAlive: true,
-    keepAliveInitialDelay: 0
-});
+let poolConfig;
+if (process.env.DATABASE_URL) {
+    // Parse DATABASE_URL (e.g., mysql://user:pass@host:port/dbname)
+    const url = new URL(process.env.DATABASE_URL);
+    poolConfig = {
+        host: url.hostname,
+        port: Number(url.port) || 3306,
+        database: url.pathname.replace(/^\//, ''),
+        user: url.username,
+        password: url.password,
+        waitForConnections: true,
+        connectionLimit: 20,
+        queueLimit: 0,
+        enableKeepAlive: true,
+        keepAliveInitialDelay: 0,
+        // Ensure SSL if Railway requires it (optional)
+        ssl: {
+            rejectUnauthorized: false
+        }
+    };
+} else {
+    poolConfig = {
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 3306,
+        database: process.env.DB_NAME || 'studyhub',
+        user: process.env.DB_USER || 'root',
+        password: process.env.DB_PASSWORD,
+        waitForConnections: true,
+        connectionLimit: 20,
+        queueLimit: 0,
+        enableKeepAlive: true,
+        keepAliveInitialDelay: 0
+    };
+}
+const pool = mysql.createPool(poolConfig);
 
 // Test database connection
 pool.getConnection()
