@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 import App from './App';
 import './index.css';
+
+// Initialize Vercel Speed Insights (client-side only)
+injectSpeedInsights();
 
 const queryClient = new QueryClient({
     defaultOptions: {
