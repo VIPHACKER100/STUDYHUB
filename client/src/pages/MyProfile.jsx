@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, User, BookOpen, Clock, AlertTriangle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import useAuthStore from '../stores/authStore';
@@ -26,17 +27,19 @@ export default function MyProfile() {
                 ? '/api/uploads/bookmarks/me'
                 : '/api/uploads/user/me';
 
-            // Note: downloads history endpoint not yet explicitly created in controller, using placeholders
-
             const res = await axios.get(endpoint, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
 
-            const data = activeTab === 'bookmarks' ? res.data.data.bookmarks : res.data.data.uploads;
-            setItems(data || []);
+            if (res.data && res.data.success && res.data.data) {
+                const data = activeTab === 'bookmarks' ? res.data.data.bookmarks : res.data.data.uploads;
+                setItems(Array.isArray(data) ? data : []);
+            } else {
+                setItems([]);
+            }
         } catch (error) {
-            console.error(error);
-            // toast.error("Failed to load items");
+            console.error('Fetch items error:', error);
+            setItems([]);
         } finally {
             setLoading(false);
         }
