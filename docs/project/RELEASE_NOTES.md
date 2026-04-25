@@ -1,6 +1,34 @@
-# StudyHub - Release Notes v1.0.0
+# StudyHub - Release Notes
 
-## 🎉 Initial Release - December 2025
+## 🚀 v1.1.0 Intelligence & Community Update - April 2026
+
+We're thrilled to launch **v1.1.0**, focusing on making StudyHub more intelligent and community-driven with AI features and gamification!
+
+### ✨ What's New
+
+#### 🧠 Intelligence Layer
+- **AI Content Recommendations** - Automatically find relevant notes based on your interaction history.
+- **Smart PDF Summarization** - Generate executive summaries of long documents using Google Gemini AI.
+- **Global Trending** - Discover what's popular across the entire platform in real-time.
+
+#### 🏆 Gamification & Community
+- **Global Leaderboards** - Compete for the top spot in "Top Contributors" and "Top Learners".
+- **Badge Achievement System** - Earn 12+ unique badges (Legend, Scholar, Critic, etc.) for your contributions.
+- **Achievement Showcase** - Display your hard-earned badges on your profile and leaderboards.
+- **Global Navbar** - A completely redesigned, responsive navigation experience with notification sync.
+
+#### ⚡ Performance & Reliability
+- **PWA Ready** - Install StudyHub on your desktop or mobile for a native-like experience.
+- **Offline Reliability** - NetworkFirst caching ensures you can access content even with a spotty connection.
+- **Redis Caching** - Blazing fast response times for recommendations and analytics trends.
+
+#### 🎨 Design Overhaul
+- **Premium Dashboard** - New hero banner, glassmorphism effects, and high-fidelity feature cards.
+- **Mobile Experience** - Enhanced responsive layouts for all new intelligence features.
+
+---
+
+## 🎉 Initial Release v1.0.0 - December 2025
 
 We're excited to announce the initial release of **StudyHub**, a comprehensive educational collaboration platform!
 
@@ -133,17 +161,12 @@ cd .. && npm run dev
 
 ## 🔮 Roadmap
 
-### v1.1.0 (Planned)
-- Redis caching for improved performance
-- Enhanced analytics dashboard
-- Mobile app (React Native)
-- Video/audio calling
-
 ### v1.2.0 (Planned)
-- AI-powered content recommendations
+- Mobile app (React Native)
+- Video study rooms (WebRTC)
+- AI Tutor integration (RAG-based)
+- Shared study calendars
 - Plagiarism detection
-- Calendar integration
-- Study group scheduling
 
 ## 🙏 Acknowledgments
 

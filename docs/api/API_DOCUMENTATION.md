@@ -103,3 +103,35 @@ Base URL: `http://localhost:5000/api`
 
 ### Delete Upload (Admin)
 `DELETE /admin/uploads/:id`
+
+---
+
+## Leaderboards
+
+### Get Rankings
+`GET /leaderboard`
+- Returns: `{ topContributors, topLearners, userRank }`
+- Includes badges and rank metrics.
+
+---
+
+## Recommendations
+
+### Get Personalized Recommendations
+`GET /recommendations`
+- Headers: `Authorization: Bearer <token>`
+- Returns: Top 6 suggestions based on user download history.
+
+### Get Trending Content
+`GET /recommendations/trending`
+- Returns: Top 10 globally popular items.
+
+---
+
+## AI Features
+
+### Generate Smart Summary
+`POST /ai/summarize/:uploadId`
+- Headers: `Authorization: Bearer <token>`
+- Returns: `{ summary }` (Markdown format)
+- Requires: PDF or Text document.

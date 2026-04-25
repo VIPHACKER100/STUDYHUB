@@ -5,6 +5,7 @@ import {
     MessageSquare, Users, Upload, BookOpen,
     Trophy, Search, Bell, TrendingUp
 } from 'lucide-react';
+import RecommendationSection from '../components/dashboard/RecommendationSection';
 
 const features = [
     {
@@ -97,6 +98,9 @@ export default function Dashboard() {
                     ))}
                 </div>
             </section>
+
+            {/* AI Recommendations */}
+            <RecommendationSection />
 
             {/* Stats Row */}
             <section>

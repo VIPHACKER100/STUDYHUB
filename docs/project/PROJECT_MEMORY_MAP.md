@@ -2,7 +2,7 @@
 
 This document is the living architectural reference for the StudyHub codebase. Update it whenever a new service, layer, or major component is added.
 
-**Last Updated:** April 2026 | **Version:** 1.1.0
+**Last Updated:** April 2026 | **Version:** 1.2.0
 
 ---
 
@@ -116,7 +116,10 @@ STUDYHUB/
 │   │   │   ├── userController.js    # ✅ Public Profile, Uploads by user
 │   │   │   ├── adminController.js   # ✅ Stats + Redis Cache, Trends, Users, Reports, Uploads
 │   │   │   ├── searchController.js  # ✅ Cross-entity search
-│   │   │   └── notificationController.js # ✅ In-app notifications
+│   │   │   ├── notificationController.js # ✅ In-app notifications
+│   │   │   ├── leaderboardController.js # ✅ Achievement ranks & badge logic
+│   │   │   ├── recommendationController.js # ✅ Personalized AI content suggestions
+│   │   │   └── aiController.js       # ✅ Smart document summarization orchestration
 │   │   ├── models/
 │   │   │   ├── User.js              # ✅
 │   │   │   ├── Upload.js            # ✅
@@ -132,15 +135,19 @@ STUDYHUB/
 │   │   │   ├── userRoutes.js        # ✅
 │   │   │   ├── adminRoutes.js       # ✅ + /trends endpoint
 │   │   │   ├── searchRoutes.js      # ✅
-│   │   │   └── notificationRoutes.js # ✅
+│   │   │   ├── notificationRoutes.js # ✅
+│   │   │   ├── leaderboardRoutes.js  # ✅
+│   │   │   ├── recommendationRoutes.js # ✅
+│   │   │   └── aiRoutes.js           # ✅
 │   │   ├── middleware/
 │   │   │   ├── auth.js              # ✅ authMiddleware, requireAdmin
 │   │   │   ├── rateLimiter.js       # ✅ apiLimiter, authLimiter, uploadLimiter
 │   │   │   └── upload.js            # ✅ Multer config
 │   │   ├── services/
 │   │   │   ├── emailService.js      # ✅ Welcome, Verify, Reset, Digest
-│   │   │   ├── cacheService.js      # ✅ NEW - Redis get/set/del/delPattern
-│   │   │   └── cronService.js       # ✅ Daily digest scheduler
+│   │   │   ├── cacheService.js      # ✅ Redis get/set/del/delPattern
+│   │   │   ├── cronService.js       # ✅ Daily digest scheduler
+│   │   │   └── aiService.js         # ✅ Google Gemini + PDF Extraction
 │   │   ├── socket/
 │   │   │   └── handlers.js          # ✅ setupMessageHandlers, setupRoomHandlers, setupPresenceHandlers
 │   │   ├── database/
@@ -205,13 +212,21 @@ User sends message → POST /api/messages/send
                    → MessageStore update → UI re-render
 ```
 
-### 5. Admin Dashboard Stats (Cached)
+### 6. AI Recommendations
 ```
-GET /api/admin/stats → cacheService.get('admin:stats')
-    ├── HIT  → return cached stats (TTL: 10 min)
-    └── MISS → 6 parallel DB queries → aggregate
-             → cacheService.set('admin:stats', data, 600s)
-Cache invalidated on: user role change, user toggle, report resolve, upload delete
+GET /api/recommendations → Get user interaction history (downloads)
+                         → Find top 3 frequent subjects
+                         → Fetch top-rated uploads in those subjects (not yet downloaded)
+                         → Fallback to global trending if no history
+                         → Cache result (1 hour)
+```
+
+### 7. Smart PDF Summarization
+```
+POST /api/ai/summarize/:id → Extract text from PDF using pdf-parse
+                           → Send prompt to Gemini API (gemini-pro)
+                           → Format response (Overview + Key Takeaways)
+                           → Cache result (24 hours)
 ```
 
 ---

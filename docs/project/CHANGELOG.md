@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-04-25
+
+### ✨ AI & Community Update
+
+This update introduces intelligent content discovery and gamified learning experiences.
+
+### Added
+
+#### AI & Recommendations
+- **Personalized Recommendations** - Interests-based content discovery logic
+- **Global Trending** - Real-time trending content algorithm
+- **Smart PDF Summary** - AI-driven executive summaries for documents
+- **Gemini AI Integration** - Powered by Google's generative models
+- **PDF Text Extraction** - Native text processing for documents
+
+#### Gamification & Community
+- **Leaderboard System** - Global ranks for Top Contributors and Top Learners
+- **Badge Engine** - 12+ unique achievements across 3 categories
+- **Achievement Showcase** - Personal badge display in the profile and leaderboard
+- **Global Navigation** - Redesigned responsive Navbar with notification integration
+
+#### Performance & Reliability
+- **Redis Caching** - Advanced caching for recommendations and analytics
+- **PWA Support** - Fully installable web application manifest
+- **Offline Mode** - NetworkFirst service worker caching for reliability
+
+#### Design
+- **Dashboard Overhaul** - Premium glassmorphism UI with hero banners
+- **Feature Cards** - Redesigned interactive entry points with gradients
+
+### Changed
+- Refactored `App.jsx` to use a global `Layout` wrapper
+- Enhanced `adminController.js` with cached trend analytics
+- Optimized `vite.config.js` for PWA and production build performance
+
+### Fixed
+- PWA branding inconsistency (renamed to StudyHub)
+- Sidebar mobile responsiveness in messaging view
+
 ## [1.0.0] - 2025-12-14
 
 ### 🎉 Initial Release
@@ -144,14 +183,10 @@ The first production-ready release of StudyHub!
 ## [Unreleased]
 
 ### Planned Features
-- Redis caching for improved performance
-- Two-factor authentication (2FA)
-- Video/audio calling
-- AI-powered content recommendations
-- Advanced analytics dashboard
 - Mobile app (React Native)
-- Calendar integration
-- Study group scheduling
+- Video study rooms (WebRTC)
+- AI Tutor integration (RAG-based)
+- Shared study calendars
 - Plagiarism detection
 - Enhanced file preview
 - Collaborative document editing

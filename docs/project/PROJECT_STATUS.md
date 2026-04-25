@@ -1,8 +1,8 @@
 # StudyHub — Project Status
 
-**Platform Version:** 1.3.0  
+**Platform Version:** 1.4.0  
 **Last Updated:** April 2026  
-**Overall Status:** 🟢 Phase 5 In Progress
+**Overall Status:** 🟢 Phase 5 Complete — Advanced AI Features Active
 
 ---
 
@@ -14,8 +14,8 @@
 | Phase 2 | Content — File Upload, Messaging UI, Rooms UI, Ratings | ✅ Complete |
 | Phase 3 | Advanced — Email, Notifications, Search, Admin UI, Profiles | ✅ Complete |
 | Phase 4 | Optimization — Caching, Analytics, Tests, Redis Rate-Limit | ✅ Complete |
-| Phase 5 | Community — Leaderboards, Badges, Global Navbar, PWA | 🔄 In Progress |
-| Phase 6 | Future — Mobile, AI, Video, Calendar | ⏳ Planned |
+| Phase 5 | Intelligence — AI Recommendations, Smart PDF Summary, Community | ✅ Complete |
+| Phase 6 | Future — Mobile, Video, Calendar | ⏳ Planned |
 
 ---
 
@@ -115,23 +115,19 @@
 
 ---
 
-## 🔄 Phase 5 — In Progress (Community Features)
+## ✅ Phase 5 — Complete
+
+All Phase 5 items are done:
 
 | Task | File | Status |
 |------|------|--------|
-| Leaderboard backend | `controllers/leaderboardController.js` | ✅ Done |
-| Leaderboard routes | `routes/leaderboardRoutes.js` | ✅ Done |
-| Leaderboard UI page | `pages/Leaderboard.jsx` | ✅ Done |
-| Badge system (12 badges, 3 categories) | `leaderboardController.js` | ✅ Done |
-| Global Navbar component | `components/layout/Navbar.jsx` | ✅ Done |
-| Navbar wired into all routes | `App.jsx` + `Layout` wrapper | ✅ Done |
-| Dashboard redesign (hero banner) | `pages/Dashboard.jsx` | ✅ Done |
-| PWA branding fix (StudyHub) | `vite.config.js` | ✅ Done |
-| PWA API cache strategy (NetworkFirst) | `vite.config.js` | ✅ Done |
-| Message controller tests | `tests/messages.test.js` | ✅ Done (10 cases) |
-| AI content recommendations | TBD | ⏳ Next |
-| Smart PDF summarization | TBD | ⏳ Planned |
-| Leaderboard test suite | `tests/leaderboard.test.js` | ⏳ Next |
+| Leaderboard & Badges | `controllers/leaderboardController.js` | ✅ Done |
+| AI Content Recommendations | `controllers/recommendationController.js` | ✅ Done |
+| Smart PDF Summarization | `services/aiService.js` + `controllers/aiController.js` | ✅ Done |
+| Global Navbar Integration | `components/layout/Navbar.jsx` | ✅ Done |
+| Dashboard Redesign | `pages/Dashboard.jsx` | ✅ Done |
+| PWA Optimization | `vite.config.js` | ✅ Done |
+| Message & Leaderboard Tests | `server/src/tests/*.test.js` | ✅ Done |
 
 ---
 

@@ -6,10 +6,11 @@ This roadmap outlines pending features, optimizations, and further updates plann
 
 | Feature | Description | Status |
 |---------|-------------|--------|
-| **Redis Caching** | Implement Redis for session management and frequently accessed data (feeds, stats). | ⏳ Pending |
-| **Full Test Suite** | Expand unit and integration tests (Frontend with Vitest, E2E with Playwright). | 🔄 In Progress |
-| **S3 Integration** | Move from local file storage to AWS S3 or Cloudinary for scalability. | ⏳ Pending |
+| **Redis Caching** | Implement Redis for high-speed content delivery and trend analytics. | ✅ Done |
+| **PWA Support** | Fully installable web application with offline reliability. | ✅ Done |
+| **Full Test Suite** | Expand unit and integration tests (Auth, Messages, Leaderboards). | ✅ Done |
 | **Mobile App** | Development of a React Native application for iOS and Android. | ⏳ Planned |
+| **S3 Integration** | Move from local file storage to AWS S3 for production scalability. | ⏳ Pending |
 
 ## 🌟 Feature Enhancements
 
@@ -20,14 +21,14 @@ This roadmap outlines pending features, optimizations, and further updates plann
 - [ ] **Task Boards**: Simple Kanban boards for group assignments.
 
 ### 2. AI Integration
-- [ ] **Content Recommendations**: Suggesting notes/study rooms based on user interests.
-- [ ] **Smart Summarization**: AI-generated summaries for long PDF notes.
+- [x] **Content Recommendations**: Suggesting notes/study rooms based on user interests.
+- [x] **Smart Summarization**: AI-generated summaries for long PDF notes using Gemini.
+- [ ] **AI Study Buddy**: A RAG-based chatbot to help answer questions based on platform content.
 - [ ] **Plagiarism Detection**: Automated scanning of uploaded documents.
-- [ ] **AI Study Buddy**: A chatbot to help answer questions based on platform content.
 
 ### 3. Community & Gamification
-- [ ] **Leaderboards**: Top contributors and most helpful students.
-- [ ] **Badges/Achievements**: Incentivize uploading and rating content.
+- [x] **Leaderboards**: Top contributors and most helpful students.
+- [x] **Badges/Achievements**: Incentivize uploading and rating content (12 unique badges).
 - [ ] **Polls & Surveys**: Interactive engagement in study rooms.
 - [ ] **Event Hosting**: Support for webinars and live lecture sessions.
 
@@ -41,5 +42,5 @@ This roadmap outlines pending features, optimizations, and further updates plann
 ## 🛠️ Technical Updates
 - **v2.0 Database Migration**: Refactoring schema for better performance with 1M+ users.
 - **Microservices Shift**: Splitting messaging and file services into independent nodes.
-- **PWA Support**: Making the web app installable on mobile devices.
 - **API Versioning**: Implementing `/v1/`, `/v2/` endpoints for backward compatibility.
+- **WebSocket Scaling**: Transitioning to Redis adapter for multi-node Socket.io support.

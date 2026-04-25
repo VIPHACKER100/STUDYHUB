@@ -8,6 +8,8 @@ import searchRoutes from './searchRoutes.js';
 import adminRoutes from './adminRoutes.js';
 import userRoutes from './userRoutes.js';
 import leaderboardRoutes from './leaderboardRoutes.js';
+import recommendationRoutes from './recommendationRoutes.js';
+import aiRoutes from './aiRoutes.js';
 
 const router = express.Router();
 
@@ -21,6 +23,8 @@ router.use('/search', searchRoutes);
 router.use('/admin', adminRoutes);
 router.use('/users', userRoutes);
 router.use('/leaderboard', leaderboardRoutes);
+router.use('/recommendations', recommendationRoutes);
+router.use('/ai', aiRoutes);
 
 
 // Health check

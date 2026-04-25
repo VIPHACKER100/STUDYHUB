@@ -31,6 +31,7 @@ Welcome to the StudyHub documentation. This directory is organized into logical 
 - [License](../LICENSE) - Project license information.
 
 ### 🕒 History
+- [Phase 5 Complete](history/PHASE5_COMPLETE.md)
 - [Phase 3 Complete](history/PHASE3_COMPLETE.md)
 - [Phase 2 Complete](history/PHASE2_COMPLETE.md)
 - [Changelog](project/CHANGELOG.md)
