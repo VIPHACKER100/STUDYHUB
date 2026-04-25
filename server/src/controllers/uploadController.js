@@ -3,6 +3,7 @@ import Notification from '../models/Notification.js';
 import { body, validationResult } from 'express-validator';
 import path from 'path';
 import fs from 'fs';
+import cacheService from '../services/cacheService.js';
 
 /**
  * Upload Controller
@@ -76,6 +77,9 @@ export const createUpload = [
                 // Don't fail the upload just because notification failed
             }
 
+            // Invalidate uploads cache
+            await cacheService.delPattern('uploads:*');
+
             res.status(201).json({
                 success: true,
                 message: 'File uploaded successfully',
@@ -100,6 +104,17 @@ export const getUploads = async (req, res) => {
     try {
         const { type, subject, search, page, limit, sortBy, sortOrder } = req.query;
 
+        // Cache Key
+        const cacheKey = `uploads:list:${JSON.stringify(req.query)}`;
+        const cachedData = await cacheService.get(cacheKey);
+        if (cachedData) {
+            return res.json({
+                success: true,
+                data: cachedData,
+                fromCache: true
+            });
+        }
+
         const result = await Upload.getAll({
             type,
             subject,
@@ -109,6 +124,9 @@ export const getUploads = async (req, res) => {
             sortBy,
             sortOrder,
         });
+
+        // Store in cache for 5 minutes
+        await cacheService.set(cacheKey, result, 300);
 
         res.json({
             success: true,
@@ -131,6 +149,18 @@ export const getUploads = async (req, res) => {
 export const getUpload = async (req, res) => {
     try {
         const { id } = req.params;
+
+        // Cache Key
+        const cacheKey = `uploads:detail:${id}`;
+        const cachedData = await cacheService.get(cacheKey);
+        if (cachedData) {
+            return res.json({
+                success: true,
+                data: cachedData,
+                fromCache: true
+            });
+        }
+
         const upload = await Upload.getById(id);
 
         if (!upload) {
@@ -139,6 +169,9 @@ export const getUpload = async (req, res) => {
                 message: 'Upload not found',
             });
         }
+
+        // Store in cache for 1 hour
+        await cacheService.set(cacheKey, { upload }, 3600);
 
         res.json({
             success: true,
@@ -205,6 +238,10 @@ export const updateUpload = async (req, res) => {
             });
         }
 
+        // Invalidate cache
+        await cacheService.del(`uploads:detail:${id}`);
+        await cacheService.delPattern('uploads:list:*');
+
         res.json({
             success: true,
             message: 'Upload updated successfully',
@@ -236,6 +273,10 @@ export const deleteUpload = async (req, res) => {
                 message: 'Upload not found or unauthorized',
             });
         }
+
+        // Invalidate cache
+        await cacheService.del(`uploads:detail:${id}`);
+        await cacheService.delPattern('uploads:list:*');
 
         res.json({
             success: true,

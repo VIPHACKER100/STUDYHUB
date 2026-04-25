@@ -1,315 +1,195 @@
-# StudyHub
-## Project Status: Phase 3 Complete (Advanced Features) ✅
+# StudyHub — Project Status
 
-This project was generated as a foundational implementation combining file sharing, real-time messaging, and anonymous collaboration features for educational use.
-
----
-
-## 🎯 What's Been Built (Phase 1 MVP)
-
-### ✅ Backend Infrastructure  
-- **Express Server** with Socket.io integration
-- **PostgreSQL Database** with 20+ tables (users, messages, rooms, uploads, etc.)
-- **JWT Authentication** system with role-based access control
-- **Direct Messaging API** - Full CRUD operations for private conversations
-- **Anonymous Chat Rooms API** - Create, join, manage study rooms
-- **Real-time WebSocket** handlers for live messaging
-- **Database Setup Script** - Auto-creates all tables with initial admin user
-
-### ✅ Frontend Application
-- **React 18** with Vite and TailwindCSS
-- **Authentication Pages** - Modern login and registration UI
-- **Protected Routing** - Auth guards for secure pages
-- **Dashboard** - Feature overview and navigation
-- **State Management** - Zustand stores for auth and messaging
-- **Socket.io Client** - Ready for real-time features
-- **API Integration** - Axios client with JWT interceptors
+**Platform Version:** 1.1.0  
+**Last Updated:** April 2026  
+**Overall Status:** 🟢 Production Ready + Phase 4 In Progress
 
 ---
 
-## 🚀 Getting Started
+## 📋 Phase Completion Summary
 
-```bash
-# 1. Install dependencies
-npm install
-
-# 2. Setup environment
-cp .env.example .env
-# Edit .env with your PostgreSQL credentials
-
-# 3. Create and setup database
-createdb notes_platform
-cd server && npm run db:setup
-
-# 4. Start development
-cd ..
-npm run dev
-```
-
-**Default Admin Login:**
-- Email: `admin@notesplatform.com`
-- Password: `admin123` (⚠️ Change in production!)
-
-Visit:
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:5000
+| Phase | Description | Status |
+|-------|-------------|--------|
+| Phase 1 | MVP — Auth, DB Schema, Messaging API, Socket.io | ✅ Complete |
+| Phase 2 | Content — File Upload, Messaging UI, Rooms UI, Ratings | ✅ Complete |
+| Phase 3 | Advanced — Email, Notifications, Search, Admin UI, Profiles | ✅ Complete |
+| Phase 4 | Optimization — Caching, Analytics, Docs, PWA | 🔄 In Progress |
+| Phase 5 | Future — Mobile, AI, Video, Calendar | ⏳ Planned |
 
 ---
 
-## 📋 Implementation Roadmap
+## ✅ What's Fully Built
 
-### Phase 1STATUS: ✅ **COMPLETE**
-- ✅ Project structure and configuration
-- ✅ Database schema (20+ tables)
-- ✅ User authentication with JWT
-- ✅ Direct messaging backend
-- ✅ Anonymous rooms backend
-- ✅ Real-time Socket.io setup
-- ✅ Frontend auth flow
+### 🔐 Authentication & User Management
+- [x] JWT-based register / login / logout
+- [x] Email verification flow (token link, 24h expiry)
+- [x] Forgot password / Reset password (token link, 1h expiry)
+- [x] Role-based access control: `student`, `teacher`, `admin`
+- [x] Public user profiles (`/u/:username`)
+- [x] User blocking system
+- [x] Profile avatar + bio editing
 
-### Phase 2: Content Features (Next Priority)
-Implementation order for continuing development:
+### 📁 File Sharing
+- [x] Upload notes & assignments (Multer, local storage)
+- [x] Privacy controls: `public` / `private` / `unlisted`
+- [x] Download tracking
+- [x] Ratings (1–5 stars) & comments
+- [x] Bookmarks (save/unsave)
+- [x] Advanced search & filter (subject, type, privacy, keyword)
+- [x] **Redis cache** on browse list (5 min TTL) and detail view (1 hr TTL)
 
-1. **File Upload System** 🔄
-   - Implement `server/src/middleware/upload.js` using Multer
-   - Create `server/src/controllers/uploadController.js`
-   - Add routes for uploading notes/assignments
-   - Integrate AWS S3 or local storage
+### 💬 Real-Time Messaging
+- [x] Direct one-on-one conversations
+- [x] File attachments in messages (50MB limit)
+- [x] Typing indicators (`startTyping` / `stopTyping`)
+- [x] Read receipts
+- [x] Online / offline presence tracking
+- [x] Message editing and deletion
+- [x] New conversation modal with user search
 
-2. **Messaging UI Components** 🔄
-   - Build `ConversationSidebar.jsx` component
-   - Create `ChatArea.jsx` with message list
-   - Implement `MessageBubble.jsx` and `MessageInput.jsx`
-   - Connect to Socket.io for real-time updates
+### 🕵️ Anonymous Study Rooms
+- [x] Create subject-specific rooms
+- [x] Random anonymous identity per session
+- [x] Real-time group chat via Socket.io
+- [x] Room expiration
+- [x] Participant management
 
-3. **Anonymous Rooms UI** 🔄
-   - Create room list component
-   - Build room creation modal
-   - Implement real-time chat interface
-   - Add participant list
+### 🛡️ Admin Dashboard
+- [x] Platform stats overview (users, uploads, messages, pending reports)
+- [x] **Redis cache** on stats (10 min TTL, auto-invalidated on mutations)
+- [x] **Analytics Trends** endpoint (`GET /api/admin/trends`) — daily user/upload counts for 7 days
+- [x] User management (view, search, change role, toggle active)
+- [x] Content moderation (search, filter, soft-delete uploads)
+- [x] Report management (view, resolve, dismiss)
 
-### Phase 3: Advanced Features
-- ✅ Notifications system (Phase 3C)
-- ✅ Advanced Search functionality (Phase 3D)
-- ✅ Email Digest System (Phase 3C Extra)
-- ✅ Ratings and comments (Phase 3E)
-- [ ] Admin panel UI
-- [ ] File attachments in messages
-- [ ] User profiles
-- [ ] Email verification
+### 🔔 Notifications
+- [x] In-app notification system (DB + real-time Socket emit)
+- [x] Email notifications (verification, password reset)
+- [x] Daily digest emails via node-cron scheduler
+
+### 🔒 Security
+- [x] Helmet security headers
+- [x] Rate limiting: API (100/15min), Auth (10/15min), Uploads (20/hr)
+- [x] bcrypt password hashing (10 rounds)
+- [x] JWT (7-day expiry)
+- [x] CORS protection
+- [x] Input validation (express-validator)
+- [x] SQL injection prevention (parameterized queries)
+- [x] Soft deletes for content recovery
+
+### ⚡ Performance (Phase 4 — In Progress)
+- [x] **Redis caching service** (`server/src/services/cacheService.js`)
+  - [x] Upload list cache (key: `uploads:list:*`, TTL: 5 min)
+  - [x] Upload detail cache (key: `uploads:detail:{id}`, TTL: 1 hr)
+  - [x] Admin stats cache (key: `admin:stats`, TTL: 10 min)
+  - [x] Admin trends cache (key: `admin:trends`, TTL: 1 hr)
+  - [x] Graceful no-op if Redis not configured
+- [x] **`recharts` installed** in client — ready for analytics charts in Admin UI
+- [x] `GET /api/admin/trends` — backend endpoint complete
+- [ ] Analytics chart components in `AdminDashboard.jsx` (frontend integration pending)
+- [ ] Redis rate-limit store (currently in-memory `express-rate-limit`)
+
+### 📚 Documentation
+- [x] `docs/` directory with organized subfolders (`api/`, `db/`, `deploy/`, `history/`, `project/`, `setup/`)
+- [x] `docs/INDEX.md` — central navigation hub
+- [x] `docs/project/PROJECT_MEMORY_MAP.md` — full architecture map (this session)
+- [x] `docs/project/FUTURE_ROADMAP.md` — planned features
+- [x] `docker-compose.yml` — one-command local PostgreSQL + pgAdmin
+
+### 🧪 Testing
+- [x] Jest + Supertest configured
+- [x] `health.test.js` — `/api/health` endpoint
+- [x] `auth.test.js` — register/login flow
+- [ ] Upload controller tests
+- [ ] Message controller tests
+- [ ] Frontend tests (Vitest / React Testing Library)
+
+---
+
+## 🔄 Currently In Progress (Phase 4)
+
+| Task | File | Status |
+|------|------|--------|
+| Admin analytics chart UI | `AdminDashboard.jsx` | 🔄 Recharts installed, charts pending |
+| Redis rate-limit store | `middleware/rateLimiter.js` | ⏳ Pending |
+| Frontend unit tests | `client/src/**/*.test.jsx` | ⏳ Pending |
+| Upload controller tests | `server/src/tests/upload.test.js` | ⏳ Pending |
+
+---
+
+## 🚀 Phase 5 — Future Roadmap
+
+| Feature | Priority |
+|---------|----------|
+| Mobile App (React Native) | 🔴 High |
+| Video/Audio Calling (WebRTC) | 🔴 High |
+| AI Content Recommendations | 🟡 Medium |
+| Smart PDF Summarization | 🟡 Medium |
+| Plagiarism Detection | 🟡 Medium |
+| Calendar / Study Scheduling | 🟡 Medium |
+| Leaderboards & Badges | 🟢 Low |
+| Multi-language (i18n) | 🟢 Low |
+| Microservices Architecture | 🟢 Low |
 
 ---
 
 ## 🏗️ Architecture Overview
 
 ```
-Project Structure:
-├── server/              Backend (Node.js + Express)
-│   ├── src/
-│   │   ├── config/     DB & Socket configuration
-│   │   ├── models/     Data models (User, Message, Room)
-│   │   ├── controllers/ Business logic
-│   │   ├── routes/     API endpoints
-│   │   ├── socket/     Real-time handlers
-│   │   └── middleware/ Auth, validation, upload
-│   └── package.json
-│
-├── client/             Frontend (React + Vite)
-│   ├── src/
-│   │   ├── pages/      Route components
-│   │   ├── stores/     Zustand state management
-│   │   ├── services/   API & Socket clients
-│   │   └── components/ Reusable UI components (TBD)
-│   └── package.json
-│
-└── package.json        Root workspace config
+STUDYHUB/ (Monorepo)
+├── client/  (React 18 + Vite + TailwindCSS + Zustand + TanStack Query)
+├── server/  (Node.js + Express + PostgreSQL + Socket.io + Redis + Nodemailer)
+├── docs/    (Organized documentation hub)
+├── docker-compose.yml
+└── package.json (workspace root)
 ```
 
-**Tech Stack:**
-- Backend: Node.js, Express, PostgreSQL, Socket.io, JWT
-- Frontend: React 18, Vite, TailwindCSS, Zustand, React Query
-- Real-time: Socket.io (WebSockets)
-- Database: PostgreSQL 14+
-
----
-
-## 📚 Available Documentation
-
-- **README.md** - Project overview and features  
-- **SETUP.md** - Detailed installation guide  
-- **implementation_plan.md** - Full technical specification
-- **task.md** - Development task checklist
-
----
-
-## 🔑 Key Files to Know
-
-**Backend Entry Points:**
-- `server/src/index.js` - Express server with Socket.io
-- `server/src/database/schema.sql` - Complete database schema
-- `server/src/models/` - User, Message, Room models
-
-**Frontend Entry Points:**
-- `client/src/main.jsx` - React app entry
-- `client/src/App.jsx` - Routing and auth logic
-- `client/src/stores/authStore.js` - Authentication state
-- `client/src/stores/messageStore.js` - Messaging state
-
-**Configuration:**
-- `.env` - Environment variables (create from `.env.example`)
-- `package.json` (root) - Workspace configuration
-- `client/vite.config.js` - Frontend build config
+**Key Backend Services:**
+| Service | File | Description |
+|---------|------|-------------|
+| `emailService` | `services/emailService.js` | Nodemailer — verify, reset, digest |
+| `cacheService` | `services/cacheService.js` | ioredis — cache-aside pattern |
+| `cronService` | `services/cronService.js` | node-cron — daily email digest |
 
 ---
 
 ## 🛠️ Development Commands
 
 ```bash
-# Install all dependencies
-npm install
+# Start everything
+npm run dev                  # Runs client (:5173) + server (:5000) concurrently
 
-# Start both servers (concurrent)
-npm run dev
+# Backend only
+npm run server:dev           # nodemon src/index.js
 
-# Start backend only
-npm run server:dev
+# Frontend only  
+npm run client:dev           # vite
 
-# Start frontend only
-npm run client:dev
+# Database
+cd server && npm run db:setup   # Initialize schema + seed admin user
 
-# Database setup/reset
-cd server
-npm run db:setup
+# Docker (PostgreSQL + pgAdmin)
+docker-compose up -d
 
-# Build frontend for production
-cd client
-npm run build
+# Tests
+cd server && npm test
+
+# Build for production
+cd client && npm run build
 ```
 
 ---
 
-## 🎓 Next Steps for Developers
+## 🔑 Quick Reference
 
-1. **Review the Code**
-   - Explore `server/src/` for backend logic
-   - Check `client/src/pages/` for UI components
-   - Read `implementation_plan.md` for full spec
-
-2. **Test Existing Features**
-   - Register accounts with different roles
-   - Test login/logout flow
-   - Check API endpoints in browser/Postman
-
-3. **Continue Implementation**
-   - Pick tasks from `task.md`
-   - Start with messaging UI (high priority)
-   - Or implement file upload system
-
-4. **Customize & Extend**
-   - Add more user fields
-   - Implement email verification
-   - Build admin dashboard
-   - Add notification system
-
----
-
-## 📝 Database Schema Highlights
-
-20+ tables including:
-- `users` - Role-based (admin/teacher/student)
-- `uploads` - Notes & assignments with metadata
-- `direct_conversations` & `direct_messages` - Private messaging
-- `anonymous_rooms` & `anonymous_messages` - Study groups
-- `notifications` - Unified notification system
-- `reports` - Content moderation
-- `bookmarks`, `ratings`, `downloads` - User engagement
-
----
-
-## 🔐 Security Features
-
-- JWT authentication with secure token storage
-- Bcrypt password hashing (10 rounds)
-- Role-based authorization middleware
-- CORS protection
-- Helmet security headers
-- Input validation (express-validator)
-- SQL injection prevention (parameterized queries)
-- Socket.io authentication
-
----
-
-## 🐛 Known Limitations / TODOs
-
-- [ ] Email service not yet configured (verification emails)
-- [ ] File upload routes created but implementation pending
-- [ ] Messaging UI is placeholder (needs full chat component)
-- [ ] Anonymous room UI not built yet
-- [ ] Admin panel backend ready, UI pending
-- [ ] No tests written yet (consider adding Jest/Vitest)
-- [ ] Rate limiting configured but may need tuning
-- [ ] No caching layer (Redis planned but not implemented)
-
----
-
-## 💡 Tips for Contributing
-
-1. **Follow the existing patterns:**
-   - Controllers handle business logic
-   - Models handle database operations
-   - Routes define endpoints
-   - Middleware for cross-cutting concerns
-
-2. **Keep components small:**
-   - Break down complex UI into reusable pieces
-   - Use Zustand for global state
-   - React Query for server state
-
-3. **Test thoroughly:**
-   - Test API endpoints with Postman or similar
-   - Verify database changes in psql
-   - Check real-time features with multiple browser windows
-
-4. **Update documentation:**
-   - Update task.md when completing items
-   - Add comments to complex logic
-   - Document new API endpoints
-
----
-
-##⚡ Quick Reference
-
-**API Base URL:** `http://localhost:5000/api`
-
-**Key Endpoints:**
-- `POST /auth/register` - Create account
-- `POST /auth/login` - Login
-- `GET /messages/conversations` - Get chats
-- `POST /rooms` - Create anonymous room
-- `GET /rooms` - List active rooms
-
-**Socket Events:**
-- `join_conversation` - Join chat
-- `send_message` - Send message
-- `join_room` - Join anonymous room
-- `room_message` - Send to room
-
----
-
-## 🙏 Credits
-
-This is an AI-generated educational project template demonstrating modern full-stack development with real-time features.
-
-**Technologies used:**
-- React, Node.js, Express, PostgreSQL
-- Socket.io for WebSockets
-- TailwindCSS for styling
-- Zustand for state management
-
----
-
-**Status:** MVP Complete | **Next:** Implement messaging UI and file uploads  
-**License:** MIT | **Contributions:** Welcome!
-
-For detailed setup instructions, see **SETUP.md**.  
-For technical specification, see **implementation_plan.md**.
+| Item | Value |
+|------|-------|
+| Frontend URL | `http://localhost:5173` |
+| Backend API | `http://localhost:5000/api` |
+| Health Check | `http://localhost:5000/api/health` |
+| Default Admin Email | `admin@notesplatform.com` |
+| Default Admin Password | `admin123` ⚠️ Change in prod! |
+| JWT Expiry | 7 days |
+| Email Verify Token | 24 hours |
+| Password Reset Token | 1 hour |
+| Upload Max Size | 50 MB |

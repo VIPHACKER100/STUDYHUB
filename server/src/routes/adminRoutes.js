@@ -11,6 +11,7 @@ router.use(requireAdmin);
 
 import {
     getDashboardStats,
+    getTrends,
     getUsers,
     updateUserRole,
     toggleUserStatus,
@@ -21,6 +22,7 @@ import {
 // ... other imports
 
 router.get('/stats', getDashboardStats);
+router.get('/trends', getTrends);
 router.get('/users', getUsers);
 router.put('/users/:id/role', updateUserRole);
 router.put('/users/:id/status', toggleUserStatus);

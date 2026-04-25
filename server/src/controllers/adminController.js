@@ -1,7 +1,18 @@
 import { query } from '../config/database.js';
+import cacheService from '../services/cacheService.js';
 
 export const getDashboardStats = async (req, res) => {
     try {
+        const cacheKey = 'admin:stats';
+        const cachedData = await cacheService.get(cacheKey);
+        if (cachedData) {
+            return res.json({
+                success: true,
+                data: cachedData,
+                fromCache: true
+            });
+        }
+
         // Parallelize queries for efficiency
         const [
             userCount,
@@ -13,26 +24,31 @@ export const getDashboardStats = async (req, res) => {
         ] = await Promise.all([
             query('SELECT COUNT(*) FROM users'),
             query('SELECT COUNT(*) FROM uploads'),
-            query('SELECT COUNT(*) FROM direct_messages'), // + messages from rooms?
+            query('SELECT COUNT(*) FROM direct_messages'),
             query('SELECT COUNT(*) FROM reports WHERE status = \'pending\''),
             query('SELECT id, username, email, role, created_at FROM users ORDER BY created_at DESC LIMIT 5'),
             query('SELECT id, title, type, created_at FROM uploads ORDER BY created_at DESC LIMIT 5')
         ]);
 
+        const stats = {
+            counts: {
+                users: parseInt(userCount.rows[0].count),
+                uploads: parseInt(uploadCount.rows[0].count),
+                messages: parseInt(messageCount.rows[0].count),
+                pendingReports: parseInt(reportCount.rows[0].count)
+            },
+            recentActivity: {
+                users: recentUsers.rows,
+                uploads: recentUploads.rows
+            }
+        };
+
+        // Cache for 10 minutes
+        await cacheService.set(cacheKey, stats, 600);
+
         res.json({
             success: true,
-            data: {
-                counts: {
-                    users: parseInt(userCount.rows[0].count),
-                    uploads: parseInt(uploadCount.rows[0].count),
-                    messages: parseInt(messageCount.rows[0].count),
-                    pendingReports: parseInt(reportCount.rows[0].count)
-                },
-                recentActivity: {
-                    users: recentUsers.rows,
-                    uploads: recentUploads.rows
-                }
-            }
+            data: stats
         });
     } catch (error) {
         console.error('Admin stats error:', error);
@@ -40,8 +56,49 @@ export const getDashboardStats = async (req, res) => {
     }
 };
 
+export const getTrends = async (req, res) => {
+    try {
+        const cacheKey = 'admin:trends';
+        const cachedData = await cacheService.get(cacheKey);
+        if (cachedData) {
+            return res.json({ success: true, data: cachedData, fromCache: true });
+        }
+
+        const [userTrends, uploadTrends] = await Promise.all([
+            query(`
+                SELECT TO_CHAR(created_at, 'YYYY-MM-DD') as date, COUNT(*) as count 
+                FROM users 
+                WHERE created_at > NOW() - INTERVAL '7 days' 
+                GROUP BY date 
+                ORDER BY date ASC
+            `),
+            query(`
+                SELECT TO_CHAR(created_at, 'YYYY-MM-DD') as date, COUNT(*) as count 
+                FROM uploads 
+                WHERE created_at > NOW() - INTERVAL '7 days' 
+                GROUP BY date 
+                ORDER BY date ASC
+            `)
+        ]);
+
+        const trends = {
+            users: userTrends.rows,
+            uploads: uploadTrends.rows
+        };
+
+        // Cache for 1 hour
+        await cacheService.set(cacheKey, trends, 3600);
+
+        res.json({ success: true, data: trends });
+    } catch (error) {
+        console.error('Admin trends error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
 export const getUsers = async (req, res) => {
     try {
+
         const { page = 1, limit = 20, search } = req.query;
         const offset = (page - 1) * limit;
 
@@ -103,6 +160,9 @@ export const updateUserRole = async (req, res) => {
         }
 
         res.json({ success: true, message: 'User role updated', data: result.rows[0] });
+
+        // Invalidate stats cache
+        await cacheService.del('admin:stats');
     } catch (error) {
         console.error('Update role error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
@@ -123,6 +183,9 @@ export const toggleUserStatus = async (req, res) => {
         }
 
         res.json({ success: true, message: 'User status updated', data: result.rows[0] });
+
+        // Invalidate stats cache
+        await cacheService.del('admin:stats');
     } catch (error) {
         console.error('Toggle status error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
@@ -188,6 +251,9 @@ export const resolveReport = async (req, res) => {
         }
 
         res.json({ success: true, message: 'Report resolved', data: result.rows[0] });
+
+        // Invalidate stats cache
+        await cacheService.del('admin:stats');
     } catch (error) {
         console.error('Resolve report error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
@@ -265,6 +331,10 @@ export const deleteUpload = async (req, res) => {
         }
 
         res.json({ success: true, message: 'Upload deleted by admin' });
+
+        // Invalidate caches
+        await cacheService.del('admin:stats');
+        await cacheService.delPattern('uploads:*');
     } catch (error) {
         console.error('Admin delete upload error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
