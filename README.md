@@ -1,5 +1,11 @@
 # StudyHub - Notes & Assignment Sharing Platform
 
+![Version](https://img.shields.io/badge/version-1.1.0-orange.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
+![React](https://img.shields.io/badge/react-18.2.0-blue.svg)
+![PostgreSQL](https://img.shields.io/badge/postgresql-14%2B-blue.svg)
+
 A comprehensive educational platform combining file sharing (notes/assignments), real-time messaging, anonymous study rooms, and collaborative learning features.
 
 ## 🚀 Features
@@ -42,10 +48,10 @@ A comprehensive educational platform combining file sharing (notes/assignments),
 - **TailwindCSS** - Styling
 - **React Router** - Routing
 - **Zustand** - State management
-- **React Query** - Data fetching & sync
-- **Zustand** - State management
 - **React Markdown** - Summary rendering
 - **Vite PWA** - Progressive Web App logic
+- **Lucide React** - Modern iconography
+- **Recharts** - Analytics visualization
 
 ## 📋 Prerequisites
 
@@ -89,6 +95,7 @@ The app will be available at:
 Detailed documentation is available in the [docs/](./docs/) directory:
 
 - [**Documentation Index**](./docs/INDEX.md) ⬅️ **Start Here**
+- [**Full Feature List**](./docs/project/FULL_FEATURE_LIST.md) - Detailed breakdown of all platform capabilities.
 - [**Memory Map**](./docs/project/PROJECT_MEMORY_MAP.md) - Conceptual architecture overview.
 - [**Future Roadmap**](./docs/project/FUTURE_ROADMAP.md) - Planned features and updates.
 - [Setup Guide](./docs/setup/SETUP.md) - Detailed installation instructions.
