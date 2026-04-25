@@ -1,4 +1,4 @@
-# 🧠 Project Memory Map: StudyHub
+# 🧠 Project Memory Map: STUDYHUB
 
 This document is the living architectural reference for the StudyHub codebase. Update it whenever a new service, layer, or major component is added.
 
@@ -87,10 +87,13 @@ STUDYHUB/
 │   │   │   ├── AnonymousRooms.jsx   # ✅
 │   │   │   ├── MyProfile.jsx        # ✅
 │   │   │   ├── PublicProfile.jsx    # ✅
+│   │   │   ├── Leaderboard.jsx      # ✅ (Rankings & Badges)
 │   │   │   └── AdminDashboard.jsx   # ✅ (Stats, Users, Content, Reports)
 │   │   ├── components/
-│   │   │   ├── messaging/           # ✅ MessagingLayout, Sidebar, ChatArea, MessageBubble, MessageInput, MessageList, NewConversationModal
-│   │   │   └── admin/               # ✅ UserManagement, ContentManagement, ReportManagement
+│   │   │   ├── messaging/           # ✅ ChatArea, Sidebar, Layout
+│   │   │   ├── admin/               # ✅ UserManagement, ContentManagement, ReportManagement
+│   │   │   ├── dashboard/           # ✅ RecommendationSection
+│   │   │   └── layout/              # ✅ Navbar, NotificationBell
 │   │   ├── stores/
 │   │   │   ├── authStore.js         # ✅ JWT, user session
 │   │   │   └── messageStore.js      # ✅ Conversations, messages
@@ -227,6 +230,14 @@ POST /api/ai/summarize/:id → Extract text from PDF using pdf-parse
                            → Send prompt to Gemini API (gemini-pro)
                            → Format response (Overview + Key Takeaways)
                            → Cache result (24 hours)
+```
+
+### 8. Gamification (Leaderboard & Badges)
+```
+GET /api/leaderboard → Aggregate scores (Uploads*10 + RatingsAvg*5)
+                     → Calculate Badges (e.g., 'Rising Star' for 5 uploads)
+                     → Cache result (30 minutes)
+                     → Display in Leaderboard UI + Achievement Showcase
 ```
 
 ---
