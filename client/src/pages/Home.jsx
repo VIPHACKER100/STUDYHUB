@@ -23,32 +23,7 @@ const Home = () => {
 
     return (
         <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen font-sans selection:bg-indigo-500 selection:text-white">
-            {/* Navigation Header */}
-            <nav className="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16 items-center">
-                        <div className="flex items-center gap-2">
-                            <div className="bg-indigo-600 p-1.5 rounded-lg">
-                                <BookOpen className="w-6 h-6 text-white" />
-                            </div>
-                            <span className="text-xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400">STUDYHUB</span>
-                        </div>
-                        <div className="hidden md:flex items-center space-x-8">
-                            <a href="#features" className="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Features</a>
-                            <a href="#about" className="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <Link to="/login" className="text-sm font-semibold hover:text-indigo-600 dark:hover:text-indigo-400">Log in</Link>
-                            <Link 
-                                to="/register" 
-                                className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-indigo-500/30 transition-all transform hover:scale-105 active:scale-95"
-                            >
-                                Get Started
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            {/* Navigation removed - handled by PublicLayout */}
 
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
@@ -184,9 +159,13 @@ const Home = () => {
                         </div>
                         <p>© 2026 STUDYHUB Platform. Built for the future of education.</p>
                         <div className="flex items-center space-x-6">
-                            <a href="#" className="hover:text-indigo-600 transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-indigo-600 transition-colors">Terms of Service</a>
-                            <a href="#" className="hover:text-indigo-600 transition-colors">Contact Support</a>
+                            <Link to="/about" className="hover:text-indigo-600 transition-colors">About</Link>
+                            <Link to="/features" className="hover:text-indigo-600 transition-colors">Features</Link>
+                            <Link to="/help" className="hover:text-indigo-600 transition-colors">Help Center</Link>
+                            <Link to="/roadmap" className="hover:text-indigo-600 transition-colors">Roadmap</Link>
+                            <Link to="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
+                            <Link to="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
+                            <Link to="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link>
                         </div>
                     </div>
                 </div>

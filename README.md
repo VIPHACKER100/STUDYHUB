@@ -32,6 +32,12 @@ A comprehensive educational platform combining file sharing (notes/assignments),
 - **Analytics Dashboard** - High-fidelity platform usage statistics and trends
 - **Report System** - Handle user reports and content takedowns
 - **PWA Ready** - Fully installable as a web app with offline reliability
+### 🌐 Marketing & Support
+- **Premium Landing Page** - High-conversion hero section and feature showcase
+- **Support Hub** - Searchable FAQ and categorized help center
+- **Product Roadmap** - Public timeline of past, current, and future phases
+- **Legal Suite** - Professional Privacy Policy and Terms of Service
+- **Contact System** - Integrated inquiry form with departmental routing
 
 ## 🛠️ Tech Stack
 

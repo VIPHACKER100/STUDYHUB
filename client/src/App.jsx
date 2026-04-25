@@ -16,12 +16,29 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Leaderboard from './pages/Leaderboard';
 import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import HelpCenter from './pages/HelpCenter';
+import Features from './pages/Features';
+import Roadmap from './pages/Roadmap';
+import NotFound from './pages/NotFound';
 import Navbar from './components/layout/Navbar';
+import PublicNavbar from './components/layout/PublicNavbar';
 
-// Layout wrapper — renders Navbar above all protected pages
+// Layout wrapper for dashboard pages
 const Layout = ({ children }) => (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
         <Navbar />
+        <main className="flex-1">{children}</main>
+    </div>
+);
+
+// Layout wrapper for public info pages
+const PublicLayout = ({ children }) => (
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
+        <PublicNavbar />
         <main className="flex-1">{children}</main>
     </div>
 );
@@ -96,12 +113,21 @@ function App() {
                     />
 
                     {/* Admin Route */}
-                    <Route
-                        path="/admin"
+                    <Route path="/admin"
                         element={<ProtectedRoute allowedRoles={['admin']}><AdminDashboard /></ProtectedRoute>}
                     />
 
-                    <Route path="/" element={<Home />} />
+                    {/* Public Info Routes */}
+                    <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+                    <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+                    <Route path="/privacy" element={<PublicLayout><PrivacyPolicy /></PublicLayout>} />
+                    <Route path="/terms" element={<PublicLayout><TermsOfService /></PublicLayout>} />
+                    <Route path="/help" element={<PublicLayout><HelpCenter /></PublicLayout>} />
+                    <Route path="/features" element={<PublicLayout><Features /></PublicLayout>} />
+                    <Route path="/roadmap" element={<PublicLayout><Roadmap /></PublicLayout>} />
+
+                    <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
         </BrowserRouter>
