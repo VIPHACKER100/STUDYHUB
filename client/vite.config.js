@@ -10,8 +10,8 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
             manifest: {
-                name: 'StudyHub — Collaborative Learning Platform',
-                short_name: 'StudyHub',
+                name: 'STUDYHUB — Collaborative Learning Platform',
+                short_name: 'STUDYHUB',
                 description: 'Share notes, study with peers, and climb the leaderboard',
                 theme_color: '#6366f1',
                 background_color: '#0f172a',

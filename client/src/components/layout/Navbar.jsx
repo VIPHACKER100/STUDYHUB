@@ -34,12 +34,12 @@ export default function Navbar() {
                 <div className="flex items-center justify-between h-16">
 
                     {/* Logo */}
-                    <Link to="/dashboard" className="flex items-center gap-2.5 flex-shrink-0 group">
+                    <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group">
                         <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-md group-hover:shadow-indigo-300 dark:group-hover:shadow-indigo-900 transition-shadow">
                             <GraduationCap className="w-5 h-5 text-white" />
                         </div>
-                        <span className="text-lg font-bold text-gray-900 dark:text-white">
-                            Study<span className="text-indigo-600">Hub</span>
+                        <span className="text-lg font-bold tracking-tight text-gray-900 dark:text-white uppercase">
+                            STUDYHUB
                         </span>
                     </Link>
 

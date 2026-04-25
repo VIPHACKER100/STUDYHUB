@@ -15,6 +15,7 @@ import PublicProfile from './pages/PublicProfile';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Leaderboard from './pages/Leaderboard';
+import Home from './pages/Home';
 import Navbar from './components/layout/Navbar';
 
 // Layout wrapper — renders Navbar above all protected pages
@@ -100,7 +101,7 @@ function App() {
                         element={<ProtectedRoute allowedRoles={['admin']}><AdminDashboard /></ProtectedRoute>}
                     />
 
-                    <Route path="/" element={<Navigate to="/dashboard" />} />
+                    <Route path="/" element={<Home />} />
                 </Routes>
             </div>
         </BrowserRouter>

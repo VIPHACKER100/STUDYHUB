@@ -19,7 +19,8 @@ graph TD
     Backend <--> |Nodemailer + SMTP| EmailService[Email Service]
 
     subgraph "Frontend - /client/src"
-        Frontend --> Pages["pages/ (12 routes)"]
+        Frontend --> Pages["pages/ (13 routes)"]
+        Pages --> Home["Home.jsx (Landing Page)"]
         Frontend --> Components["components/ (messaging, admin, uploads)"]
         Frontend --> Stores["stores/ (Zustand)"]
         Frontend --> Services["services/ (api, socket)"]
