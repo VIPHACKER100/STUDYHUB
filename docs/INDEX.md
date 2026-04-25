@@ -8,6 +8,7 @@ Welcome to the StudyHub documentation. This directory is organized into logical 
 - [Project Summary](project/PROJECT_SUMMARY.md) - High-level overview of the platform.
 - [Project Status](project/PROJECT_STATUS.md) - Current development roadmap and status.
 - [Memory Map](project/PROJECT_MEMORY_MAP.md) - Conceptual architecture and structural overview.
+- [Full Feature List](project/FULL_FEATURE_LIST.md) - Comprehensive list of features from Phase 1-5.
 - [Future Roadmap](project/FUTURE_ROADMAP.md) - Planned features and updates.
 
 ### 🚀 Getting Started
