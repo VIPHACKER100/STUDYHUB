@@ -53,7 +53,7 @@ A comprehensive educational platform combining file sharing (notes/assignments),
 - **Database**: PostgreSQL >= 14.x OR MySQL >= 8.0
 - **npm** or **yarn**
 
-> **Note:** The application supports both PostgreSQL and MySQL. See [MYSQL_SETUP.md](./MYSQL_SETUP.md) for MySQL migration guide.
+> **Note:** The application supports both PostgreSQL and MySQL. See [MYSQL_SETUP.md](./docs/db/MYSQL_SETUP.md) for MySQL migration guide.
 
 ## 🏃 Quick Start
 

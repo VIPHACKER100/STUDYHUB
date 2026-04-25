@@ -14,6 +14,7 @@ Welcome to the StudyHub documentation. This directory is organized into logical 
 - [General Setup](setup/SETUP.md) - How to get the project running locally.
 - [MySQL Setup](db/MYSQL_SETUP.md) - Database-specific installation and configuration.
 - [Environment Variables](setup/UPDATE_ENV.md) - Configuration guide for `.env`.
+- [GitHub Setup](setup/GITHUB_SETUP.md) - Repository and deployment setup.
 
 ### 🌐 API & Database
 - [API Documentation](api/API_DOCUMENTATION.md) - Endpoint reference and usage.
@@ -28,6 +29,7 @@ Welcome to the StudyHub documentation. This directory is organized into logical 
 ### 📜 Community & Legal
 - [Contributing](CONTRIBUTING.md) - Guidelines for contributing to StudyHub.
 - [Security](SECURITY.md) - Security policy and reporting.
+- [Branding Guidelines](branding/BRAND_GUIDELINES.html) - Visual identity and design assets.
 - [License](../LICENSE) - Project license information.
 
 ### 🕒 History

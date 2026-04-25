@@ -74,6 +74,9 @@ NODE_ENV=production npm start
 - Messages: `/api/messages/*`
 - Rooms: `/api/rooms/*`
 - Admin: `/api/admin/*`
+- Leaderboard: `/api/leaderboard/*`
+- Recommendations: `/api/recommendations/*`
+- AI Features: `/api/ai/*`
 
 ## 🎯 Common Tasks
 
@@ -104,14 +107,18 @@ Body: {
 }
 ```
 
-### Send Message
+### AI Summary
 ```bash
-POST /api/messages/send
+POST /api/ai/summarize/:id
 Headers: Authorization: Bearer <token>
-Body: {
-  "receiverId": 2,
-  "content": "Hello!"
-}
+Returns: { "summary": "...markdown..." }
+```
+
+### Get Recommendations
+```bash
+GET /api/recommendations
+Headers: Authorization: Bearer <token>
+Returns: [ { "id": 1, "title": "...", ... } ]
 ```
 
 ## 🔧 Environment Variables
@@ -142,9 +149,12 @@ AWS_SECRET_ACCESS_KEY=
 AWS_REGION=us-east-1
 AWS_S3_BUCKET=
 
-# Redis (optional)
+# Redis (Required for Performance)
 REDIS_HOST=localhost
 REDIS_PORT=6379
+
+# Google Gemini AI (Required for Summaries)
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 ## 🐛 Troubleshooting
@@ -215,6 +225,11 @@ studyhub/
 - ✅ Email notifications
 - ✅ User profiles
 - ✅ Search & filtering
+- ✅ AI Recommendations
+- ✅ Smart PDF Summarization
+- ✅ Global Leaderboards
+- ✅ Achievement Badges
+- ✅ PWA Support
 
 ## 📞 Support
 
@@ -228,5 +243,5 @@ MIT License - See LICENSE file
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: December 2025
+**Version**: 1.1.0  
+**Last Updated**: April 2026

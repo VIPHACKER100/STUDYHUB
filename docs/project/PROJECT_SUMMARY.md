@@ -46,14 +46,21 @@
 - ✅ Room expiration
 - ✅ Participant management
 
-### 5. Community & Gamification
+### 5. Admin Dashboard
+- ✅ User management (view, edit, delete)
+- ✅ Content moderation
+- ✅ Platform analytics
+- ✅ Announcement system
+- ✅ Report handling
+
+### 6. Community & Gamification
 - ✅ Global Leaderboards (Contributors & Learners)
 - ✅ Badge Achievement System (12+ unique badges)
 - ✅ Achievement Showcase in Profile
 - ✅ PWA Support (Fully installable web app)
 - ✅ Global Redesigned Navbar
 
-### 6. AI & Intelligence
+### 7. AI & Intelligence
 - ✅ Personalized AI Content Recommendations
 - ✅ Global Real-time Trending Content
 - ✅ Smart PDF Summarization (Gemini AI)
@@ -291,17 +298,14 @@ Tests include:
 - Authentication flow
 - (Requires local PostgreSQL instance)
 
-## 🔮 Future Enhancements
+## 🔮 Future Enhancements (Phase 6+)
 
-### Phase 4: Polish & Optimization
-- [ ] Redis caching for sessions
-- [ ] Advanced analytics dashboard
-- [ ] Mobile app (React Native)
-- [ ] Video/audio calling
-- [ ] AI-powered content recommendations
-- [ ] Plagiarism detection
-- [ ] Calendar integration
-- [ ] Study group scheduling
+- [ ] **Mobile App**: Development of a React Native application for iOS and Android.
+- [ ] **AI Tutor Integration**: RAG-based chatbot for subject-specific assistance.
+- [ ] **Video Study Rooms**: Real-time collaborative spaces using WebRTC.
+- [ ] **Collaborative Editing**: Live multi-user document editing.
+- [ ] **Plagiarism Detection**: Advanced scanning for document originality.
+- [ ] **Shared Calendars**: Integration for group study scheduling.
 
 ## 📄 License
 

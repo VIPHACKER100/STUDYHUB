@@ -14,15 +14,19 @@ Before starting, ensure you have the following installed:
    - Download from: https://www.postgresql.org/download/
    - Verify installation: `psql --version`
 
-3. **Git** (optional, for cloning)
+3. **Redis** (optional but recommended for performance)
+   - Download from: https://redis.io/download/ (or use Docker)
+   - Verify installation: `redis-cli ping`
+
+4. **Git** (optional, for cloning)
    - Download from: https://git-scm.com/
 
 ## Step 1: Clone or Download Project
 
 If you have Git:
 ```bash
-git clone <repository-url>
-cd note
+git clone https://github.com/VIPHACKER100/STUDYHUB.git
+cd STUDYHUB
 ```
 
 Or download  and extract the ZIP file, then navigate to the folder.
@@ -56,18 +60,18 @@ Using PostgreSQL command line or GUI tool (pgAdmin):
 ```bash
 # Option 1: Using psql command line
 psql -U postgres
-CREATE DATABASE notes_platform;
+CREATE DATABASE studyhub_db;
 \q
 
 # Option 2: Using createdb command
-createdb -U postgres notes_platform
+createdb -U postgres studyhub_db
 ```
 
 ### Verify Database Created
 
 ```bash
 psql -U postgres -l
-# Should see 'notes_platform' in the list
+# Should see 'studyhub_db' in the list
 ```
 
 ## Step 4: Environment Configuration
@@ -88,17 +92,24 @@ Open `.env` in a text editor and configure the following:
 # REQUIRED - Database Configuration
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=notes_platform
+DB_NAME=studyhub_db
 DB_USER=postgres
 DB_PASSWORD=your_postgres_password_here
 
 # REQUIRED - JWT Secret (change this!)
 JWT_SECRET=your_secure_random_string_here_minimum_32_characters
 
-# Optional - Other Settings
+# Optional - Performance & AI
 PORT=5000
 NODE_ENV=development
 CLIENT_URL=http://localhost:5173
+
+# Redis
+REDIS_HOST=localhost
+REDIS_PORT=6379
+
+# AI (Required for Smart Summaries)
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 **Important**:
@@ -177,7 +188,7 @@ npm run dev
 - **Solution**: Check your PostgreSQL password in `.env` file
 - Verify password with: `psql -U postgres -W`
 
-**Error**: "database "notes_platform" does not exist"
+**Error**: "database "studyhub_db" does not exist"
 - **Solution**: Create the database first (see Step 3)
 
 **Error**: "relation "users" does not exist"
@@ -247,7 +258,7 @@ Both frontend and backend support hot reload:
 
 If you modify the schema:
 1. Drop existing tables or database
-2. Recreate database: `dropdb notes_platform && createdb notes_platform`
+2. Recreate database: `dropdb studyhub_db && createdb studyhub_db`
 3. Run setup again: `npm run db:setup`
 
 ### Viewing Database
@@ -256,7 +267,7 @@ Use PostgreSQL client to view data:
 
 ```bash
 # Connect to database
-psql -U postgres -d notes_platform
+psql -U postgres -d studyhub_db
 
 # List all tables
 \dt
@@ -298,7 +309,7 @@ If you encounter issues not covered here:
 npm install
 cp .env.example .env
 # Edit .env file
-createdb notes_platform
+createdb studyhub_db
 cd server && npm run db:setup
 
 # Daily development
@@ -306,8 +317,8 @@ cd /path/to/project
 npm run dev
 
 # Database reset (if needed)
-dropdb notes_platform
-createdb notes_platform
+dropdb studyhub_db
+createdb studyhub_db
 cd server && npm run db:setup
 ```
 

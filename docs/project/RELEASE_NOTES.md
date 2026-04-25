@@ -147,11 +147,11 @@ cd .. && npm run dev
 
 ## 📖 Documentation
 
-- [README.md](./README.md) - Project overview
-- [SETUP.md](./SETUP.md) - Setup instructions
-- [DEPLOYMENT.md](./DEPLOYMENT.md) - Deployment guide
+- [README.md](../../README.md) - Project overview
+- [SETUP.md](../setup/SETUP.md) - Setup instructions
+- [DEPLOYMENT.md](../deploy/DEPLOYMENT.md) - Deployment guide
 - [PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md) - Complete overview
-- [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) - API reference
+- [API_DOCUMENTATION.md](../api/API_DOCUMENTATION.md) - API reference
 
 ## 🐛 Known Issues
 

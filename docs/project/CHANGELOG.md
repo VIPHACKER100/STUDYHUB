@@ -196,10 +196,6 @@ The first production-ready release of StudyHub!
 - API webhooks
 - Third-party authentication (Google, GitHub)
 - Advanced search with Elasticsearch
-- Content recommendation engine
-- Gamification features
-- Achievement system
-- Leaderboards
 
 ## Version History
 
@@ -240,10 +236,10 @@ Thank you to all contributors who made this release possible!
 
 ## Links
 
-- [GitHub Repository](https://github.com/yourusername/studyhub)
-- [Documentation](./README.md)
-- [Issue Tracker](https://github.com/yourusername/studyhub/issues)
-- [Discussions](https://github.com/yourusername/studyhub/discussions)
+- [GitHub Repository](https://github.com/VIPHACKER100/STUDYHUB)
+- [Documentation](../../README.md)
+- [Issue Tracker](https://github.com/VIPHACKER100/STUDYHUB/issues)
+- [Discussions](https://github.com/VIPHACKER100/STUDYHUB/discussions)
 
 ---
 

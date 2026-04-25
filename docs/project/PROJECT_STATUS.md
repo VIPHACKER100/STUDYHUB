@@ -78,7 +78,7 @@
 - [x] SQL injection prevention (parameterized queries)
 - [x] Soft deletes for content recovery
 
-### ⚡ Performance (Phase 4 — In Progress)
+### ⚡ Performance & Optimization (Phase 4 — Complete)
 - [x] **Redis caching service** (`server/src/services/cacheService.js`)
   - [x] Upload list cache (key: `uploads:list:*`, TTL: 5 min)
   - [x] Upload detail cache (key: `uploads:detail:{id}`, TTL: 1 hr)
@@ -131,17 +131,14 @@ All Phase 5 items are done:
 
 ---
 
-## 🚀 Phase 5 — Future Roadmap
-
+## 🚀 Phase 6 — Future Roadmap
 | Feature | Priority |
 |---------|----------|
 | Mobile App (React Native) | 🔴 High |
 | Video/Audio Calling (WebRTC) | 🔴 High |
-| AI Content Recommendations | 🟡 Medium |
-| Smart PDF Summarization | 🟡 Medium |
+| AI Tutor Integration (RAG) | 🟡 Medium |
+| Shared Study Calendars | 🟡 Medium |
 | Plagiarism Detection | 🟡 Medium |
-| Calendar / Study Scheduling | 🟡 Medium |
-| Leaderboards & Badges | 🟢 Low |
 | Multi-language (i18n) | 🟢 Low |
 | Microservices Architecture | 🟢 Low |
 
