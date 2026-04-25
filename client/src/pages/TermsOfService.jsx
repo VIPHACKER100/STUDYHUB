@@ -60,7 +60,7 @@ const TermsOfService = () => {
                             </div>
                             <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 text-sm">
                                 • Harassing, hateful, or offensive content.
-                            </li>
+                            </div>
                             <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 text-sm">
                                 • Malware or harmful code.
                             </div>
