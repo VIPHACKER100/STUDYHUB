@@ -51,3 +51,4 @@ describe('Auth Endpoints', () => {
         expect(res.body.success).toBe(false);
     });
 });
+

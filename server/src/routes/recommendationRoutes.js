@@ -8,3 +8,4 @@ router.get('/', authMiddleware, getRecommendations);
 router.get('/trending', getTrending);
 
 export default router;
+

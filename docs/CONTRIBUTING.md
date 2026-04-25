@@ -286,7 +286,7 @@ describe('User Authentication', () => {
     it('should register a new user successfully', async () => {
         const userData = {
             username: 'testuser',
-            email: 'test@example.com',
+            email: 'viphacker.100.org@gmail.com',
             password: 'password123'
         };
         
@@ -389,3 +389,5 @@ By contributing, you agree that your contributions will be licensed under the MI
 ---
 
 Thank you for contributing to StudyHub! 🎓✨
+
+

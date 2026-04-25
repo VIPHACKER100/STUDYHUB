@@ -123,3 +123,5 @@ node src/database/setup-mysql.js
 4. **Come back here** when installation is complete
 
 I'll help you with the next steps after MySQL is installed! 🚀
+
+

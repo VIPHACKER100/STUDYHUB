@@ -111,3 +111,4 @@ export const handleUploadError = (err, req, res, next) => {
 };
 
 export default upload;
+

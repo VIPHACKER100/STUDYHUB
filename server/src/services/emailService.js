@@ -43,7 +43,7 @@ class EmailService {
 
         try {
             const info = await this.transporter.sendMail({
-                from: config.email.from || '"StudyHub" <noreply@studyhub.com>',
+                from: config.email.from || '"StudyHub" <viphacker.100.org@gmail.com>',
                 to,
                 subject,
                 text,
@@ -120,3 +120,4 @@ class EmailService {
 }
 
 export default new EmailService();
+

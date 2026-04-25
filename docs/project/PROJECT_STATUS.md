@@ -198,9 +198,11 @@ cd client && npm run build
 | Frontend URL | `http://localhost:5173` |
 | Backend API | `http://localhost:5000/api` |
 | Health Check | `http://localhost:5000/api/health` |
-| Default Admin Email | `admin@notesplatform.com` |
+| Default Admin Email | `viphacker.100.org@gmail.com` |
 | Default Admin Password | `admin123` ⚠️ Change in prod! |
 | JWT Expiry | 7 days |
 | Email Verify Token | 24 hours |
 | Password Reset Token | 1 hour |
 | Upload Max Size | 50 MB |
+
+

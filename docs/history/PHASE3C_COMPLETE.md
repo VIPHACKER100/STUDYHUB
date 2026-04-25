@@ -55,3 +55,5 @@ io.to(targetUserId).emit('new_notification', notification);
 - Wire up the `Notification.create` calls in the `uploadController` (e.g., notify students when teacher uploads).
 - Implement Email Digest (Phase 3C extra).
 - Advanced Search (Phase 3D).
+
+

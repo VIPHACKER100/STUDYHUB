@@ -63,3 +63,4 @@ describe('Notification Endpoints', () => {
         expect(res.body.data.count).toBe(0);
     });
 });
+

@@ -10,3 +10,4 @@ router.get('/:username', getProfile);
 router.get('/:username/uploads', getUserUploads);
 
 export default router;
+

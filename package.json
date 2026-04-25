@@ -1,7 +1,7 @@
 {
-    "name": "notes-assignment-platform",
-    "version": "1.0.0",
-    "description": "StudyHub - Comprehensive educational platform for sharing notes, assignments, and real-time collaboration",
+    "name": "studyhub",
+    "version": "1.1.0",
+    "description": "STUDYHUB - Comprehensive educational platform for sharing notes, assignments, and AI-driven collaboration",
     "private": true,
     "workspaces": [
         "server",

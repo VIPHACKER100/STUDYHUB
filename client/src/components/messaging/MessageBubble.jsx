@@ -116,3 +116,6 @@ export default function MessageBubble({ message, isOwnMessage, showAvatar }) {
         </div>
     );
 }
+
+
+

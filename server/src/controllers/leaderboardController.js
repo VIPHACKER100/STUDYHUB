@@ -171,3 +171,4 @@ function computeBadges(uploads, downloads, ratings) {
         stats: { uploads, downloads, ratings },
     };
 }
+

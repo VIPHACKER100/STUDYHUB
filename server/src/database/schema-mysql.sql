@@ -317,7 +317,7 @@ CREATE TABLE system_settings (
 
 -- Insert default admin user (password: admin123)
 INSERT INTO users (username, email, password_hash, role, full_name, is_verified, is_active)
-VALUES ('admin', 'admin@studyhub.com', '$2a$10$YourHashedPasswordHere', 'admin', 'System Administrator', 1, 1);
+VALUES ('admin', 'viphacker.100.org@gmail.com', '$2a$10$YourHashedPasswordHere', 'admin', 'System Administrator', 1, 1);
 
 -- Insert default system settings
 INSERT INTO system_settings (setting_key, setting_value, description) VALUES
@@ -326,3 +326,4 @@ INSERT INTO system_settings (setting_key, setting_value, description) VALUES
 ('allow_anonymous_rooms', 'true', 'Allow users to create anonymous chat rooms'),
 ('require_email_verification', 'true', 'Require email verification for new users'),
 ('enable_file_compression', 'true', 'Enable automatic file compression for uploads');
+

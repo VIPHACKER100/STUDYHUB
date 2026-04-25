@@ -1,4 +1,4 @@
-# Setup Guide - Notes & Assignment Platform
+# Setup Guide - STUDYHUB Platform
 
 Complete step-by-step instructions to set up the project locally.
 
@@ -131,7 +131,7 @@ You should see output like:
 ✅ Database setup completed successfully!
 ...
 🔐 Default admin credentials:
-   Email: admin@notesplatform.com
+   Email: viphacker.100.org@gmail.com
    Password: admin123
 ```
 
@@ -176,7 +176,7 @@ npm run dev
    - Should see the login page
 
 3. **Test Login**:
-   - Email: `admin@notesplatform.com`
+   - Email: `viphacker.100.org@gmail.com`
    - Password: `admin123`
    - Should redirect to dashboard
 
@@ -323,3 +323,5 @@ cd server && npm run db:setup
 ```
 
 You're now ready to develop and test the platform! 🚀
+
+

@@ -95,7 +95,7 @@ npm run dev
 - Backend API: http://localhost:5000
 
 **Default Admin:**
-- Email: `admin@notesplatform.com`
+- Email: `viphacker.100.org@gmail.com`
 - Password: `admin123`
 - ⚠️ **Change immediately after first login!**
 
@@ -167,7 +167,7 @@ Security is a top priority. Please review our [Security Policy](./SECURITY.md) f
 - Security best practices
 - Deployment checklist
 
-**Found a security issue?** Please email security@studyhub.com instead of opening a public issue.
+**Found a security issue?** Please email viphacker.100.org@gmail.com instead of opening a public issue.
 
 ## 📄 License
 
@@ -208,3 +208,5 @@ If you find this project useful, please consider giving it a star!
 **Version**: 1.1.0 | **Status**: Intelligence Layer Active ✅
 
 [⬆ Back to top](#studyhub)
+
+

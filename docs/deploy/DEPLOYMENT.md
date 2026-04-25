@@ -47,9 +47,9 @@ JWT_EXPIRES_IN=7d
 # Email (SMTP)
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
+SMTP_USER=viphacker.100.org@gmail.com
 SMTP_PASSWORD=your-app-password
-EMAIL_FROM="StudyHub <noreply@studyhub.com>"
+EMAIL_FROM="StudyHub <viphacker.100.org@gmail.com>"
 
 # File Upload
 MAX_FILE_SIZE=52428800
@@ -78,7 +78,7 @@ npm run db:setup
 This will:
 - Create all required tables
 - Set up triggers and indexes
-- Create default admin user (admin@notesplatform.com / admin123)
+- Create default admin user (viphacker.100.org@gmail.com / admin123)
 
 **⚠️ IMPORTANT**: Change the admin password immediately after first login!
 
@@ -278,3 +278,5 @@ For issues and questions:
 - Check logs: `pm2 logs` or `docker logs`
 - Review documentation: README.md, SETUP.md
 - Database schema: `server/src/database/schema.sql`
+
+

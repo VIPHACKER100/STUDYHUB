@@ -1,8 +1,8 @@
-# StudyHub - Project Summary
+# STUDYHUB - Project Summary
 
 ## 🎯 Project Overview
 
-**StudyHub** is a comprehensive educational collaboration platform that combines file sharing, real-time messaging, anonymous study rooms, and community features. Built with modern web technologies, it provides students and teachers with a secure, feature-rich environment for academic collaboration.
+**STUDYHUB** is a comprehensive educational collaboration platform that combines file sharing, real-time messaging, anonymous study rooms, and community features. Built with modern web technologies, it provides students and teachers with a secure, feature-rich environment for academic collaboration.
 
 ## 📊 Development Status
 
@@ -122,7 +122,7 @@
 ## 📁 Project Structure
 
 ```
-studyhub/
+STUDYHUB/
 ├── client/                 # React frontend
 │   ├── src/
 │   │   ├── components/    # Reusable UI components
@@ -240,7 +240,7 @@ Access:
 - Health Check: http://localhost:5000/api/health
 
 Default admin:
-- Email: admin@notesplatform.com
+- Email: viphacker.100.org@gmail.com
 - Password: admin123
 
 ## 📝 API Endpoints Summary
@@ -320,3 +320,5 @@ Built with modern web technologies for educational collaboration and learning.
 **Version**: 1.1.0  
 **Last Updated**: April 2026  
 **Status**: Intelligence Layer Active ✅
+
+

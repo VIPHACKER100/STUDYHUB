@@ -40,3 +40,4 @@ class CronService {
 }
 
 export default new CronService();
+

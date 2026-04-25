@@ -56,7 +56,7 @@ NODE_ENV=production npm start
 ## 📋 Default Credentials
 
 **Admin Account**
-- Email: `admin@notesplatform.com`
+- Email: `viphacker.100.org@gmail.com`
 - Password: `admin123`
 - ⚠️ **CHANGE IMMEDIATELY AFTER FIRST LOGIN**
 
@@ -85,7 +85,7 @@ NODE_ENV=production npm start
 POST /api/auth/register
 {
   "username": "johndoe",
-  "email": "john@example.com",
+  "email": "viphacker.100.org@gmail.com",
   "password": "password123",
   "fullName": "John Doe",
   "role": "student"
@@ -139,9 +139,9 @@ CLIENT_URL=http://localhost:5173
 # Email
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
+SMTP_USER=viphacker.100.org@gmail.com
 SMTP_PASSWORD=your-password
-EMAIL_FROM="StudyHub <noreply@studyhub.com>"
+EMAIL_FROM="StudyHub <viphacker.100.org@gmail.com>"
 
 # AWS S3 (optional)
 AWS_ACCESS_KEY_ID=
@@ -245,3 +245,5 @@ MIT License - See LICENSE file
 
 **Version**: 1.1.0  
 **Last Updated**: April 2026
+
+

@@ -135,3 +135,5 @@ Base URL: `http://localhost:5000/api`
 - Headers: `Authorization: Bearer <token>`
 - Returns: `{ summary }` (Markdown format)
 - Requires: PDF or Text document.
+
+

@@ -159,7 +159,7 @@ node src/database/setup-mysql.js
   📋 Tables: 17
 
   🔑 Default Admin Credentials:
-     Email: admin@studyhub.com
+     Email: viphacker.100.org@gmail.com
      Password: admin123
      ⚠️  CHANGE THIS PASSWORD IMMEDIATELY!
 
@@ -225,7 +225,7 @@ npm run dev
    - Navigate to: http://localhost:5173
 
 2. **Test Login:**
-   - Email: `admin@studyhub.com`
+   - Email: `viphacker.100.org@gmail.com`
    - Password: `admin123`
 
 3. **Verify Features:**
@@ -427,3 +427,5 @@ Your StudyHub application is now running on MySQL!
 
 **Version:** 1.0.0 (MySQL)  
 **Last Updated:** December 2025
+
+

@@ -104,9 +104,9 @@ UPLOAD_DIR=./uploads
 # Email (optional, configure later)
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
+SMTP_USER=viphacker.100.org@gmail.com
 SMTP_PASSWORD=your-app-password
-EMAIL_FROM=noreply@studyhub.com
+EMAIL_FROM=viphacker.100.org@gmail.com
 
 # Socket.io
 SOCKET_CORS_ORIGIN=https://your-frontend-url.vercel.app
@@ -409,3 +409,5 @@ Your StudyHub application is now live!
 
 **Railway Docs:** https://docs.railway.app  
 **Railway Discord:** https://discord.gg/railway
+
+

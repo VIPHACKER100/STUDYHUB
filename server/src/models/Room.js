@@ -216,3 +216,4 @@ class Room {
 
 export default Room;
 export { generateAnonymousId };
+

@@ -34,3 +34,4 @@ router.get('/uploads', getAdminUploads);
 router.delete('/uploads/:id', deleteUpload);
 
 export default router;
+

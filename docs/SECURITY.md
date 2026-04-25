@@ -20,7 +20,7 @@ We take the security of StudyHub seriously. If you believe you have found a secu
 
 ### Please DO:
 
-1. **Email us directly** at: security@studyhub.com (or create a private security advisory on GitHub)
+1. **Email us directly** at: viphacker.100.org@gmail.com (or create a private security advisory on GitHub)
 2. **Provide detailed information** including:
    - Type of vulnerability
    - Full paths of source file(s) related to the vulnerability
@@ -168,7 +168,7 @@ StudyHub is designed with privacy and security in mind. However, users are respo
 ## Contact
 
 For security concerns, please contact:
-- **Email**: security@studyhub.com
+- **Email**: viphacker.100.org@gmail.com
 - **GitHub**: Create a private security advisory
 
 ## Acknowledgments
@@ -181,3 +181,5 @@ We would like to thank the following individuals for responsibly disclosing secu
 
 **Last Updated**: December 2025  
 **Version**: 1.0.0
+
+

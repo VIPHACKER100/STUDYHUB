@@ -108,3 +108,6 @@ export default function UploadCard({ upload, onClick }) {
         </div>
     );
 }
+
+
+

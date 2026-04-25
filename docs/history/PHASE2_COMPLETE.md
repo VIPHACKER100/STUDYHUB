@@ -72,7 +72,7 @@ npm run dev
 ```
 
 ### Default Login:
-- Email: `admin@notesplatform.com`
+- Email: `viphacker.100.org@gmail.com`
 - Password: `admin123`
 
 ### URLs:
@@ -227,3 +227,5 @@ npm run dev
 **Ready for:** Phase 3 (Content Features) or Production Testing
 
 Enjoy the fully functional messaging and anonymous chat platform! 🎊
+
+

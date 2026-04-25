@@ -135,7 +135,7 @@ npm run dev
 
 # 4. Open browser
 # Navigate to http://localhost:5173
-# Login with admin@studyhub.com / admin123
+# Login with viphacker.100.org@gmail.com / admin123
 ```
 
 ## ✅ Success Criteria
@@ -184,3 +184,5 @@ After successful migration:
 **Print this checklist and check off items as you complete them!** ✓
 
 **Good luck with your migration!** 🚀
+
+

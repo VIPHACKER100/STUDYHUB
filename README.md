@@ -1,4 +1,4 @@
-# StudyHub - Notes & Assignment Sharing Platform
+# STUDYHUB - Education Collaboration Platform
 
 ![Version](https://img.shields.io/badge/version-1.1.0-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
@@ -12,7 +12,7 @@ A comprehensive educational platform combining file sharing (notes/assignments),
 
 ### Core Platform
 - **User Authentication** - Role-based access (Admin, Teacher, Student)
-- **Notes & Assignment Sharing** - Upload and share educational content
+- **Notes & Content Sharing** - Upload and share educational resources
 - **Search & Discovery** - AI-powered content recommendations based on user interaction
 - **Smart Summarization** - Automated AI summaries for PDF and text documents
 - **Ratings & Comments** - Community feedback on uploads
@@ -106,7 +106,7 @@ Detailed documentation is available in the [docs/](./docs/) directory:
 
 
 After running the database setup, you can login with:
-- **Email**: `admin@notesplatform.com`
+- **Email**: `viphacker.100.org@gmail.com`
 - **Password**: `admin123`
 
 **⚠️ IMPORTANT**: Change this password immediately in production!
@@ -114,7 +114,7 @@ After running the database setup, you can login with:
 ## 📁 Project Structure
 
 ```
-notes-assignment-platform/
+STUDYHUB/
 ├── client/                 # Frontend React app
 ├── server/                 # Backend Node.js app
 │   ├── src/
@@ -207,3 +207,4 @@ MIT License - feel free to use this project for learning and development.
 ## 🙏 Acknowledgments
 
 Built with modern web technologies for educational collaboration and learning.
+

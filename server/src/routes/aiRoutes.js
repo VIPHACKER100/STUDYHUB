@@ -7,3 +7,4 @@ const router = express.Router();
 router.post('/summarize/:uploadId', authMiddleware, summarizeUpload);
 
 export default router;
+

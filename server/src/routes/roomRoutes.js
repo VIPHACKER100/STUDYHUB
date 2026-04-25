@@ -24,3 +24,4 @@ router.get('/:roomId/messages', getRoomMessages);
 router.delete('/:roomId', deleteRoom);
 
 export default router;
+

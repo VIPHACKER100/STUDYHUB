@@ -49,3 +49,4 @@ router.delete('/block/:userId', unblockUser);
 router.get('/blocked', getBlockedUsers);
 
 export default router;
+

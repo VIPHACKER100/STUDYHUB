@@ -250,3 +250,4 @@ export const deleteRoom = async (req, res) => {
         });
     }
 };
+

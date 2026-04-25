@@ -42,3 +42,5 @@ Welcome to the StudyHub documentation. This directory is organized into logical 
 
 ---
 *For quick reference, see the [Quick Reference Guide](project/QUICK_REFERENCE.md).*
+
+

@@ -244,3 +244,5 @@ Thank you to all contributors who made this release possible!
 ---
 
 **Note**: This changelog is maintained manually. For a complete list of changes, see the [commit history](https://github.com/yourusername/studyhub/commits/main).
+
+

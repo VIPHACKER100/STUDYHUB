@@ -83,7 +83,7 @@ async function setupDatabase() {
         console.log(`\n  📊 Database: ${dbName}`);
         console.log(`  📋 Tables: ${tables.length}`);
         console.log('\n  🔑 Default Admin Credentials:');
-        console.log('     Email: admin@studyhub.com');
+        console.log('     Email: viphacker.100.org@gmail.com');
         console.log('     Password: admin123');
         console.log('     ⚠️  CHANGE THIS PASSWORD IMMEDIATELY!\n');
         console.log('  ✅ You can now start the server with: npm run dev\n');
@@ -105,3 +105,4 @@ async function setupDatabase() {
 
 // Run setup
 setupDatabase();
+

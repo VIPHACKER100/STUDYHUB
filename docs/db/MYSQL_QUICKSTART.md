@@ -51,7 +51,7 @@ npm run dev
 
 ### 7️⃣ Login
 - URL: http://localhost:5173
-- Email: admin@studyhub.com
+- Email: viphacker.100.org@gmail.com
 - Password: admin123
 
 ## ✅ Done!
@@ -117,3 +117,5 @@ npm install mysql2
 ---
 
 **Need help?** Check MYSQL_SETUP.md for detailed instructions!
+
+

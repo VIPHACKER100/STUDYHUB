@@ -33,3 +33,4 @@ router.post('/:id/bookmark', authMiddleware, toggleBookmark);
 router.get('/bookmarks/me', authMiddleware, getMyBookmarks);
 
 export default router;
+

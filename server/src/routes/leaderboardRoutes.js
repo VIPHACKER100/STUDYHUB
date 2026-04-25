@@ -16,3 +16,4 @@ router.get('/badges/:userId',   getUserBadges);
 router.get('/downloaders', authMiddleware, getTopDownloaders);
 
 export default router;
+

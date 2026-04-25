@@ -106,3 +106,4 @@ describe('Leaderboard Endpoints', () => {
         expect([400, 404, 500]).toContain(res.statusCode);
     });
 });
+

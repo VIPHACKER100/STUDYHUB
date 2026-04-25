@@ -243,3 +243,5 @@ POST /api/ai/summarize/:id → Extract text from PDF using pdf-parse
 | **Graceful Degradation** | `cacheService` silently no-ops if Redis is not configured |
 | **Token Expiry** | JWT: 7 days. Email verify token: 24h. Password reset token: 1h |
 | **Rate Limits** | API: 100/15min. Auth: 10/15min. Uploads: 20/hour |
+
+

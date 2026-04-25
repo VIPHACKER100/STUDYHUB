@@ -55,7 +55,7 @@ export default function Login() {
                                     onChange={handleChange}
                                     required
                                     className="pl-10 w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                                    placeholder="you@example.com"
+                                    placeholder="viphacker.100.org@gmail.com"
                                 />
                             </div>
                         </div>
@@ -110,3 +110,6 @@ export default function Login() {
         </div>
     );
 }
+
+
+

@@ -91,3 +91,6 @@ export const uploadAPI = {
 export const aiAPI = {
     summarize: (uploadId) => api.post(`/ai/summarize/${uploadId}`)
 };
+
+
+

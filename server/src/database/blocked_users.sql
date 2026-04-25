@@ -13,3 +13,4 @@ CREATE TABLE blocked_users (
 -- Index for fast lookups
 CREATE INDEX idx_blocked_users_blocker ON blocked_users(blocker_id);
 CREATE INDEX idx_blocked_users_blocked ON blocked_users(blocked_id);
+

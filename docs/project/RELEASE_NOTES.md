@@ -141,7 +141,7 @@ cd .. && npm run dev
 ```
 
 ### Default Admin Access
-- Email: `admin@notesplatform.com`
+- Email: `viphacker.100.org@gmail.com`
 - Password: `admin123`
 - ⚠️ **Change immediately after first login!**
 
@@ -183,3 +183,5 @@ MIT License - Free for educational use
 **Status**: Production Ready ✅
 
 For support and issues, please refer to the documentation or create an issue in the repository.
+
+

@@ -28,3 +28,4 @@ async function updateDatabase() {
 }
 
 updateDatabase();
+

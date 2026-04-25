@@ -44,3 +44,5 @@ This roadmap outlines pending features, optimizations, and further updates plann
 - **Microservices Shift**: Splitting messaging and file services into independent nodes.
 - **API Versioning**: Implementing `/v1/`, `/v2/` endpoints for backward compatibility.
 - **WebSocket Scaling**: Transitioning to Redis adapter for multi-node Socket.io support.
+
+

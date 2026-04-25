@@ -17,3 +17,4 @@ router.put('/read-all', markAllRead);
 router.delete('/:id', deleteNotification);
 
 export default router;
+

@@ -54,7 +54,7 @@ async function setupDatabase() {
         console.log('   - system_settings');
         console.log('   - activity_log');
         console.log('\n🔐 Default admin credentials:');
-        console.log('   Email: admin@notesplatform.com');
+        console.log('   Email: viphacker.100.org@gmail.com');
         console.log('   Password: admin123');
         console.log('   ⚠️  PLEASE CHANGE THIS PASSWORD IN PRODUCTION!\n');
 
@@ -78,3 +78,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 }
 
 export default setupDatabase;
+

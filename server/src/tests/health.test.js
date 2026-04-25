@@ -9,3 +9,4 @@ describe('Health Check', () => {
         expect(res.body.message).toBe('Server is running');
     });
 });
+

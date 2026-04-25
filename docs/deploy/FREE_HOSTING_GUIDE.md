@@ -248,7 +248,7 @@ SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=<your-email>
 SMTP_PASSWORD=<your-app-password>
-EMAIL_FROM=noreply@studyhub.com
+EMAIL_FROM=viphacker.100.org@gmail.com
 ```
 
 ---
@@ -379,3 +379,5 @@ After deployment:
 **Recommendation:** Use **Railway.app** for the easiest deployment experience with StudyHub!
 
 Would you like me to create a detailed Railway deployment guide?
+
+

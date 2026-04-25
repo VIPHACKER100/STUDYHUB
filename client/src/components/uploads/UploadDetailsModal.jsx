@@ -170,3 +170,6 @@ export default function UploadDetailsModal({ upload, onClose, token, currUserId 
         </div>
     );
 }
+
+
+

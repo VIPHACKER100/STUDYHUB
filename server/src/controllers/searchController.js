@@ -137,3 +137,4 @@ export const searchContent = async (req, res) => {
         res.status(500).json({ success: false, message: 'Search failed' });
     }
 };
+

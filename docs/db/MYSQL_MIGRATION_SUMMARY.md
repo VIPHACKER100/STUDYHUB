@@ -225,3 +225,5 @@ Migration is successful when:
 **Date:** December 2025
 
 **Your StudyHub application now supports both PostgreSQL and MySQL!** 🎓✨
+
+

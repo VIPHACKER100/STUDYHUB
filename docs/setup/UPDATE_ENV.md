@@ -90,7 +90,7 @@ SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your_email@gmail.com
 SMTP_PASSWORD=your_email_password
-EMAIL_FROM=noreply@studyhub.com
+EMAIL_FROM=viphacker.100.org@gmail.com
 
 # Redis Configuration
 REDIS_HOST=localhost
@@ -112,3 +112,5 @@ Once you've updated your `.env` file:
 ---
 
 **Remember:** Never commit your `.env` file to Git! It's already in `.gitignore`.
+
+

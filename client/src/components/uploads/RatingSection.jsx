@@ -135,3 +135,6 @@ export default function RatingSection({ uploadId, ratings, onRatingSubmit }) {
         </div>
     );
 }
+
+
+

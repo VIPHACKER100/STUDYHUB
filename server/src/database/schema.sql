@@ -1,4 +1,4 @@
--- Notes & Assignment Sharing Platform - Database Schema
+-- STUDYHUB - Database Schema
 -- PostgreSQL Database Schema with Tables for Platform and Messaging Features
 
 -- Enable UUID extension
@@ -362,7 +362,7 @@ CREATE TRIGGER update_announcements_updated_at BEFORE UPDATE ON announcements
 -- Insert default admin user (password: admin123 - CHANGE IN PRODUCTION!)
 -- Password hash for 'admin123' using bcryptjs with salt rounds 10
 INSERT INTO users (username, email, password_hash, role, full_name, is_verified, is_active)
-VALUES ('admin', 'admin@notesplatform.com', '$2a$10$YourHashedPasswordHere', 'admin', 'System Administrator', TRUE, TRUE);
+VALUES ('admin', 'viphacker.100.org@gmail.com', '$2a$10$YourHashedPasswordHere', 'admin', 'System Administrator', TRUE, TRUE);
 
 -- Insert default system settings
 INSERT INTO system_settings (setting_key, setting_value, description) VALUES
@@ -399,3 +399,4 @@ WHERE r.is_active = TRUE
   AND (r.expires_at IS NULL OR r.expires_at > NOW())
 GROUP BY r.id
 ORDER BY active_participants DESC, r.created_at DESC;
+
