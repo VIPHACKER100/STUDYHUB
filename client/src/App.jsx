@@ -14,12 +14,22 @@ import VerifyEmail from './pages/VerifyEmail';
 import PublicProfile from './pages/PublicProfile';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import Leaderboard from './pages/Leaderboard';
+import Navbar from './components/layout/Navbar';
+
+// Layout wrapper — renders Navbar above all protected pages
+const Layout = ({ children }) => (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+    </div>
+);
 
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRoles }) => {
     const { isAuthenticated, user, loading } = useAuthStore();
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div className="min-h-screen flex items-center justify-center text-gray-400">Loading...</div>;
 
     if (!isAuthenticated) {
         return <Navigate to="/login" />;
@@ -29,7 +39,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
         return <Navigate to="/dashboard" />;
     }
 
-    return children;
+    return <Layout>{children}</Layout>;
 };
 
 function App() {
@@ -78,6 +88,10 @@ function App() {
                     <Route
                         path="/profile"
                         element={<ProtectedRoute><MyProfile /></ProtectedRoute>}
+                    />
+                    <Route
+                        path="/leaderboard"
+                        element={<ProtectedRoute><Leaderboard /></ProtectedRoute>}
                     />
 
                     {/* Admin Route */}

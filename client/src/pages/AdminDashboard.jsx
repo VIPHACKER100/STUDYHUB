@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Users, FileText, MessageSquare, AlertTriangle, LayoutDashboard, Settings } from 'lucide-react';
+import { Users, FileText, MessageSquare, AlertTriangle, LayoutDashboard, BarChart2 } from 'lucide-react';
 import axios from 'axios';
 import UserManagement from '../components/admin/UserManagement';
 import ReportManagement from '../components/admin/ReportManagement';
-
 import ContentManagement from '../components/admin/ContentManagement';
+import AnalyticsTab from '../components/admin/AnalyticsTab';
 
 export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState('overview');
@@ -26,10 +26,11 @@ export default function AdminDashboard() {
     }, []);
 
     const tabs = [
-        { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-        { id: 'users', label: 'Users', icon: Users },
-        { id: 'content', label: 'Content', icon: FileText },
-        { id: 'reports', label: 'Reports', icon: AlertTriangle },
+        { id: 'overview',   label: 'Overview',  icon: LayoutDashboard },
+        { id: 'analytics',  label: 'Analytics', icon: BarChart2 },
+        { id: 'users',      label: 'Users',     icon: Users },
+        { id: 'content',    label: 'Content',   icon: FileText },
+        { id: 'reports',    label: 'Reports',   icon: AlertTriangle },
     ];
 
     if (loading) return <div className="p-8 text-center text-gray-500">Loading admin panel...</div>;
@@ -128,6 +129,12 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     </div>
+                </div>
+            )}
+
+            {activeTab === 'analytics' && (
+                <div className="animate-in fade-in duration-300">
+                    <AnalyticsTab stats={stats} />
                 </div>
             )}
 

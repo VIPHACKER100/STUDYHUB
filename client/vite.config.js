@@ -10,11 +10,11 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
             manifest: {
-                name: 'Notes & Assignment Platform',
-                short_name: 'NotesApp',
-                description: 'Share notes, assignments, and chat with peers',
-                theme_color: '#2563eb',
-                background_color: '#ffffff',
+                name: 'StudyHub — Collaborative Learning Platform',
+                short_name: 'StudyHub',
+                description: 'Share notes, study with peers, and climb the leaderboard',
+                theme_color: '#6366f1',
+                background_color: '#0f172a',
                 display: 'standalone',
                 scope: '/',
                 start_url: '/',
@@ -67,6 +67,19 @@ export default defineConfig({
                             cacheableResponse: {
                                 statuses: [0, 200]
                             }
+                        }
+                    }
+                    {
+                        urlPattern: /^\/api\/.*/i,
+                        handler: 'NetworkFirst',
+                        options: {
+                            cacheName: 'api-cache',
+                            networkTimeoutSeconds: 10,
+                            expiration: {
+                                maxEntries: 64,
+                                maxAgeSeconds: 60 * 60 * 24 // 24 hours stale fallback
+                            },
+                            cacheableResponse: { statuses: [0, 200] }
                         }
                     }
                 ]

@@ -1,8 +1,8 @@
 # StudyHub — Project Status
 
-**Platform Version:** 1.1.0  
+**Platform Version:** 1.3.0  
 **Last Updated:** April 2026  
-**Overall Status:** 🟢 Production Ready + Phase 4 In Progress
+**Overall Status:** 🟢 Phase 5 In Progress
 
 ---
 
@@ -13,8 +13,9 @@
 | Phase 1 | MVP — Auth, DB Schema, Messaging API, Socket.io | ✅ Complete |
 | Phase 2 | Content — File Upload, Messaging UI, Rooms UI, Ratings | ✅ Complete |
 | Phase 3 | Advanced — Email, Notifications, Search, Admin UI, Profiles | ✅ Complete |
-| Phase 4 | Optimization — Caching, Analytics, Docs, PWA | 🔄 In Progress |
-| Phase 5 | Future — Mobile, AI, Video, Calendar | ⏳ Planned |
+| Phase 4 | Optimization — Caching, Analytics, Tests, Redis Rate-Limit | ✅ Complete |
+| Phase 5 | Community — Leaderboards, Badges, Global Navbar, PWA | 🔄 In Progress |
+| Phase 6 | Future — Mobile, AI, Video, Calendar | ⏳ Planned |
 
 ---
 
@@ -84,10 +85,17 @@
   - [x] Admin stats cache (key: `admin:stats`, TTL: 10 min)
   - [x] Admin trends cache (key: `admin:trends`, TTL: 1 hr)
   - [x] Graceful no-op if Redis not configured
-- [x] **`recharts` installed** in client — ready for analytics charts in Admin UI
-- [x] `GET /api/admin/trends` — backend endpoint complete
-- [ ] Analytics chart components in `AdminDashboard.jsx` (frontend integration pending)
-- [ ] Redis rate-limit store (currently in-memory `express-rate-limit`)
+- [x] **Redis-backed rate limiting** (`middleware/rateLimiter.js` → `rate-limit-redis`)
+  - [x] Shared state across multiple Node.js instances
+  - [x] Graceful fallback to MemoryStore without Redis
+- [x] **Admin Analytics Dashboard** (`components/admin/AnalyticsTab.jsx`)
+  - [x] KPI cards with trend indicators
+  - [x] 7-day Growth Trend Area Chart (users + uploads)
+  - [x] Daily Uploads Bar Chart
+  - [x] User Role Distribution Pie Chart
+  - [x] Content Type Split Pie Chart
+  - [x] Live refresh button
+- [x] **`GET /api/admin/trends`** backend endpoint (cached 1hr)
 
 ### 📚 Documentation
 - [x] `docs/` directory with organized subfolders (`api/`, `db/`, `deploy/`, `history/`, `project/`, `setup/`)
@@ -99,21 +107,31 @@
 ### 🧪 Testing
 - [x] Jest + Supertest configured
 - [x] `health.test.js` — `/api/health` endpoint
-- [x] `auth.test.js` — register/login flow
-- [ ] Upload controller tests
-- [ ] Message controller tests
-- [ ] Frontend tests (Vitest / React Testing Library)
+- [x] `auth.test.js` — register/login/invalid-credentials flow
+- [x] `upload.test.js` — list, filter, create, rate, delete (10 test cases)
+- [x] `notification.test.js` — list, unread count, mark-all-read (5 test cases)
+- [ ] Frontend tests (Vitest / React Testing Library) — Phase 5
+- [ ] Message controller tests — Phase 5
 
 ---
 
-## 🔄 Currently In Progress (Phase 4)
+## 🔄 Phase 5 — In Progress (Community Features)
 
 | Task | File | Status |
 |------|------|--------|
-| Admin analytics chart UI | `AdminDashboard.jsx` | 🔄 Recharts installed, charts pending |
-| Redis rate-limit store | `middleware/rateLimiter.js` | ⏳ Pending |
-| Frontend unit tests | `client/src/**/*.test.jsx` | ⏳ Pending |
-| Upload controller tests | `server/src/tests/upload.test.js` | ⏳ Pending |
+| Leaderboard backend | `controllers/leaderboardController.js` | ✅ Done |
+| Leaderboard routes | `routes/leaderboardRoutes.js` | ✅ Done |
+| Leaderboard UI page | `pages/Leaderboard.jsx` | ✅ Done |
+| Badge system (12 badges, 3 categories) | `leaderboardController.js` | ✅ Done |
+| Global Navbar component | `components/layout/Navbar.jsx` | ✅ Done |
+| Navbar wired into all routes | `App.jsx` + `Layout` wrapper | ✅ Done |
+| Dashboard redesign (hero banner) | `pages/Dashboard.jsx` | ✅ Done |
+| PWA branding fix (StudyHub) | `vite.config.js` | ✅ Done |
+| PWA API cache strategy (NetworkFirst) | `vite.config.js` | ✅ Done |
+| Message controller tests | `tests/messages.test.js` | ✅ Done (10 cases) |
+| AI content recommendations | TBD | ⏳ Next |
+| Smart PDF summarization | TBD | ⏳ Planned |
+| Leaderboard test suite | `tests/leaderboard.test.js` | ⏳ Next |
 
 ---
 
