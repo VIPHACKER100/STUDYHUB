@@ -1,40 +1,88 @@
 import rateLimit from 'express-rate-limit';
+import { RedisStore } from 'rate-limit-redis';
+import Redis from 'ioredis';
+import config from '../config/index.js';
 
-const createLimiter = (options) => {
-    if (process.env.NODE_ENV === 'test') {
-        return (req, res, next) => next();
+// Create a shared Redis client for rate limiting
+// Falls back gracefully if Redis is unavailable
+let redisClient = null;
+
+if (config.redis?.host) {
+    redisClient = new Redis({
+        host: config.redis.host,
+        port: config.redis.port,
+        password: config.redis.password,
+        enableOfflineQueue: false,      // Don't queue commands when offline
+        lazyConnect: true,
+        retryStrategy: (times) => {
+            if (times > 3) return null; // Stop retrying after 3 attempts
+            return Math.min(times * 100, 1000);
+        },
+    });
+
+    redisClient.on('error', (err) => {
+        console.warn('⚠️  Rate-limit Redis error (falling back to memory):', err.message);
+    });
+
+    redisClient.on('connect', () => {
+        console.log('✅ Rate-limit Redis store - Connected');
+    });
+}
+
+/**
+ * Build a store config: Redis if available, memory otherwise.
+ * This means rate limiting degrades gracefully without Redis.
+ */
+const buildStore = (prefix) => {
+    if (redisClient) {
+        return new RedisStore({
+            sendCommand: (...args) => redisClient.call(...args),
+            prefix: `rl:${prefix}:`,
+        });
     }
-    return rateLimit(options);
+    return undefined; // express-rate-limit defaults to MemoryStore
 };
 
-// Global API limiter
-export const apiLimiter = createLimiter({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 200, // Limit each IP to 200 requests per windowMs
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+const createLimiter = (prefix, options) => {
+    if (process.env.NODE_ENV === 'test') {
+        return (req, res, next) => next(); // Skip limiting in test env
+    }
+    return rateLimit({
+        store: buildStore(prefix),
+        standardHeaders: true,   // Return RateLimit-* headers
+        legacyHeaders: false,    // Disable X-RateLimit-* headers
+        ...options,
+    });
+};
+
+// ─── Limiters ──────────────────────────────────────────────
+
+/** Global API limiter — 200 req / 15 min per IP */
+export const apiLimiter = createLimiter('api', {
+    windowMs: 15 * 60 * 1000,
+    max: 200,
     message: {
         success: false,
-        message: 'Too many requests from this IP, please try again after 15 minutes'
-    }
+        message: 'Too many requests from this IP, please try again after 15 minutes',
+    },
 });
 
-// Stricter limiter for auth routes (brute force protection)
-export const authLimiter = createLimiter({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 20, // Limit each IP to 20 auth requests per 15 min
+/** Auth limiter — 20 req / 15 min per IP (brute-force protection) */
+export const authLimiter = createLimiter('auth', {
+    windowMs: 15 * 60 * 1000,
+    max: 20,
     message: {
         success: false,
-        message: 'Too many authentication attempts, please try again after 15 minutes'
-    }
+        message: 'Too many authentication attempts, please try again after 15 minutes',
+    },
 });
 
-// Upload limiter (prevent DOS via file uploads)
-export const uploadLimiter = createLimiter({
-    windowMs: 60 * 60 * 1000, // 1 hour
-    max: 100, // Limit each IP to 100 uploads per hour
+/** Upload limiter — 100 uploads / hour per IP */
+export const uploadLimiter = createLimiter('upload', {
+    windowMs: 60 * 60 * 1000,
+    max: 100,
     message: {
         success: false,
-        message: 'Upload limit reached, please try again later'
-    }
+        message: 'Upload limit reached, please try again later',
+    },
 });

@@ -7,7 +7,8 @@ A comprehensive educational platform combining file sharing (notes/assignments),
 ### Core Platform
 - **User Authentication** - Role-based access (Admin, Teacher, Student)
 - **Notes & Assignment Sharing** - Upload and share educational content
-- **Search & Discovery** - Find relevant study materials
+- **Search & Discovery** - AI-powered content recommendations based on user interaction
+- **Smart Summarization** - Automated AI summaries for PDF and text documents
 - **Ratings & Comments** - Community feedback on uploads
 - **Bookmarking** - Save favorite resources
 
@@ -18,12 +19,13 @@ A comprehensive educational platform combining file sharing (notes/assignments),
 - **File Sharing** - Share documents and images in conversations
 - **Message Management** - Edit, delete, and search messages
 
-### Admin Features
+### Admin & Community
+- **Leaderboard & Badges** - Gamified learning with top contributor ranks and 12+ unique achievements
 - **User Management** - View, edit, and manage user accounts
 - **Content Moderation** - Monitor and moderate uploads and messages
-- **Analytics Dashboard** - Platform usage statistics
-- **Announcements** - Platform-wide and targeted announcements
+- **Analytics Dashboard** - High-fidelity platform usage statistics and trends
 - **Report System** - Handle user reports and content takedowns
+- **PWA Ready** - Fully installable as a web app with offline reliability
 
 ## 🛠️ Tech Stack
 
@@ -40,8 +42,10 @@ A comprehensive educational platform combining file sharing (notes/assignments),
 - **TailwindCSS** - Styling
 - **React Router** - Routing
 - **Zustand** - State management
-- **React Query** - Data fetching
-- **Socket.io Client** - Real-time messaging
+- **React Query** - Data fetching & sync
+- **Zustand** - State management
+- **React Markdown** - Summary rendering
+- **Vite PWA** - Progressive Web App logic
 
 ## 📋 Prerequisites
 
@@ -53,7 +57,7 @@ A comprehensive educational platform combining file sharing (notes/assignments),
 
 ## 🏃 Quick Start
 
-See [SETUP.md](./SETUP.md) for detailed installation instructions.
+See the [Documentation Index](./docs/INDEX.md) for detailed installation instructions.
 
 ```bash
 # 1. Install dependencies
@@ -82,20 +86,17 @@ The app will be available at:
 
 ## 📚 Documentation
 
-- [README.md](./README.md) - Project overview and quick start
-- [SETUP.md](./SETUP.md) - Detailed setup instructions
-- [DEPLOYMENT.md](./DEPLOYMENT.md) - Production deployment guide
-- [PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md) - Complete project overview
-- [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) - Complete API reference
-- [CONTRIBUTING.md](./CONTRIBUTING.md) - Contribution guidelines
-- [SECURITY.md](./SECURITY.md) - Security policy and best practices
-- [CHANGELOG.md](./CHANGELOG.md) - Version history and changes
-- [RELEASE_NOTES.md](./RELEASE_NOTES.md) - Release notes v1.0.0
-- [PHASE3_COMPLETE.md](./PHASE3_COMPLETE.md) - Phase 3 completion summary
-- [BRAND_GUIDELINES.html](./BRAND_GUIDELINES.html) - Visual brand guidelines
-- [LICENSE](./LICENSE) - MIT License
+Detailed documentation is available in the [docs/](./docs/) directory:
+
+- [**Documentation Index**](./docs/INDEX.md) ⬅️ **Start Here**
+- [**Memory Map**](./docs/project/PROJECT_MEMORY_MAP.md) - Conceptual architecture overview.
+- [**Future Roadmap**](./docs/project/FUTURE_ROADMAP.md) - Planned features and updates.
+- [Setup Guide](./docs/setup/SETUP.md) - Detailed installation instructions.
+- [API Reference](./docs/api/API_DOCUMENTATION.md) - Complete API documentation.
+- [Database Guide](./docs/db/MYSQL_SETUP.md) - Database configuration and MySQL migration.
 
 ## 🔑 Default Admin Access
+
 
 After running the database setup, you can login with:
 - **Email**: `admin@notesplatform.com`
@@ -124,26 +125,26 @@ notes-assignment-platform/
 
 ## 🌟 Key Features Implementation Status
 
-### ✅ Completed (Phase 1, 2, 3)
+### ✅ Completed (Phase 1, 2, 3, 4, 5)
 - [x] Project setup with monorepo structure
 - [x] PostgreSQL database with comprehensive schema
 - [x] User authentication (register, login, JWT)
-- [x] Direct messaging API & UI
+- [x] Direct messaging API & UI (Real-time)
 - [x] Anonymous chat rooms API & UI
-- [x] Socket.io real-time messaging
 - [x] File upload system (AWS S3 / Local)
-- [x] Search functionality with filters
-- [x] Ratings and comments system
-- [x] Admin panel UI & Content Management
-- [x] Email verification & Password Reset
-- [x] User profiles and bookmarks
-- [x] File attachments in messages
-- [x] Privacy & Security (Blocking, Rate Limiting)
+- [x] AI Content Recommendations (Interests-based)
+- [x] Smart PDF Summarization (Gemini AI)
+- [x] Gamification (Leaderboards & Badges)
+- [x] Admin panel UI & Analytics Trends
+- [x] Redis Caching & Invalidation Logic
+- [x] PWA Support & Offline Reliability
+- [x] Test Coverage (Messaging, Leaderboards, Auth)
 
 ### 🚧 Future Enhancements
-- [ ] Notifications system (UI integration)
-- [ ] Mobile optimization
-- [ ] Redis Caching
+- [ ] Mobile App (React Native)
+- [ ] Video Study Rooms
+- [ ] AI Tutor Integration (RAG)
+- [ ] Shared Study Calendars
 
 ## 📱 API Endpoints
 
@@ -170,6 +171,12 @@ notes-assignment-platform/
 - `POST /api/rooms/:roomId/join` - Join room
 - `POST /api/rooms/:roomId/leave` - Leave room
 - `GET /api/rooms/:roomId/messages` - Get room messages
+
+### Recommendations & AI
+- `GET /api/recommendations` - Get personalized content
+- `GET /api/recommendations/trending` - Get global trends
+- `POST /api/ai/summarize/:id` - Generate document summary
+- `GET /api/leaderboard` - Get platform rankings
 
 ## 🔒 Security Features
 

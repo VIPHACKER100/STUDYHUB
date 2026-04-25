@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { toast } from 'react-hot-toast';
 import { uploadAPI } from '../../services/api';
 import RatingSection from './RatingSection';
+import SummarySection from './SummarySection';
 
 export default function UploadDetailsModal({ upload, onClose, token, currUserId }) {
     const [ratings, setRatings] = useState([]);
@@ -103,6 +104,8 @@ export default function UploadDetailsModal({ upload, onClose, token, currUserId 
                                 <span>{formatFileSize(upload.file_size)}</span>
                             </div>
                         </div>
+                        
+                        <SummarySection uploadId={upload.id} fileType={upload.file_type} />
 
                         <div className="prose dark:prose-invert max-w-none">
                             <h3 className="text-sm font-semibold uppercase text-gray-500 tracking-wider mb-2">Description</h3>

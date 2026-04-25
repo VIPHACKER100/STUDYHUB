@@ -87,3 +87,7 @@ export const uploadAPI = {
     toggleBookmark: (id) => api.post(`/uploads/${id}/bookmark`),
     getMyBookmarks: (params) => api.get('/uploads/bookmarks/me', { params })
 };
+
+export const aiAPI = {
+    summarize: (uploadId) => api.post(`/ai/summarize/${uploadId}`)
+};
