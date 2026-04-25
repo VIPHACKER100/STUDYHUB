@@ -1,0 +1,15 @@
+{
+    "plugins": [
+        {
+            "type": "mysql"
+        }
+    ],
+    "services": [
+        {
+            "name": "api",
+            "type": "node",
+            "buildCommand": "npm install && npm install --workspace=server",
+            "startCommand": "npm start --workspace=server"
+        }
+    ]
+}
