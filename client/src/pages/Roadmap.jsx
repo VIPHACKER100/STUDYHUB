@@ -1,5 +1,10 @@
 import React from 'react';
-import { Rocket, CheckCircle2, Clock, Calendar, Zap, Sparkles, Code, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Rocket, CheckCircle2, Clock, Zap, ArrowRight } from 'lucide-react';
+import { Card } from '../components/ui/Card';
+import { Badge } from '../components/ui/Badge';
+import { Button } from '../components/ui/Button';
 
 const ROADMAP_DATA = [
     {
@@ -38,65 +43,111 @@ const ROADMAP_DATA = [
 ];
 
 const Roadmap = () => {
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 28 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+    };
+
     return (
-        <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
-            <div className="bg-gray-50 dark:bg-gray-800/50 pt-32 pb-16 border-b border-gray-100 dark:border-gray-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-xs font-bold mb-6">
-                        <Rocket className="w-3.5 h-3.5" />
-                        <span>The Future of STUDYHUB</span>
-                    </div>
-                    <h1 className="text-4xl md:text-5xl font-black mb-4">Our Product Roadmap</h1>
-                    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                        We are building the most advanced educational platform in the world. Here is where we've been and where we are heading.
-                    </p>
+        <div className="bg-background min-h-screen">
+            {/* Hero Section */}
+            <header className="relative pt-40 pb-24 overflow-hidden bg-foreground">
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] -mr-64 -mt-64" />
+                
+                <div className="max-w-6xl mx-auto px-6 relative z-10 text-center">
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={fadeInUp}
+                    >
+                        <Badge variant="outline" className="mb-6 border-accent/30 bg-accent/5 text-accent-secondary">
+                            <Rocket className="w-3.5 h-3.5 mr-2" />
+                            THE FUTURE OF STUDYHUB
+                        </Badge>
+                        <h1 className="text-4xl md:text-6xl font-display text-white mb-6">
+                            Our Product <span className="gradient-text">Roadmap</span>
+                        </h1>
+                        <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+                            Building the most advanced educational intelligence platform. 
+                            Transparency is one of our core values—here is our vision for the months ahead.
+                        </p>
+                    </motion.div>
                 </div>
-            </div>
+            </header>
 
-            <section className="py-20 px-4">
-                <div className="max-w-5xl mx-auto">
-                    <div className="relative border-l-2 border-gray-100 dark:border-gray-800 ml-4 md:ml-0 md:left-1/2 md:-translate-x-1/2">
+            <section className="py-24 px-6">
+                <div className="max-w-4xl mx-auto relative">
+                    {/* Timeline Line */}
+                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-1/2" />
+
+                    <div className="space-y-24">
                         {ROADMAP_DATA.map((phase, idx) => (
-                            <div key={idx} className={`relative mb-16 md:w-1/2 ${idx % 2 === 0 ? 'md:pr-12 md:text-right md:ml-0' : 'md:pl-12 md:ml-[50%]'}`}>
-                                {/* Dot */}
-                                <div className={`absolute top-0 w-8 h-8 rounded-full border-4 border-white dark:border-gray-900 shadow-lg flex items-center justify-center z-10 
-                                    ${idx % 2 === 0 
-                                        ? 'left-[-17px] md:left-auto md:right-[-17px]' 
-                                        : 'left-[-17px]'
-                                    } 
-                                    ${phase.status === 'completed' ? 'bg-green-500' : phase.status === 'current' ? 'bg-indigo-600 animate-pulse' : 'bg-gray-400'}`}
-                                >
+                            <motion.div 
+                                key={idx}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-100px" }}
+                                variants={fadeInUp}
+                                className={`relative flex flex-col ${idx % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+                            >
+                                {/* Center Dot */}
+                                <div className={`absolute left-4 md:left-1/2 top-0 w-8 h-8 -translate-x-1/2 rounded-full border-4 border-background z-20 flex items-center justify-center shadow-lg
+                                    ${phase.status === 'completed' ? 'bg-green-500' : phase.status === 'current' ? 'bg-accent shadow-accent' : 'bg-muted'}
+                                `}>
                                     {phase.status === 'completed' && <CheckCircle2 className="w-4 h-4 text-white" />}
-                                    {phase.status === 'current' && <Zap className="w-4 h-4 text-white" />}
-                                    {phase.status === 'upcoming' && <Clock className="w-4 h-4 text-white" />}
+                                    {phase.status === 'current' && <Zap className="w-4 h-4 text-white animate-pulse" />}
+                                    {phase.status === 'upcoming' && <Clock className="w-4 h-4 text-muted-foreground" />}
                                 </div>
 
-                                <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
-                                    <div className="text-sm font-bold text-indigo-600 mb-2">{phase.date}</div>
-                                    <h3 className="text-2xl font-black mb-4">{phase.title}</h3>
-                                    <ul className={`space-y-3 ${idx % 2 === 0 ? 'md:flex md:flex-col md:items-end' : ''}`}>
-                                        {phase.items.map((item, i) => (
-                                            <li key={i} className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
-                                                {idx % 2 === 0 && <span className="hidden md:block">{item}</span>}
-                                                <CheckCircle2 className={`w-4 h-4 flex-shrink-0 ${phase.status === 'completed' ? 'text-green-500' : 'text-gray-300'}`} />
-                                                {(idx % 2 !== 0 || window.innerWidth < 768) && <span>{item}</span>}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                {/* Content Card */}
+                                <div className={`ml-12 md:ml-0 md:w-1/2 ${idx % 2 === 0 ? 'md:pl-16' : 'md:pr-16 md:text-right'}`}>
+                                    <div className={`inline-block mb-3 text-sm font-mono tracking-widest ${phase.status === 'current' ? 'text-accent' : 'text-muted-foreground'}`}>
+                                        {phase.date}
+                                    </div>
+                                    <h3 className="text-2xl font-display text-foreground mb-6">{phase.title}</h3>
+                                    
+                                    <Card variant={phase.status === 'current' ? 'featured' : 'default'} className="p-8">
+                                        <ul className={`space-y-4 ${idx % 2 !== 0 ? 'md:flex md:flex-col md:items-end' : ''}`}>
+                                            {phase.items.map((item, i) => (
+                                                <li key={i} className="flex items-center gap-3 text-muted-foreground group">
+                                                    {idx % 2 !== 0 && <span className="hidden md:block transition-colors group-hover:text-foreground">{item}</span>}
+                                                    <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 
+                                                        ${phase.status === 'completed' ? 'bg-green-100 text-green-600' : 'bg-muted text-muted-foreground/50'}
+                                                    `}>
+                                                        <CheckCircle2 className="w-3.5 h-3.5" />
+                                                    </div>
+                                                    {(idx % 2 === 0 || typeof window !== 'undefined' && window.innerWidth < 768) && <span className="transition-colors group-hover:text-foreground">{item}</span>}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </Card>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
+                </div>
 
-                    <div className="text-center mt-20">
-                        <div className="bg-indigo-50 dark:bg-indigo-900/20 p-10 rounded-[3rem] border border-indigo-100 dark:border-indigo-800">
-                            <h2 className="text-2xl font-bold mb-4">Have a feature request?</h2>
-                            <p className="text-gray-600 dark:text-gray-400 mb-8">We build STUDYHUB based on your feedback. Tell us what you want to see next!</p>
-                            <Link to="/contact" className="bg-indigo-600 text-white px-10 py-4 rounded-full font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-500/20">
-                                Suggest a Feature
-                            </Link>
+                {/* Final CTA */}
+                <div className="max-w-4xl mx-auto mt-32">
+                    <Card variant="elevated" className="bg-foreground p-16 text-center relative overflow-hidden rounded-[3rem]">
+                        <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+                        <div className="relative z-10">
+                            <Badge variant="outline" className="mb-6 border-accent/20 bg-accent/5 text-accent-secondary">
+                                FEEDBACK DRIVEN
+                            </Badge>
+                            <h2 className="text-3xl md:text-4xl font-display text-white mb-6">Have a feature request?</h2>
+                            <p className="text-muted-foreground mb-10 max-w-lg mx-auto text-lg">
+                                We build STUDYHUB based on your feedback. 
+                                Tell us what you want to master next, and we'll make it part of the vision.
+                            </p>
+                            <Button size="lg" className="rounded-full group px-12" asChild>
+                                <Link to="/contact">
+                                    Suggest a Feature
+                                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </Button>
                         </div>
-                    </div>
+                    </Card>
                 </div>
             </section>
         </div>

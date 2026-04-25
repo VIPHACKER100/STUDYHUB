@@ -1,155 +1,209 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, ShieldCheck, HelpCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Mail, Phone, MapPin, Send, HelpCircle, ShieldCheck, ArrowRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { Button } from '../components/ui/Button';
+import { Card } from '../components/ui/Card';
 
-const Contact = () => {
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const INPUT_BASE =
+    'w-full px-4 py-3.5 bg-muted/50 border border-border rounded-xl text-foreground ' +
+    'placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 ' +
+    'focus:ring-accent/40 focus:border-accent transition-all resize-none';
+
+const CONTACT_INFO = [
+    { icon: Mail, label: 'Email', value: 'viphacker.100.org@gmail.com' },
+    { icon: Phone, label: 'Support', value: '+1 (555) STUDY-HUB' },
+    { icon: MapPin, label: 'Headquarters', value: 'Tech City, Innovation District' },
+];
+
+const HELP_CARDS = [
+    { icon: HelpCircle, label: 'Help Center', desc: 'Find quick answers in our FAQ.', href: '/help' },
+    { icon: ShieldCheck, label: 'Report Abuse', desc: 'Help us keep STUDYHUB safe.', href: '#' },
+];
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
+export default function Contact() {
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: 'general',
-        message: ''
+        name: '', email: '', subject: 'general', message: ''
     });
+    const [sending, setSending] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // In a real app, this would send an email via the backend
-        console.log('Contact form submitted:', formData);
-        toast.success('Message sent! We\'ll get back to you soon.');
+        setSending(true);
+        await new Promise(r => setTimeout(r, 800));
+        toast.success("Message sent! We'll get back to you soon.");
         setFormData({ name: '', email: '', subject: 'general', message: '' });
+        setSending(false);
     };
 
+    const set = (key) => (e) => setFormData(prev => ({ ...prev, [key]: e.target.value }));
+
     return (
-        <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
-            <div className="bg-gray-50 dark:bg-gray-800/50 pt-32 pb-12 border-b border-gray-100 dark:border-gray-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-4xl font-black mb-4">Contact Us</h1>
-                    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                        Have questions, feedback, or need support? Our team is here to help you.
-                    </p>
+        <div className="min-h-screen bg-background">
+
+            {/* ── Hero ─────────────────────────────────────────────── */}
+            <div className="bg-foreground pt-32 pb-16 relative overflow-hidden">
+                <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px]" />
+                <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <p className="text-[10px] font-mono font-black text-accent uppercase tracking-[0.25em] mb-4">
+                            Support
+                        </p>
+                        <h1 className="text-5xl font-display text-white tracking-tight mb-4">Contact Us</h1>
+                        <p className="text-muted-foreground max-w-xl mx-auto">
+                            Have questions, feedback, or need support? Our team is here to help.
+                        </p>
+                    </motion.div>
                 </div>
             </div>
 
+            {/* ── Main Content ─────────────────────────────────────── */}
             <section className="py-20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-3 gap-12">
+                <div className="max-w-5xl mx-auto px-6">
+                    <div className="grid lg:grid-cols-3 gap-10">
+
                         {/* Info Column */}
-                        <div className="lg:col-span-1 space-y-8">
+                        <motion.div
+                            initial={{ opacity: 0, x: -16 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            className="space-y-8"
+                        >
+                            {/* Contact details */}
                             <div>
-                                <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Mail className="w-5 h-5" />
+                                <h2 className="text-xl font-display text-foreground mb-6">Reach us directly</h2>
+                                <div className="space-y-5">
+                                    {CONTACT_INFO.map(({ icon: Icon, label, value }) => (
+                                        <div key={label} className="flex items-start gap-4">
+                                            <div className="w-10 h-10 bg-accent/10 border border-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <Icon className="w-4 h-4 text-accent" />
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-foreground text-sm">{label}</p>
+                                                <p className="text-muted-foreground text-sm">{value}</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p className="font-bold">Email</p>
-                                            <p className="text-gray-600 dark:text-gray-400 text-sm">viphacker.100.org@gmail.com</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Phone className="w-5 h-5" />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold">Support</p>
-                                            <p className="text-gray-600 dark:text-gray-400 text-sm">+1 (555) STUDY-HUB</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <MapPin className="w-5 h-5" />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold">Headquarters</p>
-                                            <p className="text-gray-600 dark:text-gray-400 text-sm">Tech City, Innovation District<br />Global Education Hub</p>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
 
-                            {/* Help Cards */}
-                            <div className="grid gap-4">
-                                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700">
-                                    <HelpCircle className="w-6 h-6 text-indigo-600 mb-2" />
-                                    <p className="font-bold text-sm">Help Center</p>
-                                    <p className="text-xs text-gray-500">Find quick answers in our FAQ.</p>
-                                </div>
-                                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700">
-                                    <ShieldCheck className="w-6 h-6 text-blue-600 mb-2" />
-                                    <p className="font-bold text-sm">Report Abuse</p>
-                                    <p className="text-xs text-gray-500">Help us keep STUDYHUB safe.</p>
-                                </div>
+                            {/* Help shortcuts */}
+                            <div className="space-y-3">
+                                {HELP_CARDS.map(({ icon: Icon, label, desc, href }) => (
+                                    <Link key={label} to={href}>
+                                        <Card className="p-4 hover:border-accent/30 transition-colors group cursor-pointer">
+                                            <div className="flex items-start gap-3">
+                                                <Icon className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                                                <div>
+                                                    <p className="font-bold text-foreground text-sm group-hover:text-accent transition-colors">
+                                                        {label}
+                                                    </p>
+                                                    <p className="text-xs text-muted-foreground">{desc}</p>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </Link>
+                                ))}
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Form Column */}
-                        <div className="lg:col-span-2">
-                            <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-xl shadow-gray-200/50 dark:shadow-none">
-                                <h3 className="text-2xl font-bold mb-8">Send us a Message</h3>
+                        <motion.div
+                            className="lg:col-span-2"
+                            initial={{ opacity: 0, x: 16 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <Card className="p-8 md:p-10">
+                                <h3 className="text-xl font-display text-foreground mb-8">Send us a message</h3>
+
                                 <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="grid md:grid-cols-2 gap-6">
+                                    {/* Name + Email row */}
+                                    <div className="grid md:grid-cols-2 gap-5">
                                         <div>
-                                            <label className="block text-sm font-bold mb-2">Full Name</label>
-                                            <input 
-                                                type="text" 
-                                                required
-                                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border-none focus:ring-2 focus:ring-indigo-500 transition-all"
-                                                placeholder="John Doe"
+                                            <label className="block text-sm font-bold text-foreground mb-2">
+                                                Full Name
+                                            </label>
+                                            <input
+                                                type="text" required
+                                                className={INPUT_BASE}
+                                                placeholder="Aryan Ahirwar"
                                                 value={formData.name}
-                                                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                                onChange={set('name')}
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-bold mb-2">Email Address</label>
-                                            <input 
-                                                type="email" 
-                                                required
-                                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border-none focus:ring-2 focus:ring-indigo-500 transition-all"
-                                                placeholder="john@example.com"
+                                            <label className="block text-sm font-bold text-foreground mb-2">
+                                                Email Address
+                                            </label>
+                                            <input
+                                                type="email" required
+                                                className={INPUT_BASE}
+                                                placeholder="you@example.com"
                                                 value={formData.email}
-                                                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                                onChange={set('email')}
                                             />
                                         </div>
                                     </div>
+
+                                    {/* Subject */}
                                     <div>
-                                        <label className="block text-sm font-bold mb-2">Subject</label>
-                                        <select 
-                                            className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border-none focus:ring-2 focus:ring-indigo-500 transition-all"
-                                            value={formData.subject}
-                                            onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                                        >
+                                        <label className="block text-sm font-bold text-foreground mb-2">Subject</label>
+                                        <select className={INPUT_BASE} value={formData.subject} onChange={set('subject')}>
                                             <option value="general">General Inquiry</option>
                                             <option value="support">Technical Support</option>
                                             <option value="feedback">Product Feedback</option>
                                             <option value="partnership">Partnership</option>
                                         </select>
                                     </div>
+
+                                    {/* Message */}
                                     <div>
-                                        <label className="block text-sm font-bold mb-2">Message</label>
-                                        <textarea 
-                                            required
-                                            rows="5"
-                                            className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                                        <label className="block text-sm font-bold text-foreground mb-2">Message</label>
+                                        <textarea
+                                            required rows={5}
+                                            className={INPUT_BASE}
                                             placeholder="How can we help you?"
                                             value={formData.message}
-                                            onChange={(e) => setFormData({...formData, message: e.target.value})}
-                                        ></textarea>
+                                            onChange={set('message')}
+                                        />
                                     </div>
-                                    <button 
+
+                                    <Button
                                         type="submit"
-                                        className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-lg shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-1 active:scale-[0.98]"
+                                        disabled={sending}
+                                        className="w-full py-4 rounded-xl"
                                     >
-                                        <Send className="w-5 h-5" />
-                                        Send Message
-                                    </button>
+                                        <span className="flex items-center justify-center gap-2">
+                                            {sending ? (
+                                                <>
+                                                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                                    Sending…
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Send className="w-4 h-4" />
+                                                    Send Message
+                                                    <ArrowRight className="w-4 h-4 ml-auto" />
+                                                </>
+                                            )}
+                                        </span>
+                                    </Button>
                                 </form>
-                            </div>
-                        </div>
+                            </Card>
+                        </motion.div>
                     </div>
                 </div>
             </section>
         </div>
     );
-};
-
-export default Contact;
+}

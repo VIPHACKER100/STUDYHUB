@@ -3,6 +3,7 @@
 ## 🚀 Quick Commands
 
 ### Development
+
 ```bash
 # Install all dependencies
 npm install
@@ -18,6 +19,7 @@ npm run client:dev
 ```
 
 ### Database
+
 ```bash
 cd server
 
@@ -32,6 +34,7 @@ npm run db:seed
 ```
 
 ### Testing
+
 ```bash
 cd server
 
@@ -43,6 +46,7 @@ npm test -- src/tests/health.test.js
 ```
 
 ### Production
+
 ```bash
 # Build client
 cd client
@@ -56,6 +60,7 @@ NODE_ENV=production npm start
 ## 📋 Default Credentials
 
 **Admin Account**
+
 - Email: `viphacker.100.org@gmail.com`
 - Password: `admin123`
 - ⚠️ **CHANGE IMMEDIATELY AFTER FIRST LOGIN**
@@ -63,11 +68,13 @@ NODE_ENV=production npm start
 ## 🔗 Important URLs
 
 ### Development
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:5000
-- Health Check: http://localhost:5000/api/health
+
+- Frontend: <http://localhost:5173>
+- Backend API: <http://localhost:5000>
+- Health Check: <http://localhost:5000/api/health>
 
 ### API Endpoints
+
 - Auth: `/api/auth/*`
 - Users: `/api/users/*`
 - Uploads: `/api/uploads/*`
@@ -81,18 +88,20 @@ NODE_ENV=production npm start
 ## 🎯 Common Tasks
 
 ### Create New User
+
 ```bash
 POST /api/auth/register
 {
-  "username": "johndoe",
+  "username": "aryan",
   "email": "viphacker.100.org@gmail.com",
   "password": "password123",
-  "fullName": "John Doe",
+  "fullName": "Aryan Ahirwar",
   "role": "student"
 }
 ```
 
 ### Upload File
+
 ```bash
 POST /api/uploads
 Headers: Authorization: Bearer <token>
@@ -108,6 +117,7 @@ Body: {
 ```
 
 ### AI Summary
+
 ```bash
 POST /api/ai/summarize/:id
 Headers: Authorization: Bearer <token>
@@ -115,6 +125,7 @@ Returns: { "summary": "...markdown..." }
 ```
 
 ### Get Recommendations
+
 ```bash
 GET /api/recommendations
 Headers: Authorization: Bearer <token>
@@ -124,6 +135,7 @@ Returns: [ { "id": 1, "title": "...", ... } ]
 ## 🔧 Environment Variables
 
 ### Required
+
 ```env
 PORT=5000
 DB_HOST=localhost
@@ -135,6 +147,7 @@ CLIENT_URL=http://localhost:5173
 ```
 
 ### Optional
+
 ```env
 # Email
 SMTP_HOST=smtp.gmail.com
@@ -160,6 +173,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
 ## 🐛 Troubleshooting
 
 ### Database Connection Failed
+
 ```bash
 # Check PostgreSQL is running
 sudo systemctl status postgresql
@@ -169,6 +183,7 @@ psql -h localhost -U postgres -d studyhub_db
 ```
 
 ### Port Already in Use
+
 ```bash
 # Windows
 netstat -ano | findstr :5000
@@ -180,6 +195,7 @@ kill -9 <PID>
 ```
 
 ### Module Not Found
+
 ```bash
 # Clear cache and reinstall
 rm -rf node_modules package-lock.json
@@ -187,6 +203,7 @@ npm install
 ```
 
 ### Email Not Sending
+
 - Check SMTP credentials in `.env`
 - Verify firewall allows port 587
 - For Gmail, use App Password instead of regular password
@@ -245,5 +262,3 @@ MIT License - See LICENSE file
 
 **Version**: 1.1.0  
 **Last Updated**: April 2026
-
-

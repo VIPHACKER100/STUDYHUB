@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, MessageSquare } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ConversationSidebar from './ConversationSidebar';
 import ChatArea from './ChatArea';
 import useAuthStore from '../../stores/authStore';
 import useMessageStore from '../../stores/messageStore';
 import socketService from '../../services/socket';
+import { Button } from '../ui/Button';
 
 export default function MessagingLayout() {
     const navigate = useNavigate();
@@ -47,44 +49,50 @@ export default function MessagingLayout() {
     }, [activeConversation]);
 
     return (
-        <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+        <div className="h-screen flex flex-col bg-background overflow-hidden">
             {/* Header */}
-            <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center gap-4">
-                <button
-                    onClick={() => navigate('/dashboard')}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                >
-                    <ArrowLeft className="w-5 h-5" />
-                </button>
-                <div>
-                    <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Messages</h1>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {user?.username}
-                    </p>
+            <header className="bg-foreground text-white border-b border-white/10 px-6 py-4 flex items-center justify-between z-20">
+                <div className="flex items-center gap-4">
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => navigate('/dashboard')}
+                        className="text-white hover:bg-white/10"
+                    >
+                        <ArrowLeft className="w-5 h-5" />
+                    </Button>
+                    <div>
+                        <div className="flex items-center gap-2">
+                            <MessageSquare className="w-5 h-5 text-accent" />
+                            <h1 className="text-xl font-display">Messages</h1>
+                        </div>
+                        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mt-0.5">
+                            Signed in as {user?.username}
+                        </p>
+                    </div>
                 </div>
             </header>
 
             {/* Main Content */}
-            <div className="flex-1 flex overflow-hidden">
-                {/* Sidebar - Hidden on mobile when chat is open */}
-                <div
-                    className={`${isMobileSidebarOpen ? 'block' : 'hidden'
-                        } md:block w-full md:w-80 lg:w-96 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800`}
+            <div className="flex-1 flex overflow-hidden relative">
+                {/* Sidebar */}
+                <motion.div
+                    initial={false}
+                    animate={{ 
+                        x: isMobileSidebarOpen || window.innerWidth >= 768 ? 0 : '-100%',
+                        width: window.innerWidth >= 768 ? '380px' : '100%'
+                    }}
+                    transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                    className={`absolute md:relative z-10 h-full bg-card border-r border-border shadow-xl md:shadow-none`}
                 >
                     <ConversationSidebar />
-                </div>
+                </motion.div>
 
-                {/* Chat Area - Hidden on mobile when sidebar is open */}
-                <div
-                    className={`${!isMobileSidebarOpen ? 'block' : 'hidden'
-                        } md:block flex-1 bg-gray-50 dark:bg-gray-900`}
-                >
+                {/* Chat Area */}
+                <div className="flex-1 bg-background relative">
                     <ChatArea onMobileBack={() => setIsMobileSidebarOpen(true)} />
                 </div>
             </div>
         </div>
     );
 }
-
-
-

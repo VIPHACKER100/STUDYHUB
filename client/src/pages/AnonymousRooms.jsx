@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Plus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, Plus, Users, Sparkles, Ghost } from 'lucide-react';
 import useAuthStore from '../stores/authStore';
 import RoomList from '../components/rooms/RoomList';
 import CreateRoomModal from '../components/rooms/CreateRoomModal';
 import RoomChat from '../components/rooms/RoomChat';
 import { roomAPI } from '../services/api';
-import socketService from '../services/socket';
 import { toast } from 'react-hot-toast';
+import { Button } from '../components/ui/Button';
+import { Badge } from '../components/ui/Badge';
+import { Card } from '../components/ui/Card';
 
 export default function AnonymousRooms() {
     const navigate = useNavigate();
@@ -55,91 +58,120 @@ export default function AnonymousRooms() {
     };
 
     return (
-        <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+        <div className="h-screen flex flex-col bg-background">
             {/* Header */}
-            <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center gap-4">
-                <button
-                    onClick={() => navigate('/dashboard')}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                >
-                    <ArrowLeft className="w-5 h-5" />
-                </button>
-                <div className="flex-1">
-                    <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Anonymous Rooms</h1>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Join study groups anonymously
-                    </p>
+            <header className="bg-background/80 backdrop-blur-md border-b border-border px-6 py-4 flex items-center justify-between sticky top-0 z-30">
+                <div className="flex items-center gap-4">
+                    <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => navigate('/dashboard')}
+                        className="rounded-full w-10 h-10 p-0"
+                    >
+                        <ArrowLeft className="w-5 h-5" />
+                    </Button>
+                    <div>
+                        <div className="flex items-center gap-2">
+                            <h1 className="text-xl font-display text-foreground tracking-tight">Anonymous Rooms</h1>
+                            <Badge variant="outline" className="bg-accent/10 text-accent border-accent/20 hidden sm:flex">
+                                <Ghost className="w-3.5 h-3.5" />
+                                PRIVATE
+                            </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                            Real-time cryptonym collaboration
+                        </p>
+                    </div>
                 </div>
-                <button
+                
+                <Button 
                     onClick={handleCreateRoom}
-                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                    className="rounded-full shadow-lg shadow-accent/20"
                 >
-                    <Plus className="w-4 h-4" />
-                    <span className="hidden sm:inline">Create Room</span>
-                </button>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Create Room
+                </Button>
             </header>
 
             {/* Main Content */}
             <div className="flex-1 flex overflow-hidden">
                 {/* Room List Sidebar */}
-                <div className={`${activeRoom ? 'hidden lg:block' : 'block'
-                    } w-full lg:w-96 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-y-auto scrollbar-thin`}>
-                    <RoomList
-                        rooms={rooms}
-                        activeRoom={activeRoom}
-                        onSelectRoom={handleRoomSelect}
-                        loading={loading}
-                    />
-                </div>
+                <motion.div 
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    className={`${activeRoom ? 'hidden lg:block' : 'block'
+                    } w-full lg:w-[400px] border-r border-border bg-background overflow-y-auto custom-scrollbar`}
+                >
+                    <div className="p-6">
+                        <RoomList
+                            rooms={rooms}
+                            activeRoom={activeRoom}
+                            onSelectRoom={handleRoomSelect}
+                            loading={loading}
+                        />
+                    </div>
+                </motion.div>
 
                 {/* Chat Area */}
                 <div className={`${!activeRoom ? 'hidden lg:block' : 'block'
-                    } flex-1 bg-gray-50 dark:bg-gray-900`}>
-                    {activeRoom ? (
-                        <RoomChat
-                            room={activeRoom}
-                            onBack={() => setActiveRoom(null)}
-                        />
-                    ) : (
-                        <div className="h-full flex items-center justify-center p-8">
-                            <div className="text-center max-w-md">
-                                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
-                                    <svg
-                                        className="w-10 h-10 text-white"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                                        />
-                                    </svg>
+                    } flex-1 bg-muted/30 relative`}>
+                    
+                    <AnimatePresence mode="wait">
+                        {activeRoom ? (
+                            <motion.div 
+                                key={activeRoom.id}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="h-full"
+                            >
+                                <RoomChat
+                                    room={activeRoom}
+                                    onBack={() => setActiveRoom(null)}
+                                />
+                            </motion.div>
+                        ) : (
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="h-full flex items-center justify-center p-8"
+                            >
+                                <div className="text-center max-w-sm">
+                                    <div className="w-24 h-24 mx-auto mb-8 rounded-[2rem] bg-accent/10 flex items-center justify-center relative">
+                                        <div className="absolute inset-0 bg-accent/20 rounded-[2rem] blur-xl opacity-50" />
+                                        <Users className="w-12 h-12 text-accent relative z-10" />
+                                    </div>
+                                    <h3 className="text-2xl font-display text-foreground mb-4">
+                                        No Selection Made
+                                    </h3>
+                                    <p className="text-muted-foreground leading-relaxed mb-10">
+                                        Select an anonymous study room from the sidebar to begin collaborating without social friction.
+                                    </p>
+                                    <div className="flex justify-center gap-3">
+                                        {[1,2,3].map(i => (
+                                            <div key={i} className="w-1.5 h-1.5 rounded-full bg-accent/20" />
+                                        ))}
+                                    </div>
                                 </div>
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                                    No Room Selected
-                                </h3>
-                                <p className="text-gray-600 dark:text-gray-400">
-                                    Select a room from the sidebar to start chatting anonymously
-                                </p>
-                            </div>
-                        </div>
-                    )}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
 
             {/* Create Room Modal */}
-            {isCreateModalOpen && (
-                <CreateRoomModal
-                    onClose={() => setIsCreateModalOpen(false)}
-                    onCreated={handleRoomCreated}
-                />
-            )}
+            <AnimatePresence>
+                {isCreateModalOpen && (
+                    <CreateRoomModal
+                        onClose={() => setIsCreateModalOpen(false)}
+                        onCreated={handleRoomCreated}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }
+
 
 
 

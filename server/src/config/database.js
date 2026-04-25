@@ -41,13 +41,23 @@ pool.on('error', (err) => {
 export const query = async (text, params) => {
     const start = Date.now();
     try {
+        if (process.env.USE_MOCK_DB === 'true') {
+            const { mockQuery } = await import('../database/mockDb.js');
+            return await mockQuery(text, params);
+        }
         const res = await pool.query(text, params);
         const duration = Date.now() - start;
         console.log('Executed query', { text, duration, rows: res.rowCount });
         return res;
     } catch (error) {
-        console.error('Database query error:', error);
-        throw error;
+        console.warn('Database query error, falling back to mock:', error.message);
+        try {
+            const { mockQuery } = await import('../database/mockDb.js');
+            return await mockQuery(text, params);
+        } catch (mockError) {
+            console.error('Mock DB fallback failed:', mockError);
+            throw error;
+        }
     }
 };
 

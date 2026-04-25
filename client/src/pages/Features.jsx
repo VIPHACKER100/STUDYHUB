@@ -1,150 +1,234 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
-    Zap, Users, Trophy, BookOpen, Search, Share2, 
-    MessageSquare, Shield, Globe, ArrowRight, Sparkles 
+    Zap, Users, Trophy, BookOpen, MessageSquare, Shield, ArrowRight, Sparkles, CheckCircle2 
 } from 'lucide-react';
-
-const FeatureCard = ({ icon: Icon, title, description, color }) => (
-    <div className={`p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-sm hover:shadow-xl transition-all group`}>
-        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${color}`}>
-            <Icon className="w-7 h-7" />
-        </div>
-        <h3 className="text-xl font-bold mb-3">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{description}</p>
-    </div>
-);
+import { Card } from '../components/ui/Card';
+import { Badge } from '../components/ui/Badge';
+import { Button } from '../components/ui/Button';
 
 const Features = () => {
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 28 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+    };
+
+    const stagger = {
+        visible: { transition: { staggerChildren: 0.1 } }
+    };
+
     return (
-        <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
-            {/* Hero */}
-            <section className="pt-32 pb-16 bg-gray-50 dark:bg-gray-800/50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-4xl md:text-6xl font-black mb-6">Designed for Modern <br/> Collaborative Learning</h1>
-                    <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-                        We've built a suite of powerful tools to help you manage your study materials, collaborate with peers, and leverage AI for better grades.
-                    </p>
+        <div className="bg-background min-h-screen">
+            {/* Hero Section (Inverted) */}
+            <section className="relative pt-40 pb-32 overflow-hidden bg-foreground">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] -mr-64 -mt-64" />
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-secondary/5 rounded-full blur-[100px] -ml-48 -mb-48" />
+                
+                <div className="max-w-6xl mx-auto px-6 relative z-10 text-center">
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={fadeInUp}
+                    >
+                        <Badge variant="outline" className="mb-6 border-accent/30 bg-accent/5 text-accent-secondary">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            EVOLVED EDUCATION
+                        </Badge>
+                        <h1 className="text-4xl md:text-7xl font-display text-white mb-8 leading-[1.1]">
+                            Designed for Modern <br/> <span className="gradient-text">Collaborative Learning</span>
+                        </h1>
+                        <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                            We've engineered a suite of powerful tools to help you manage materials, 
+                            collaborate without friction, and leverage AI for academic mastery.
+                        </p>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* Pillar 1: AI Intelligence */}
-            <section className="py-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
-                        <div>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-xs font-bold mb-6">
-                                <Sparkles className="w-3.5 h-3.5" />
-                                <span>Phase 5 Intelligence</span>
-                            </div>
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6">AI-Powered Note Intelligence</h2>
-                            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                                Don't just store your notes—understand them. Our AI-powered system analyzes your uploaded PDFs to help you grasp complex concepts faster.
-                            </p>
-                            <ul className="space-y-4 mb-8">
-                                <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                                    <Zap className="w-5 h-5 text-blue-500" />
-                                    <span>Instant 3-sentence overviews of long documents</span>
+            {/* Feature Pillars */}
+            <div className="max-w-6xl mx-auto px-6 py-32 space-y-48">
+                
+                {/* Pillar 1: AI Intelligence */}
+                <section className="grid lg:grid-cols-2 gap-20 items-center">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                    >
+                        <Badge variant="outline" className="mb-6 text-accent border-accent/20">INTELLIGENCE LAYER</Badge>
+                        <h2 className="text-3xl md:text-5xl font-display text-foreground mb-8">AI-Powered Note <span className="gradient-text">Intelligence</span></h2>
+                        <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
+                            Don't just store your notes—understand them. Our neural processing layer analyzes your PDFs to extract core concepts and generate mastery-level insights.
+                        </p>
+                        <ul className="space-y-6">
+                            {[
+                                "Instant 3-sentence overviews of complex material",
+                                "Key Takeaway extraction for accelerated review",
+                                "Smart Recommendations based on your study patterns"
+                            ].map((item, i) => (
+                                <li key={i} className="flex items-center gap-4 text-foreground group">
+                                    <div className="w-6 h-6 rounded-full bg-accent/10 text-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                        <Zap className="w-3.5 h-3.5" />
+                                    </div>
+                                    <span className="font-medium">{item}</span>
                                 </li>
-                                <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                                    <Zap className="w-5 h-5 text-blue-500" />
-                                    <span>Key Takeaway extraction for quick review</span>
-                                </li>
-                                <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                                    <Zap className="w-5 h-5 text-blue-500" />
-                                    <span>Smart Recommendations based on your study habits</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-[3rem] p-1 shadow-2xl">
-                            <div className="bg-white dark:bg-gray-900 rounded-[2.8rem] p-8 h-full">
-                                <div className="space-y-4">
-                                    <div className="h-4 bg-gray-100 dark:bg-gray-800 rounded-full w-3/4"></div>
-                                    <div className="h-4 bg-gray-100 dark:bg-gray-800 rounded-full w-full"></div>
-                                    <div className="h-4 bg-gray-100 dark:bg-gray-800 rounded-full w-5/6"></div>
-                                    <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
-                                        <div className="text-sm font-bold text-blue-600 mb-2">AI SUMMARY</div>
-                                        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-2xl italic text-gray-600 dark:text-gray-400 text-sm">
+                            ))}
+                        </ul>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <Card variant="featured" className="p-1">
+                            <div className="bg-card rounded-[calc(1rem-2px)] p-10 shadow-2xl">
+                                <div className="space-y-6">
+                                    <div className="space-y-3">
+                                        <div className="h-3 bg-muted rounded-full w-3/4 animate-pulse" />
+                                        <div className="h-3 bg-muted rounded-full w-full animate-pulse" />
+                                        <div className="h-3 bg-muted rounded-full w-5/6 animate-pulse" />
+                                    </div>
+                                    <div className="pt-8 border-t border-border">
+                                        <Badge className="mb-4 bg-accent text-white border-none">AI SUMMARY</Badge>
+                                        <div className="p-6 bg-accent/5 rounded-2xl italic text-foreground text-lg leading-relaxed border border-accent/10">
                                             "This document covers the core principles of React State management, focusing on Hooks and the Context API for efficient data flow..."
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </Card>
+                    </motion.div>
+                </section>
 
-                    {/* Pillar 2: Anonymous Collaboration */}
-                    <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
-                        <div className="order-2 lg:order-1 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[3rem] p-1 shadow-2xl">
-                            <div className="bg-white dark:bg-gray-900 rounded-[2.8rem] p-8 h-full flex flex-col justify-center gap-4">
-                                <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700">
-                                    <div className="w-8 h-8 rounded-full bg-indigo-500"></div>
-                                    <div className="text-sm font-bold">Anonymous Owl: "Does anyone understand the third law?"</div>
+                {/* Pillar 2: Anonymous Collaboration */}
+                <section className="grid lg:grid-cols-2 gap-20 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="order-2 lg:order-1"
+                    >
+                        <div className="relative">
+                            <div className="absolute -inset-4 bg-gradient-to-br from-accent/20 to-transparent blur-2xl rounded-[3rem]" />
+                            <Card className="relative p-10 space-y-6 bg-foreground text-white border-none overflow-hidden shadow-2xl">
+                                <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+                                <div className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                                    <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
+                                        <Users className="w-5 h-5 text-white" />
+                                    </div>
+                                    <div className="text-sm font-medium">Anonymous Owl: "Does anyone understand the third law?"</div>
                                 </div>
-                                <div className="flex items-center gap-3 p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800 self-end">
-                                    <div className="text-sm font-bold">You (Brave Lion): "I can help! Here is a simple explanation..."</div>
-                                    <div className="w-8 h-8 rounded-full bg-purple-500"></div>
+                                <div className="flex items-center gap-4 p-4 bg-accent/20 rounded-2xl border border-accent/30 backdrop-blur-sm self-end ml-12">
+                                    <div className="text-sm font-medium">You (Brave Lion): "I can help! Here is a simple explanation..."</div>
+                                    <div className="w-10 h-10 rounded-full bg-accent-secondary flex items-center justify-center">
+                                        <Sparkles className="w-5 h-5 text-white" />
+                                    </div>
                                 </div>
+                            </Card>
+                        </div>
+                    </motion.div>
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="order-1 lg:order-2"
+                    >
+                        <Badge variant="outline" className="mb-6 text-accent-secondary border-accent-secondary/20">ZERO FRICTION</Badge>
+                        <h2 className="text-3xl md:text-5xl font-display text-foreground mb-8">Anonymous <span className="gradient-text">Collaboration</span></h2>
+                        <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
+                            Join subject-specific study rooms where focus is the only priority. No social pressure, no judgment—just pure collaborative mastery.
+                        </p>
+                        <ul className="space-y-6">
+                            {[
+                                { icon: Shield, text: "Randomized identities for safe questioning" },
+                                { icon: MessageSquare, text: "Real-time cryptonym chat with peers" },
+                                { icon: Users, text: "Moderated zones for zero-distraction study" }
+                            ].map((item, i) => (
+                                <li key={i} className="flex items-center gap-4 text-foreground group">
+                                    <div className="w-6 h-6 rounded-full bg-accent-secondary/10 text-accent-secondary flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                        <item.icon className="w-3.5 h-3.5" />
+                                    </div>
+                                    <span className="font-medium">{item.text}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                </section>
+
+                {/* Pillar 3: Gamification */}
+                <section className="grid lg:grid-cols-2 gap-20 items-center">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                    >
+                        <Badge variant="outline" className="mb-6 text-accent border-accent/20">RECOGNITION ENGINE</Badge>
+                        <h2 className="text-3xl md:text-5xl font-display text-foreground mb-8">Gamified <span className="gradient-text">Recognition</span></h2>
+                        <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
+                            Your contributions drive the community. Earn digital prestige for helping others and climb the global ranks through meaningful academic engagement.
+                        </p>
+                        <div className="grid grid-cols-2 gap-6">
+                            <Card className="p-6 border-accent/10 bg-accent/5 hover:bg-accent/10 transition-colors">
+                                <Trophy className="w-8 h-8 text-accent mb-4" />
+                                <div className="font-bold text-foreground mb-1">Leaderboards</div>
+                                <div className="text-sm text-muted-foreground">Top contributors ranked monthly</div>
+                            </Card>
+                            <Card className="p-6 border-accent-secondary/10 bg-accent-secondary/5 hover:bg-accent-secondary/10 transition-colors">
+                                <Sparkles className="w-8 h-8 text-accent-secondary mb-4" />
+                                <div className="font-bold text-foreground mb-1">Elite Badges</div>
+                                <div className="text-sm text-muted-foreground">Earn rewards for specific milestones</div>
+                            </Card>
+                        </div>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <Card variant="featured" className="p-16 text-center group overflow-hidden relative">
+                            <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                            <Trophy className="w-24 h-24 mx-auto mb-8 text-accent drop-shadow-[0_0_15px_rgba(0,82,255,0.4)] group-hover:scale-110 transition-transform duration-500 relative z-10" />
+                            <h3 className="text-3xl font-display text-foreground mb-4 relative z-10">Rising Star Badge</h3>
+                            <p className="text-muted-foreground text-lg relative z-10">Earned for sharing 5 high-precision notes</p>
+                            <div className="mt-8 flex justify-center gap-1 relative z-10">
+                                {[1,2,3,4,5].map(i => (
+                                    <div key={i} className="w-1.5 h-1.5 rounded-full bg-accent" />
+                                ))}
                             </div>
-                        </div>
-                        <div className="order-1 lg:order-2">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6">Anonymous Collaboration</h2>
-                            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                                Join our subject-specific study rooms where focus is the only priority. No social pressure, just learning.
-                            </p>
-                            <ul className="space-y-4">
-                                <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                                    <Shield className="w-5 h-5 text-indigo-500" />
-                                    <span>Randomized identities for safe questioning</span>
-                                </li>
-                                <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                                    <MessageSquare className="w-5 h-5 text-indigo-500" />
-                                    <span>Real-time chat with fellow students</span>
-                                </li>
-                                <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                                    <Users className="w-5 h-5 text-indigo-500" />
-                                    <span>Moderated environment for focused study</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        </Card>
+                    </motion.div>
+                </section>
+            </div>
 
-                    {/* Pillar 3: Gamification */}
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6">Gamified Recognition</h2>
-                            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                                Your contributions matter. Earn recognition for helping the community and climbing the global rankings.
-                            </p>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="p-4 bg-amber-50 dark:bg-amber-900/10 rounded-2xl border border-amber-100 dark:border-amber-800/30">
-                                    <Trophy className="w-6 h-6 text-amber-600 mb-2" />
-                                    <div className="font-bold">Leaderboards</div>
-                                    <div className="text-xs text-gray-500">Top contributors ranked monthly</div>
-                                </div>
-                                <div className="p-4 bg-purple-50 dark:bg-purple-900/10 rounded-2xl border border-purple-100 dark:border-purple-800/30">
-                                    <Sparkles className="w-6 h-6 text-purple-600 mb-2" />
-                                    <div className="font-bold">12+ Badges</div>
-                                    <div className="text-xs text-gray-500">Earn rewards for specific milestones</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="bg-gradient-to-br from-amber-400 to-orange-500 rounded-[3rem] p-8 shadow-2xl text-white text-center">
-                            <Trophy className="w-20 h-20 mx-auto mb-6 drop-shadow-lg" />
-                            <h3 className="text-2xl font-black mb-2">Rising Star Badge</h3>
-                            <p className="text-amber-50 text-sm">Earned for sharing 5 high-quality notes</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* CTA */}
-            <section className="py-24 bg-indigo-600 text-white text-center px-4">
-                <h2 className="text-3xl md:text-5xl font-black mb-8">Ready to experience these features?</h2>
-                <Link to="/register" className="inline-flex items-center gap-2 px-10 py-5 bg-white text-indigo-600 rounded-full font-black text-xl hover:bg-indigo-50 transition-all transform hover:scale-105 active:scale-95 shadow-2xl shadow-black/20">
-                    Join STUDYHUB Now
-                    <ArrowRight className="w-6 h-6" />
-                </Link>
+            {/* CTA Section */}
+            <section className="py-32 bg-foreground relative overflow-hidden text-center px-6">
+                <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/10 rounded-full blur-[150px]" />
+                
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeInUp}
+                    className="relative z-10"
+                >
+                    <h2 className="text-4xl md:text-6xl font-display text-white mb-10 leading-tight">
+                        Ready to experience <br/> the <span className="gradient-text">future?</span>
+                    </h2>
+                    <Button size="lg" className="rounded-full h-16 px-12 text-lg font-bold group" asChild>
+                        <Link to="/register">
+                            Join STUDYHUB Now
+                            <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                        </Link>
+                    </Button>
+                </motion.div>
             </section>
         </div>
     );

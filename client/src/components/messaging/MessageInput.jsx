@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { Send, Paperclip, Smile, X, File } from 'lucide-react';
+import { Send, Paperclip, Smile, X, File, Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { motion, AnimatePresence } from 'framer-motion';
 import useMessageStore from '../../stores/messageStore';
 import socketService from '../../services/socket';
 import axios from 'axios';
+import { Button } from '../ui/Button';
 
 export default function MessageInput() {
     const { activeConversation, sendMessage } = useMessageStore();
@@ -37,14 +39,12 @@ export default function MessageInput() {
         const file = e.target.files[0];
         if (!file) return;
 
-        // Basic validation
-        if (file.size > 50 * 1024 * 1024) { // 50MB limit
+        if (file.size > 50 * 1024 * 1024) { 
             toast.error('File too large (max 50MB)');
             return;
         }
 
         setAttachment(file);
-        // Reset input so same file can be selected again if needed (after removal)
         e.target.value = null;
     };
 
@@ -61,7 +61,6 @@ export default function MessageInput() {
 
             let attachmentData = null;
 
-            // Upload attachment if exists
             if (attachment) {
                 const formData = new FormData();
                 formData.append('file', attachment);
@@ -113,84 +112,96 @@ export default function MessageInput() {
     };
 
     return (
-        <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4">
-            {/* Attachment Preview */}
-            {attachment && (
-                <div className="mb-2 flex items-center gap-3 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg max-w-fit">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                        <File className="w-5 h-5 text-blue-600 dark:text-blue-300" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate max-w-[200px]">
-                            {attachment.name}
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                            {(attachment.size / 1024 / 1024).toFixed(2)} MB
-                        </p>
-                    </div>
-                    <button
-                        onClick={removeAttachment}
-                        className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full transition-colors"
+        <div className="bg-card border border-border shadow-2xl rounded-[2rem] p-4 relative">
+            <AnimatePresence>
+                {attachment && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="mb-4 flex items-center gap-4 p-3 bg-muted/50 rounded-2xl border border-border/50 max-w-sm"
                     >
-                        <X className="w-4 h-4 text-gray-500" />
-                    </button>
-                </div>
-            )}
+                        <div className="p-3 bg-accent/10 rounded-xl">
+                            <File className="w-6 h-6 text-accent" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <p className="text-sm font-bold text-foreground truncate">
+                                {attachment.name}
+                            </p>
+                            <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                                {(attachment.size / 1024 / 1024).toFixed(2)} MB
+                            </p>
+                        </div>
+                        <button
+                            onClick={removeAttachment}
+                            className="p-1.5 hover:bg-muted-foreground/10 rounded-full transition-colors text-muted-foreground hover:text-foreground"
+                        >
+                            <X className="w-4 h-4" />
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
-            <div className="flex items-end gap-2">
+            <div className="flex items-end gap-4">
                 <input
                     type="file"
                     ref={fileInputRef}
                     className="hidden"
                     onChange={handleFileSelect}
                 />
-                <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors flex-shrink-0"
-                    title="Attach file"
-                >
-                    <Paperclip className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                </button>
+                
+                <div className="flex items-center gap-1 mb-1">
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="text-muted-foreground hover:text-accent rounded-xl hover:bg-accent/5"
+                    >
+                        <Paperclip className="w-5 h-5" />
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-muted-foreground hover:text-accent rounded-xl hover:bg-accent/5"
+                    >
+                        <Smile className="w-5 h-5" />
+                    </Button>
+                </div>
 
-                <div className="flex-1 relative">
+                <div className="flex-1 bg-muted/30 rounded-2xl px-4 py-2 border border-transparent focus-within:border-accent/30 transition-all">
                     <textarea
                         ref={textareaRef}
                         value={message}
                         onChange={handleChange}
                         onKeyDown={handleKeyDown}
-                        placeholder="Type a message..."
+                        placeholder="Share your thoughts..."
                         rows={1}
-                        className="w-full px-4 py-2 pr-10 bg-gray-100 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none max-h-32 scrollbar-thin"
-                        style={{ minHeight: '42px' }}
+                        className="w-full bg-transparent text-foreground text-sm focus:outline-none resize-none max-h-32 scrollbar-thin py-1"
+                        style={{ minHeight: '32px' }}
                     />
-                    <button
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition-colors"
-                        title="Add emoji"
-                    >
-                        <Smile className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                    </button>
                 </div>
 
-                <button
+                <Button
                     onClick={handleSend}
                     disabled={(!message.trim() && !attachment) || sending}
-                    className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
-                    title="Send message"
+                    className="h-11 w-11 rounded-2xl flex-shrink-0 shadow-lg shadow-accent/20 transition-all active:scale-95"
                 >
                     {sending ? (
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
                         <Send className="w-5 h-5" />
                     )}
-                </button>
+                </Button>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                Press Enter to send, Shift+Enter for new line
-            </p>
+            
+            <div className="absolute -bottom-6 left-6 right-6 flex justify-between px-2">
+                <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                    Enter to send • Shift+Enter for new line
+                </p>
+                <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest hidden md:block">
+                    50MB Max Upload
+                </p>
+            </div>
         </div>
     );
 }
-
-
-
-

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowLeft, MoreVertical } from 'lucide-react';
+import { ArrowLeft, MoreVertical, MessageCircle, Info } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import useMessageStore from '../../stores/messageStore';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
+import { Button } from '../ui/Button';
 
 export default function ChatArea({ onMobileBack }) {
     const { activeConversation, conversations, messages } = useMessageStore();
@@ -20,78 +22,92 @@ export default function ChatArea({ onMobileBack }) {
 
     if (!activeConversation) {
         return (
-            <div className="h-full flex items-center justify-center p-8">
-                <div className="text-center max-w-md">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <svg
-                            className="w-10 h-10 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                            />
-                        </svg>
+            <div className="h-full flex flex-col items-center justify-center p-12 bg-background relative overflow-hidden">
+                <div className="absolute inset-0 bg-dot-pattern opacity-5" />
+                
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-center max-w-sm relative z-0"
+                >
+                    <div className="absolute -top-24 left-1/2 -translate-x-1/2 opacity-[0.03] select-none pointer-events-none">
+                        <MessageCircle className="w-64 h-64 text-foreground" />
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                        No Conversation Selected
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                        Select a conversation from the sidebar or start a new one to begin messaging
-                    </p>
-                </div>
+                    <div className="relative z-10">
+                        <div className="w-20 h-20 mx-auto mb-8 rounded-[2rem] bg-accent/5 text-accent/40 flex items-center justify-center">
+                            <MessageCircle className="w-10 h-10" />
+                        </div>
+                        <h3 className="text-2xl font-display text-foreground mb-4">
+                            Your Messages
+                        </h3>
+                        <p className="text-muted-foreground leading-relaxed">
+                            Select a peer or mentor from the sidebar to start a secure, real-time collaboration.
+                        </p>
+                    </div>
+                </motion.div>
             </div>
         );
     }
 
     return (
-        <div className="h-full flex flex-col">
+        <div className="h-full flex flex-col bg-background relative">
             {/* Chat Header */}
-            <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center gap-3">
+            <motion.header 
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className="bg-card border-b border-border px-6 py-4 flex items-center gap-4 z-10 shadow-sm"
+            >
                 {/* Mobile back button */}
-                <button
+                <Button
+                    variant="ghost"
+                    size="icon"
                     onClick={onMobileBack}
-                    className="md:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                    className="md:hidden"
                 >
                     <ArrowLeft className="w-5 h-5" />
-                </button>
+                </Button>
 
                 {/* User Avatar */}
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold">
-                    {currentConversation?.username?.[0]?.toUpperCase() || '?'}
+                <div className="relative">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        {currentConversation?.username?.[0]?.toUpperCase() || '?'}
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-card rounded-full" />
                 </div>
 
                 {/* User Info */}
                 <div className="flex-1 min-w-0">
-                    <h2 className="font-semibold text-gray-900 dark:text-white truncate">
+                    <h2 className="font-display text-lg text-foreground truncate">
                         {currentConversation?.full_name || currentConversation?.username}
                     </h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                        @{currentConversation?.username}
-                    </p>
+                    <div className="flex items-center gap-2">
+                        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+                            @{currentConversation?.username}
+                        </p>
+                    </div>
                 </div>
 
-                {/* More Options */}
-                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                    <MoreVertical className="w-5 h-5" />
-                </button>
-            </div>
+                {/* Options */}
+                <div className="flex items-center gap-2">
+                    <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
+                        <Info className="w-5 h-5" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
+                        <MoreVertical className="w-5 h-5" />
+                    </Button>
+                </div>
+            </motion.header>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto scrollbar-thin bg-gray-50 dark:bg-gray-900">
+            <div className="flex-1 overflow-y-auto scrollbar-thin bg-background p-6">
                 <MessageList />
-                <div ref={messagesEndRef} />
+                <div ref={messagesEndRef} className="h-4" />
             </div>
 
             {/* Message Input */}
-            <MessageInput />
+            <div className="px-6 pb-6 bg-background">
+                <MessageInput />
+            </div>
         </div>
     );
 }
-
-
-

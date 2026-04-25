@@ -1,55 +1,63 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Search, ArrowLeft, Ghost } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Home, LayoutDashboard, ArrowLeft, Ghost } from 'lucide-react';
+import { Button } from '../components/ui/Button';
 
-const NotFound = () => {
+export default function NotFound() {
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4 py-20">
-            <div className="max-w-md w-full text-center">
+        <div className="min-h-screen bg-background flex items-center justify-center px-6">
+            <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="max-w-md w-full text-center"
+            >
                 {/* 404 Visual */}
-                <div className="relative mb-12">
-                    <div className="text-[12rem] font-black text-gray-200 dark:text-gray-800 leading-none select-none">
+                <div className="relative mb-12 select-none">
+                    <div className="text-[11rem] font-black text-foreground/5 leading-none">
                         404
                     </div>
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-24 h-24 bg-indigo-600 rounded-3xl rotate-12 flex items-center justify-center shadow-2xl shadow-indigo-500/50">
-                            <Ghost className="w-12 h-12 text-white" />
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-accent/30 rounded-[1.5rem] blur-2xl scale-150" />
+                            <div className="relative w-24 h-24 bg-foreground rounded-[1.5rem] rotate-12 flex items-center justify-center shadow-2xl shadow-foreground/20">
+                                <Ghost className="w-11 h-11 text-accent" />
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <h1 className="text-3xl font-black mb-4">Oops! Page Lost in Space</h1>
-                <p className="text-gray-600 dark:text-gray-400 mb-10 leading-relaxed text-lg">
-                    The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+                <h1 className="text-3xl font-display text-foreground tracking-tight mb-4">
+                    Page lost in space
+                </h1>
+                <p className="text-muted-foreground mb-10 leading-relaxed">
+                    The page you're looking for was moved, removed, or never existed.
                 </p>
 
-                <div className="flex flex-col gap-4">
-                    <Link 
-                        to="/" 
-                        className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-indigo-500/30 transition-all transform hover:-translate-y-1"
-                    >
-                        <Home className="w-5 h-5" />
-                        Back to Home
-                    </Link>
-                    <Link 
-                        to="/dashboard" 
-                        className="w-full py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-750 transition-all"
-                    >
-                        <Search className="w-5 h-5" />
-                        Go to Dashboard
-                    </Link>
+                <div className="flex flex-col gap-3">
+                    <Button asChild className="w-full py-4 rounded-xl">
+                        <Link to="/" className="flex items-center justify-center gap-2">
+                            <Home className="w-4 h-4" />
+                            Back to Home
+                        </Link>
+                    </Button>
+                    <Button asChild variant="outline" className="w-full py-4 rounded-xl">
+                        <Link to="/dashboard" className="flex items-center justify-center gap-2">
+                            <LayoutDashboard className="w-4 h-4" />
+                            Go to Dashboard
+                        </Link>
+                    </Button>
                 </div>
 
-                <button 
+                <button
                     onClick={() => window.history.back()}
-                    className="mt-8 text-gray-500 hover:text-indigo-600 font-bold flex items-center gap-2 mx-auto transition-colors"
+                    className="mt-8 text-muted-foreground hover:text-accent font-bold flex items-center gap-2 mx-auto transition-colors text-sm"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Go Back
                 </button>
-            </div>
+            </motion.div>
         </div>
     );
-};
-
-export default NotFound;
+}

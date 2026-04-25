@@ -3,6 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Sparkles, Download, Star, ArrowRight, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Card } from '../ui/Card';
+import { Badge } from '../ui/Badge';
+import { Button } from '../ui/Button';
 
 const fetchRecommendations = async () => {
     const res = await axios.get('/api/recommendations');
@@ -18,9 +21,9 @@ export default function RecommendationSection() {
 
     if (isLoading) {
         return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1, 2, 3].map(i => (
-                    <div key={i} className="h-40 bg-gray-200 dark:bg-gray-700 rounded-2xl" />
+                    <Card key={i} className="h-48 animate-pulse bg-muted/50 border-none" />
                 ))}
             </div>
         );
@@ -29,58 +32,66 @@ export default function RecommendationSection() {
     if (isError || !recommendations?.length) return null;
 
     return (
-        <section className="mt-12">
-            <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-2">
-                    <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
-                        <Sparkles className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+        <section className="mt-16">
+            <div className="flex items-center justify-between mb-10">
+                <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center">
+                        <Sparkles className="w-6 h-6 text-accent" />
                     </div>
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">Recommended for You</h2>
+                    <div>
+                        <h2 className="text-xl font-display text-foreground tracking-tight">Recommended Intelligence</h2>
+                        <p className="text-sm text-muted-foreground">AI-curated resources based on your study patterns</p>
+                    </div>
                 </div>
-                <Link to="/browse" className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
-                    Browse all <ArrowRight className="w-4 h-4" />
-                </Link>
+                <Button variant="ghost" className="text-accent font-bold" asChild>
+                    <Link to="/browse">
+                        Browse all <ArrowRight className="ml-2 w-4 h-4" />
+                    </Link>
+                </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {recommendations.map((item) => (
                     <Link
                         key={item.id}
-                        to={`/browse?id=${item.id}`} // Assuming browse page can handle detail via query or route
-                        className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all group"
+                        to={`/browse?id=${item.id}`}
+                        className="group"
                     >
-                        <div className="flex justify-between items-start mb-3">
-                            <span className="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider">
-                                {item.subject}
-                            </span>
-                            <div className="flex items-center gap-1 text-amber-500">
-                                <Star className="w-3.5 h-3.5 fill-current" />
-                                <span className="text-xs font-bold">{item.averageRating || '0.0'}</span>
-                            </div>
-                        </div>
-
-                        <h3 className="font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-indigo-600 transition-colors">
-                            {item.title}
-                        </h3>
-
-                        <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-50 dark:border-gray-700/50">
-                            <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold text-gray-500 capitalize">
-                                    {item.uploaderName?.[0]}
+                        <Card className="p-8 h-full transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 relative overflow-hidden">
+                            <div className="flex justify-between items-start mb-6">
+                                <Badge variant="outline" className="border-accent/20 text-accent bg-accent/5">
+                                    {item.subject}
+                                </Badge>
+                                <div className="flex items-center gap-1.5 text-accent-secondary">
+                                    <Star className="w-4 h-4 fill-current" />
+                                    <span className="text-sm font-black">{item.averageRating || '0.0'}</span>
                                 </div>
-                                <span className="text-xs text-gray-500 dark:text-gray-400">{item.uploaderName}</span>
                             </div>
-                            <div className="flex items-center gap-1.5 text-xs text-gray-400">
-                                <Download className="w-3 h-3" />
-                                <span>{item.downloadCount}</span>
+
+                            <h3 className="text-xl font-bold text-foreground mb-4 line-clamp-2 group-hover:text-accent transition-colors leading-tight">
+                                {item.title}
+                            </h3>
+
+                            <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs font-black text-foreground capitalize border border-border">
+                                        {item.uploaderName?.[0]}
+                                    </div>
+                                    <span className="text-xs font-bold text-muted-foreground">{item.uploaderName}</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full">
+                                    <Download className="w-3 h-3" />
+                                    <span>{item.downloadCount}</span>
+                                </div>
                             </div>
-                        </div>
+                        </Card>
                     </Link>
                 ))}
             </div>
         </section>
     );
 }
+
 
 
 

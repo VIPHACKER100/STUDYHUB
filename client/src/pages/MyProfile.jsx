@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, User, BookOpen, Clock, AlertTriangle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, User, BookOpen, Bookmark, Clock, AlertTriangle, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import useAuthStore from '../stores/authStore';
 import UploadDetailsModal from '../components/uploads/UploadDetailsModal';
+import { Button } from '../components/ui/Button';
+import { Badge } from '../components/ui/Badge';
+import { Card } from '../components/ui/Card';
+
+const TABS = [
+    { id: 'uploads',   label: 'My Uploads',  icon: FileText },
+    { id: 'bookmarks', label: 'Bookmarks',    icon: Bookmark },
+];
 
 export default function MyProfile() {
-    // Skeleton implemented for future phase detailed in task.md
     const navigate = useNavigate();
     const { user } = useAuthStore();
-    const [activeTab, setActiveTab] = useState('uploads'); // uploads, bookmarks, downloads
+    const [activeTab, setActiveTab] = useState('uploads');
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedUpload, setSelectedUpload] = useState(null);
 
-    useEffect(() => {
-        fetchItems();
-    }, [activeTab]);
+    useEffect(() => { fetchItems(); }, [activeTab]);
 
     const fetchItems = async () => {
         setLoading(true);
@@ -26,12 +32,10 @@ export default function MyProfile() {
             const endpoint = activeTab === 'bookmarks'
                 ? '/api/uploads/bookmarks/me'
                 : '/api/uploads/user/me';
-
             const res = await axios.get(endpoint, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
-
-            if (res.data && res.data.success && res.data.data) {
+            if (res.data?.success && res.data?.data) {
                 const data = activeTab === 'bookmarks' ? res.data.data.bookmarks : res.data.data.uploads;
                 setItems(Array.isArray(data) ? data : []);
             } else {
@@ -45,96 +49,161 @@ export default function MyProfile() {
         }
     };
 
+    const memberYear = user?.created_at
+        ? new Date(user.created_at).getFullYear()
+        : new Date().getFullYear();
+
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-            <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-8">
-                <div className="max-w-4xl mx-auto flex items-center gap-6">
-                    <button onClick={() => navigate('/dashboard')} className="p-2 hover:bg-gray-100 rounded-full">
-                        <ArrowLeft className="w-6 h-6 text-gray-600" />
-                    </button>
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 flex items-center justify-center text-3xl font-bold text-white shadow-lg">
-                        {user?.username?.[0]?.toUpperCase()}
-                    </div>
-                    <div>
-                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{user?.full_name || user?.username}</h1>
-                        <p className="text-gray-500 capitalize">{user?.role} • Joined {new Date().getFullYear()}</p>
-                    </div>
-                </div>
-            </header>
-
-            <div className="max-w-4xl mx-auto px-4 py-8">
-                <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6">
-                    <button
-                        onClick={() => setActiveTab('uploads')}
-                        className={`px-6 py-3 font-medium text-sm transition-colors relative ${activeTab === 'uploads'
-                                ? 'text-blue-600 dark:text-blue-400'
-                                : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
-                            }`}
+        <div className="min-h-screen bg-background">
+            {/* Hero Header — Inverted */}
+            <div className="bg-foreground">
+                <div className="max-w-4xl mx-auto px-6 pt-8 pb-12">
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => navigate('/dashboard')}
+                        className="rounded-full w-10 h-10 p-0 mb-8 text-muted-foreground hover:text-white hover:bg-white/10"
                     >
-                        My Uploads
-                        {activeTab === 'uploads' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 rounded-t-full"></div>}
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('bookmarks')}
-                        className={`px-6 py-3 font-medium text-sm transition-colors relative ${activeTab === 'bookmarks'
-                                ? 'text-blue-600 dark:text-blue-400'
-                                : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
-                            }`}
-                    >
-                        Bookmarks
-                        {activeTab === 'bookmarks' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 rounded-t-full"></div>}
-                    </button>
-                </div>
+                        <ArrowLeft className="w-5 h-5" />
+                    </Button>
 
-                {loading ? (
-                    <div className="flex justify-center py-12">
-                        <div className="animate-spin h-8 w-8 border-4 border-blue-600 border-t-transparent rounded-full"></div>
-                    </div>
-                ) : items.length === 0 ? (
-                    <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-                        <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                            {activeTab === 'uploads' ? <BookOpen className="w-8 h-8 text-gray-400" /> : <AlertTriangle className="w-8 h-8 text-gray-400" />}
+                    <div className="flex items-center gap-6">
+                        {/* Avatar */}
+                        <div className="relative">
+                            <div className="w-20 h-20 rounded-[1.5rem] bg-accent/20 border border-accent/30 flex items-center justify-center text-3xl font-black text-white shadow-xl shadow-accent/20">
+                                {user?.username?.[0]?.toUpperCase()}
+                            </div>
+                            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-400 rounded-full border-2 border-foreground" />
                         </div>
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">No items found</h3>
-                        <p className="text-gray-500">You haven't {activeTab === 'uploads' ? 'uploaded' : 'bookmarked'} anything yet.</p>
-                    </div>
-                ) : (
-                    <div className="space-y-4">
-                        {items.map(item => (
-                            <div
-                                key={item.id}
-                                onClick={() => setSelectedUpload(item)}
-                                className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow cursor-pointer flex items-center justify-between"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <div className="h-12 w-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-2xl">
-                                        {item.file_type?.includes('pdf') ? '📄' : '📝'}
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-gray-900 dark:text-white">{item.title}</h3>
-                                        <p className="text-sm text-gray-500">{item.subject} • {format(new Date(item.created_at || Date.now()), 'MMM d, yyyy')}</p>
-                                    </div>
-                                </div>
-                                {activeTab === 'bookmarks' && (
-                                    <span className="text-xs px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Bookmarked</span>
+
+                        <div className="flex-1">
+                            <h1 className="text-3xl font-display text-white mb-1">
+                                {user?.full_name || user?.username}
+                            </h1>
+                            <div className="flex items-center gap-3 flex-wrap">
+                                <Badge variant="outline" className="bg-white/5 border-white/10 text-white/70 font-mono uppercase">
+                                    {user?.role}
+                                </Badge>
+                                <span className="text-muted-foreground text-sm">Member since {memberYear}</span>
+                                {user?.is_verified && (
+                                    <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20">
+                                        Verified
+                                    </Badge>
                                 )}
                             </div>
-                        ))}
+                        </div>
                     </div>
-                )}
+                </div>
             </div>
 
-            {selectedUpload && (
-                <UploadDetailsModal
-                    upload={selectedUpload}
-                    onClose={() => setSelectedUpload(null)}
-                    token={localStorage.getItem('token')}
-                    currUserId={user?.id}
-                />
-            )}
+            {/* Tab Navigation */}
+            <div className="border-b border-border bg-background sticky top-0 z-10">
+                <div className="max-w-4xl mx-auto px-6">
+                    <div className="flex items-center gap-1">
+                        {TABS.map((tab) => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`relative flex items-center gap-2 px-5 py-4 text-sm font-bold transition-colors ${
+                                    activeTab === tab.id
+                                        ? 'text-accent'
+                                        : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                            >
+                                <tab.icon className="w-4 h-4" />
+                                {tab.label}
+                                {activeTab === tab.id && (
+                                    <motion.div
+                                        layoutId="profile-tab-indicator"
+                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-t-full"
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Content */}
+            <div className="max-w-4xl mx-auto px-6 py-10">
+                <AnimatePresence mode="wait">
+                    {loading ? (
+                        <motion.div
+                            key="loading"
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                            className="space-y-4"
+                        >
+                            {[1, 2, 3].map(i => (
+                                <Card key={i} className="h-20 animate-pulse bg-muted/40 border-none" />
+                            ))}
+                        </motion.div>
+                    ) : items.length === 0 ? (
+                        <motion.div
+                            key="empty"
+                            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                            className="text-center py-24"
+                        >
+                            <div className="w-20 h-20 bg-accent/10 rounded-[1.5rem] flex items-center justify-center mx-auto mb-6 relative">
+                                <div className="absolute inset-0 bg-accent/10 rounded-[1.5rem] blur-xl" />
+                                {activeTab === 'uploads'
+                                    ? <BookOpen className="w-10 h-10 text-accent relative z-10" />
+                                    : <Bookmark className="w-10 h-10 text-accent relative z-10" />
+                                }
+                            </div>
+                            <h3 className="text-xl font-display text-foreground mb-2">Nothing here yet</h3>
+                            <p className="text-muted-foreground">
+                                You haven't {activeTab === 'uploads' ? 'uploaded any resources' : 'bookmarked anything'} yet.
+                            </p>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            className="space-y-3"
+                        >
+                            {items.map(item => (
+                                <Card
+                                    key={item.id}
+                                    onClick={() => setSelectedUpload(item)}
+                                    className="p-5 cursor-pointer hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-200 group"
+                                >
+                                    <div className="flex items-center justify-between gap-4">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                {item.file_type?.includes('pdf') ? '📄' : '📝'}
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-foreground group-hover:text-accent transition-colors">{item.title}</h3>
+                                                <p className="text-sm text-muted-foreground font-mono">
+                                                    {item.subject} · {format(new Date(item.created_at || Date.now()), 'MMM d, yyyy')}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        {activeTab === 'bookmarks' && (
+                                            <Badge variant="outline" className="bg-accent-secondary/5 text-accent-secondary border-accent-secondary/20 flex-shrink-0">
+                                                Saved
+                                            </Badge>
+                                        )}
+                                    </div>
+                                </Card>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+
+            <AnimatePresence>
+                {selectedUpload && (
+                    <UploadDetailsModal
+                        upload={selectedUpload}
+                        onClose={() => setSelectedUpload(null)}
+                        token={localStorage.getItem('token')}
+                        currUserId={user?.id}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }
-
-
 
