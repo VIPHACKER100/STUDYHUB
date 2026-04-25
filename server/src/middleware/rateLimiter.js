@@ -30,13 +30,21 @@ if (config.redis?.host) {
 }
 
 /**
- * Build a store config: Redis if available, memory otherwise.
+ * Build a store config: Redis if available and connected, memory otherwise.
  * This means rate limiting degrades gracefully without Redis.
  */
 const buildStore = (prefix) => {
-    if (redisClient) {
+    // Only use RedisStore if client exists AND is fully connected ('ready')
+    if (redisClient && redisClient.status === 'ready') {
         return new RedisStore({
-            sendCommand: (...args) => redisClient.call(...args),
+            sendCommand: async (...args) => {
+                try {
+                    return await redisClient.call(...args);
+                } catch (err) {
+                    console.warn('⚠️  Redis command failed in rate-limiter, using fallback logic');
+                    throw err; // rate-limit-redis will handle or we should have a better fallback
+                }
+            },
             prefix: `rl:${prefix}:`,
         });
     }

@@ -59,6 +59,11 @@ export const config = {
     socket: {
         corsOrigin: process.env.SOCKET_CORS_ORIGIN || 'http://localhost:5173',
     },
+
+    // AI & Intelligence
+    ai: {
+        geminiKey: process.env.GEMINI_API_KEY,
+    },
 };
 
 export default config;

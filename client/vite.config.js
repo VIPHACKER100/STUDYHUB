@@ -68,7 +68,7 @@ export default defineConfig({
                                 statuses: [0, 200]
                             }
                         }
-                    }
+                    },
                     {
                         urlPattern: /^\/api\/.*/i,
                         handler: 'NetworkFirst',
