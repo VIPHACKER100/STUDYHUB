@@ -60,6 +60,10 @@ AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_REGION=us-east-1
 AWS_S3_BUCKET=
+
+# AI & Mock (v1.5.0)
+GEMINI_API_KEY=your_gemini_api_key_here
+USE_MOCK_DB=false
 ```
 
 ## Database Setup

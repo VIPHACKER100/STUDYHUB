@@ -2,7 +2,7 @@
 
 This document is the living architectural reference for the StudyHub codebase. Update it whenever a new service, layer, or major component is added.
 
-**Last Updated:** April 2026 | **Version:** 1.2.0
+**Last Updated:** April 26, 2026 | **Version:** 1.5.0
 
 ---
 
@@ -63,6 +63,9 @@ graph TD
 | **Security** | Helmet, express-rate-limit | - | Headers & Rate Limiting |
 | **Validation** | express-validator | 7 | Input Sanitization |
 | **Testing** | Jest + Supertest | - | Unit & Integration Tests |
+| **Animations** | Framer Motion | Latest | Micro-animations & Transitions |
+| **AI Suite** | Google Gemini AI | Pro | Smart Summaries & Insights |
+| **Testing/Demo** | Mock DB Layer | v1.5.0 | Virtual Data for Dev/Demo |
 | **PWA** | vite-plugin-pwa | - | Installable Web App |
 
 ---
@@ -158,7 +161,8 @@ STUDYHUB/
 │   │   │   ├── schema.sql           # ✅ PostgreSQL schema (20+ tables)
 │   │   │   ├── schema-mysql.sql     # ✅ MySQL equivalent
 │   │   │   ├── setup.js             # ✅ DB init + admin seed
-│   │   │   └── setup-mysql.js       # ✅ MySQL init
+│   │   │   ├── setup-mysql.js       # ✅ MySQL init
+│   │   │   └── mockDb.js            # ✅ Virtual DB layer for demo/dev (v1.5.0)
 │   │   └── tests/
 │   │       ├── health.test.js       # ✅
 │   │       └── auth.test.js         # ✅
@@ -239,6 +243,15 @@ GET /api/leaderboard → Aggregate scores (Uploads*10 + RatingsAvg*5)
                      → Calculate Badges (e.g., 'Rising Star' for 5 uploads)
                      → Cache result (30 minutes)
                      → Display in Leaderboard UI + Achievement Showcase
+```
+
+### 9. Mock Database Initialization (v1.5.0)
+```
+Server Start → Check process.env.USE_MOCK_DB
+             ├── true  → Initialize mockDb.js (Virtual JSON Store)
+             │         → Intercept database pool queries
+             │         → Return static demo data (Users, Rooms, Messages)
+             └── false → Connect to live PostgreSQL / Redis
 ```
 
 ---

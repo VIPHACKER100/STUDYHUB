@@ -1,5 +1,25 @@
 # StudyHub - Release Notes
 
+## 🚀 v1.5.0 Modern Design Rollout - April 2026
+
+We are excited to unveil **v1.5.0**, the "Modern Design Rollout." This version transforms StudyHub with a premium, state-of-the-art aesthetic and significant developer experience improvements.
+
+### ✨ What's New
+
+#### 🎨 Premium Design System
+- **Glassmorphism Aesthetic** - A modern, high-fidelity UI using translucent layers and blur effects.
+- **Dark-Mode-First Styling** - Refined dark theme for reduced eye strain and a premium look.
+- **Unified Component Library** - Standardized Badges, Buttons, and Modals across the entire platform.
+- **Micro-animations** - Smooth transitions and interactive hover effects powered by Framer Motion.
+- **High-Fidelity Empty States** - Redesigned placeholder views with elegant background watermarks.
+
+#### 🛠️ Developer Experience
+- **Mock Database Mode** - Explore the entire platform without requiring a local PostgreSQL or Redis instance.
+- **Expanded Documentation** - A complete audit of all setup, deployment, and API guides for v1.5.0.
+- **Platform Stabilization** - Resolved critical UI regressions including floating icon bugs and layout overflows.
+
+---
+
 ## 🚀 v1.1.0 Intelligence & Community Update - April 2026
 
 We're thrilled to launch **v1.1.0**, focusing on making StudyHub more intelligent and community-driven with AI features and gamification!
@@ -178,9 +198,9 @@ MIT License - Free for educational use
 
 ---
 
-**Version**: 1.0.0  
-**Release Date**: December 2025  
-**Status**: Production Ready ✅
+**Version**: 1.5.0  
+**Release Date**: April 26, 2026  
+**Status**: Modern Design Rollout ✅
 
 For support and issues, please refer to the documentation or create an issue in the repository.
 

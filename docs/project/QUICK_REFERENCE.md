@@ -247,6 +247,8 @@ studyhub/
 - ✅ Global Leaderboards
 - ✅ Achievement Badges
 - ✅ PWA Support
+- ✅ Premium Glassmorphism UI (v1.5.0)
+- ✅ Mock Database Mode (v1.5.0)
 
 ## 📞 Support
 
@@ -260,5 +262,5 @@ MIT License - See LICENSE file
 
 ---
 
-**Version**: 1.1.0  
-**Last Updated**: April 2026
+**Version**: 1.5.0  
+**Last Updated**: April 26, 2026

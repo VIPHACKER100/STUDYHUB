@@ -9,6 +9,7 @@ This roadmap outlines pending features, optimizations, and further updates plann
 | **Redis Caching** | Implement Redis for high-speed content delivery and trend analytics. | ✅ Done |
 | **PWA Support** | Fully installable web application with offline reliability. | ✅ Done |
 | **Full Test Suite** | Expand unit and integration tests (Auth, Messages, Leaderboards). | ✅ Done |
+| **Modern Design Rollout** | Premium Glassmorphism UI, micro-animations, and unified components. | ✅ v1.5.0 |
 | **Mobile App** | Development of a React Native application for iOS and Android. | ⏳ Planned |
 | **S3 Integration** | Move from local file storage to AWS S3 for production scalability. | ⏳ Pending |
 

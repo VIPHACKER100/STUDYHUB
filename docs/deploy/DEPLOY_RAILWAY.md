@@ -35,7 +35,7 @@ git init
 git add .
 
 # Commit
-git commit -m "Initial commit: StudyHub v1.0.0"
+git commit -m "Initial commit: StudyHub v1.5.0 - Modern Design Rollout"
 
 # Create repository on GitHub first, then:
 git remote add origin https://github.com/viphacker100/studyhub.git

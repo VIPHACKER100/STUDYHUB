@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-04-26
+
+### ✨ Modern Design Rollout & UI Overhaul
+
+This update transforms StudyHub into a premium, dark-mode-first collaborative experience with high-fidelity glassmorphism aesthetics.
+
+### Added
+
+#### Design & UI
+- **Glassmorphism Design System** - Implementation of blur effects, subtle gradients, and depth-based layouts.
+- **Unified Component Library** - Modernized `Button`, `Badge`, `Modal`, and `Input` components.
+- **Premium Page Layouts** - Full redesign of Dashboard, Browse, Messages, Rooms, and Profiles.
+- **Aesthetic Empty States** - High-fidelity background watermarks and descriptive illustrations.
+- **Enhanced Micro-interactions** - Spring-based animations and polished hover states across the platform.
+
+#### Messaging Suite
+- **Real-time Polish** - Refined typing indicators and read receipt layouts.
+- **Empty State Watermarks** - Subtle, non-distracting background branding in active chat areas.
+
+#### Development & Testing
+- **Mock Database Layer** - Integrated `mockDb.js` to allow full platform navigation without a live SQL connection.
+- **Unified Project Documentation** - Updated all status and memory maps to reflect version 1.5.0.
+
+### Fixed
+- **Badge Alignment** - Resolved icon/text overlap in the `Badge` component and removed manual margins.
+- **Floating Icon Bug** - Redesigned the messaging empty state to prevent "stray icon" visual confusion.
+- **Modal Contrast** - Improved backdrop and focus states for the "New Conversation" modal.
+- **Responsive Overflow** - Fixed horizontal scrolling issues in long message threads.
+
 ## [1.1.0] - 2026-04-25
 
 ### ✨ AI & Community Update

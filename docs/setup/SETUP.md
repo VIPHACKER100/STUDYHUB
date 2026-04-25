@@ -165,7 +165,28 @@ cd client
 npm run dev
 ```
 
-## Step 7: Verify Installation
+## Step 7: Mock Database Mode (Alternative)
+
+If you don't have PostgreSQL installed or want to quickly test the UI without a database, StudyHub includes a **Mock Database Mode**.
+
+### Enabling Mock Mode
+
+1.  Open `.env` in the root directory.
+2.  Add or update the following variable:
+    ```env
+    USE_MOCK_DB=true
+    ```
+3.  Restart the backend server.
+
+### Features of Mock Mode
+- **No SQL Required**: You can run the app without PostgreSQL or Redis.
+- **Demo Accounts**: Login with any email; the system will simulate a successful authentication.
+- **Persistence**: Data is stored in memory and resets when the server restarts.
+- **Full Navigation**: All pages (Dashboard, Messages, Rooms, Admin) will render with realistic mock data.
+
+---
+
+## Step 8: Verify Installation
 
 1. **Check Backend Health**:
    - Open browser to: http://localhost:5000/api/health

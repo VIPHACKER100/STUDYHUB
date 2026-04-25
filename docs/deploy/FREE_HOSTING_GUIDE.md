@@ -60,6 +60,8 @@
    DB_PASSWORD=<railway-mysql-password>
    JWT_SECRET=<your-secret>
    CLIENT_URL=<your-frontend-url>
+   GEMINI_API_KEY=<your-gemini-key>
+   USE_MOCK_DB=false
    ```
 
 5. **Deploy:**

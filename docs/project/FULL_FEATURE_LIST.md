@@ -47,6 +47,14 @@ This document provides a comprehensive breakdown of all features, functional cap
 - **Notification Hub**: Real-time alerts for likes, comments, system announcements, and messages.
 - **Daily Digest Emails**: Automated summary of platform activity delivered to users.
 
+### 🎨 Modern Design & UX (v1.5.0)
+
+- **Premium Glassmorphism**: High-fidelity translucent UI layers with blur effects.
+- **Micro-animations**: Interactive transitions and hover effects via Framer Motion.
+- **Unified Components**: Standardized, theme-aware Button and Badge systems.
+- **Dark-Mode-First**: A refined, low-strain dark aesthetic for nighttime study.
+- **High-Fidelity Placeholders**: Watermarked background empty states for a premium feel.
+
 ### 🛡️ Administration & Moderation
 
 - **Analytics Dashboard**: High-fidelity charts showing 7-day user growth and content trends.
@@ -57,6 +65,11 @@ This document provides a comprehensive breakdown of all features, functional cap
 ---
 
 ## 2. Technical Capabilities (Under the Hood)
+
+### 🛠️ Developer Experience (v1.5.0)
+
+- **Mock Database Mode**: Full platform exploration without local PostgreSQL/Redis requirements.
+- **Comprehensive API Docs**: End-to-end documentation for all 60+ endpoints.
 
 ### ⚡ Performance & Optimization
 
@@ -106,6 +119,7 @@ This document provides a comprehensive breakdown of all features, functional cap
 | **Phase 3** | Administration & Security | ✅ Complete |
 | **Phase 4** | Performance & PWA | ✅ Complete |
 | **Phase 5** | Intelligence & Gamification | ✅ Complete |
+| **v1.5.0** | Modern Design Rollout | ✅ Complete |
 | **Phase 6** | Mobile & Real-time Advanced | ⏳ Planned |
 
 ---

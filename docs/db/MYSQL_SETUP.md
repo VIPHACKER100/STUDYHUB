@@ -425,7 +425,7 @@ Your StudyHub application is now running on MySQL!
 
 ---
 
-**Version:** 1.0.0 (MySQL)  
-**Last Updated:** December 2025
+**Version:** 1.5.0 (MySQL)  
+**Last Updated:** April 2026
 
 

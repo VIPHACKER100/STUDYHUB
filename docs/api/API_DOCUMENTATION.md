@@ -104,6 +104,12 @@ Base URL: `http://localhost:5000/api`
 ### Delete Upload (Admin)
 `DELETE /admin/uploads/:id`
 
+### Get Analytics Trends
+`GET /admin/trends`
+- Returns: `{ labels: [], users: [], uploads: [] }`
+- Period: Last 7 days
+- Cache: 1 hour
+
 ---
 
 ## Leaderboards

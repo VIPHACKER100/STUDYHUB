@@ -99,6 +99,10 @@ REDIS_PASSWORD=
 
 # Socket.io Configuration
 SOCKET_CORS_ORIGIN=http://localhost:5173
+
+# AI & Mock Configuration
+GEMINI_API_KEY=your_gemini_api_key_here
+USE_MOCK_DB=false
 ```
 
 ## 🚀 After Updating
