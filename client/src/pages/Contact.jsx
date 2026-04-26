@@ -15,8 +15,8 @@ const INPUT_BASE =
 
 const CONTACT_INFO = [
     { icon: Mail, label: 'Email', value: 'viphacker.100.org@gmail.com' },
-    { icon: Phone, label: 'Support', value: '+1 (555) STUDY-HUB' },
-    { icon: MapPin, label: 'Headquarters', value: 'Tech City, Innovation District' },
+    { icon: Phone, label: 'Support', value: '+91 7389718429' },
+    { icon: MapPin, label: 'Headquarters', value: 'Madhya Pradesh, India' },
 ];
 
 const HELP_CARDS = [

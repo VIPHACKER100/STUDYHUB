@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-04-26
+
+### ✨ VIPHACKER.100 Branding & Security Hardening
+
+This update introduces the official branding of the developer and emphasizes the platform's security-first architecture.
+
+### Added
+- **Developer Identity** - Global footer now proudly features "Engineered by VIPHACKER.100" and connects to the developer's official channels.
+- **Meet the Developer** - A new, dedicated section in the About page detailing Aryan Ahirwar's cybersecurity background and technical arsenal.
+- **Cyber-Hardened Features** - Added a new pillar in the Features page to highlight the security-first architecture inspired by DarkWin-OS.
+- **SEO Optimization** - Added author metadata to the core application HTML.
+
+### Changed
+- **Contact Details** - Updated official support phone number and location.
+- **Icon Integrations** - Expanded the `lucide-react` icon set in the About page to support new visual elements.
+
 ## [1.5.1] - 2026-04-26
 
 ### ✨ Enhanced Authentication & Verification

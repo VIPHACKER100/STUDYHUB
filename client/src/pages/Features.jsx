@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
-    Zap, Users, Trophy, BookOpen, MessageSquare, Shield, ArrowRight, Sparkles, CheckCircle2 
+    Zap, Users, Trophy, BookOpen, MessageSquare, Shield, ArrowRight, Sparkles, CheckCircle2, Lock, Terminal 
 } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
@@ -203,6 +203,72 @@ const Features = () => {
                                 ))}
                             </div>
                         </Card>
+                    </motion.div>
+                </section>
+
+                {/* Pillar 4: Cyber-Hardened Foundation */}
+                <section className="grid lg:grid-cols-2 gap-20 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="order-2 lg:order-1"
+                    >
+                        <Card className="p-10 bg-slate-950 border-accent/20 relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <Terminal className="w-24 h-24 text-accent" />
+                            </div>
+                            <div className="space-y-6 relative z-10">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center border border-accent/30">
+                                        <Lock className="w-6 h-6 text-accent" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-white tracking-tight">Security-First Architecture</h3>
+                                </div>
+                                <div className="space-y-4">
+                                    <div className="h-2 bg-accent/10 rounded-full w-full overflow-hidden">
+                                        <motion.div 
+                                            initial={{ x: "-100%" }}
+                                            whileInView={{ x: "0%" }}
+                                            transition={{ duration: 2, ease: "easeInOut" }}
+                                            className="h-full bg-accent w-full"
+                                        />
+                                    </div>
+                                    <p className="text-sm text-slate-400 font-mono">
+                                        $ studyhub --audit-vulnerabilities<br/>
+                                        <span className="text-accent">SUCCESS:</span> All systems nominal. Hardened by VIPHACKER.100
+                                    </p>
+                                </div>
+                            </div>
+                        </Card>
+                    </motion.div>
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="order-1 lg:order-2"
+                    >
+                        <Badge variant="outline" className="mb-6 text-accent border-accent/20 uppercase tracking-widest">Architected for Trust</Badge>
+                        <h2 className="text-3xl md:text-5xl font-display text-foreground mb-8">Cyber-Hardened <span className="gradient-text">Foundation</span></h2>
+                        <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
+                            Built by a cybersecurity researcher, STUDYHUB goes beyond standard protocols. Our platform is designed with the same rigor used in ethical hacking labs.
+                        </p>
+                        <ul className="space-y-6">
+                            {[
+                                { icon: Shield, text: "Privacy-centric data encryption layers" },
+                                { icon: Lock, text: "Advanced API vulnerability shielding" },
+                                { icon: Terminal, text: "Inspired by DarkWin-OS security principles" }
+                            ].map((item, i) => (
+                                <li key={i} className="flex items-center gap-4 text-foreground group">
+                                    <div className="w-6 h-6 rounded-full bg-accent/10 text-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                        <item.icon className="w-3.5 h-3.5" />
+                                    </div>
+                                    <span className="font-medium">{item.text}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </motion.div>
                 </section>
             </div>

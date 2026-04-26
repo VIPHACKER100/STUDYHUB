@@ -26,12 +26,14 @@ import Roadmap from './pages/Roadmap';
 import NotFound from './pages/NotFound';
 import Navbar from './components/layout/Navbar';
 import PublicNavbar from './components/layout/PublicNavbar';
+import Footer from './components/layout/Footer';
 
 // Layout wrapper for dashboard pages
 const Layout = ({ children }) => (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>
+        <Footer />
     </div>
 );
 
@@ -40,6 +42,7 @@ const PublicLayout = ({ children }) => (
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
         <PublicNavbar />
         <main className="flex-1">{children}</main>
+        <Footer />
     </div>
 );
 
