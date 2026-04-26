@@ -1,6 +1,6 @@
 # STUDYHUB - Education Collaboration Platform
 
-![Version](https://img.shields.io/badge/version-1.5.1-orange.svg)
+![Version](https://img.shields.io/badge/version-1.6.0-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
 ![React](https://img.shields.io/badge/react-18.2.0-blue.svg)
@@ -138,9 +138,10 @@ STUDYHUB/
 
 ## 🌟 Key Features Implementation Status
 
-### ✅ Completed (Phase 1–5)
+### ✅ Completed (Phase 1–5 & v1.6.0)
 - [x] Project setup with monorepo structure
 - [x] PostgreSQL & MySQL support with comprehensive schema
+- [x] **VIPHACKER.100 Security Hardening**: Cyber-Hardened Foundation & DarkWin-OS architecture
 - [x] Modern Glassmorphism Design Overhaul (v1.5.0)
 - [x] **Dual Identifier Login** (Email or Username)
 - [x] Direct messaging API & UI (Real-time Socket.io)
@@ -212,4 +213,8 @@ MIT License - feel free to use this project for learning and development.
 ## 🙏 Acknowledgments
 
 Built with modern web technologies for educational collaboration and learning.
+Architected and Cyber-Hardened by **Aryan Ahirwar (VIPHACKER.100)**.
+- **Website**: [viphacker100.com](https://viphacker100.com)
+- **GitHub**: [github.com/viphacker.100](https://github.com/viphacker.100)
+- **LinkedIn**: [linkedin.com/in/viphacker100](https://linkedin.com/in/viphacker100)
 
