@@ -32,7 +32,7 @@ router.post('/reset-password', authLimiter, resetPassword);
 
 router.post('/login', [
     authLimiter,
-    check('email', 'Please include a valid email').isEmail(),
+    check('identifier', 'Email or username is required').not().isEmpty(),
     check('password', 'Password is required').exists()
 ], login);
 

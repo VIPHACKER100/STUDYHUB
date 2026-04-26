@@ -132,11 +132,10 @@ export const register = [
  */
 export const login = [
     // Validation
-    body('email')
+    body('identifier')
         .trim()
-        .isEmail()
-        .withMessage('Please provide a valid email')
-        .normalizeEmail(),
+        .notEmpty()
+        .withMessage('Email or username is required'),
 
     body('password')
         .notEmpty()
@@ -154,14 +153,22 @@ export const login = [
                 });
             }
 
-            const { email, password } = req.body;
+            const identifier = req.body.identifier || req.body.email;
+            const { password } = req.body;
+
+            if (!identifier) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Email or username is required',
+                });
+            }
 
             // Find user
-            const user = await User.findByEmail(email);
+            const user = await User.findByIdentifier(identifier);
             if (!user) {
                 return res.status(401).json({
                     success: false,
-                    message: 'Invalid email or password',
+                    message: 'Invalid email/username or password',
                 });
             }
 
@@ -178,7 +185,7 @@ export const login = [
             if (!isValidPassword) {
                 return res.status(401).json({
                     success: false,
-                    message: 'Invalid email or password',
+                    message: 'Invalid email/username or password',
                 });
             }
 

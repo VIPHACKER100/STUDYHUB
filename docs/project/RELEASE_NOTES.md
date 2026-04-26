@@ -1,5 +1,22 @@
 # StudyHub - Release Notes
 
+## 🚀 v1.5.1 Enhanced Authentication & Verification - April 2026
+
+We've released **v1.5.1**, focusing on login flexibility and platform verification.
+
+### ✨ What's New
+
+#### 🔐 Authentication Flexibility
+- **Dual Identifier Login** - You can now log in using either your **Email Address** or your **Username**.
+- **Streamlined UI** - The login form has been updated to support and clearly label the dual-identifier field.
+- **Robust Verification** - Implemented comprehensive automated tests for the entire authentication flow.
+
+#### 🛠️ Developer Improvements
+- **Mock DB Enhancements** - The virtual database layer now supports complex authentication queries, enabling better offline development.
+- **Test Stability** - Fixed registration validation issues in the test suite to ensure consistent "Green" builds.
+
+---
+
 ## 🚀 v1.5.0 Modern Design Rollout - April 2026
 
 We are excited to unveil **v1.5.0**, the "Modern Design Rollout." This version transforms StudyHub with a premium, state-of-the-art aesthetic and significant developer experience improvements.
@@ -198,9 +215,9 @@ MIT License - Free for educational use
 
 ---
 
-**Version**: 1.5.0  
+**Version**: 1.5.1  
 **Release Date**: April 26, 2026  
-**Status**: Modern Design Rollout ✅
+**Status**: Authentication Update ✅
 
 For support and issues, please refer to the documentation or create an issue in the repository.
 

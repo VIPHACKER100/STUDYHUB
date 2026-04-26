@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1] - 2026-04-26
+
+### ✨ Enhanced Authentication & Verification
+
+This update improves the login experience and verifies the platform's authentication integrity.
+
+### Added
+- **Dual Identifier Login** - Users can now log in using either their **Email Address** or **Username**.
+- **Backend Identifier Resolver** - New `findByIdentifier` logic in the User model to handle flexible authentication queries.
+- **Automated Auth Tests** - Comprehensive integration tests for registration, email login, username login, and credential failure.
+
+### Changed
+- **Login UI** - Updated the login form to reflect the new flexible identifier support.
+- **Auth Store** - Refactored state management to pass generic identifiers to the backend.
+
+### Fixed
+- **Registration Test Validation** - Resolved a bug in the test suite where missing role fields caused registration failures during automated testing.
+- **Mock DB Query Support** - Added support for OR-based SQL queries in the mock database layer.
+
 ## [1.5.0] - 2026-04-26
 
 ### ✨ Modern Design Rollout & UI Overhaul

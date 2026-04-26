@@ -30,6 +30,12 @@ export const mockQuery = async (text, params) => {
     const query = text.toLowerCase().trim();
     console.log('[MOCK DB] Executing:', query, params);
 
+    // AUTH: Find by Email or Username
+    if (query.includes('from users where email = $1 or username = $1')) {
+        const user = storage.users.find(u => u.email === params[0] || u.username === params[0]);
+        return { rows: user ? [user] : [] };
+    }
+
     // AUTH: Find by Email
     if (query.includes('from users where email = $1')) {
         const user = storage.users.find(u => u.email === params[0]);

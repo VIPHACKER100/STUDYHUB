@@ -6,14 +6,14 @@ Base URL: `http://localhost:5000/api`
 
 ### Register
 `POST /auth/register`
-- Body: `{ username, email, password }`
-- Returns: `{ user, token }`
+- Body: `{ username, email, password, fullName, role }`
+- Returns: `{ data: { user, token }, success, message }`
 - Rate Limit: 20 req / 15 min
 
 ### Login
 `POST /auth/login`
-- Body: `{ email, password }`
-- Returns: `{ user, token }`
+- Body: `{ identifier, password }` (identifier can be email or username)
+- Returns: `{ data: { user, token }, success, message }`
 - Rate Limit: 20 req / 15 min
 
 ### Get Current User

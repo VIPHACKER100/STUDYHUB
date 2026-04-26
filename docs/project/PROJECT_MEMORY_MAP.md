@@ -2,7 +2,7 @@
 
 This document is the living architectural reference for the StudyHub codebase. Update it whenever a new service, layer, or major component is added.
 
-**Last Updated:** April 26, 2026 | **Version:** 1.5.0
+**Last Updated:** April 26, 2026 | **Version:** 1.5.1
 
 ---
 
@@ -65,7 +65,7 @@ graph TD
 | **Testing** | Jest + Supertest | - | Unit & Integration Tests |
 | **Animations** | Framer Motion | Latest | Micro-animations & Transitions |
 | **AI Suite** | Google Gemini AI | Pro | Smart Summaries & Insights |
-| **Testing/Demo** | Mock DB Layer | v1.5.0 | Virtual Data for Dev/Demo |
+| **Testing/Demo** | Mock DB Layer | v1.5.1 | Virtual Data for Dev/Demo |
 | **PWA** | vite-plugin-pwa | - | Installable Web App |
 
 ---
@@ -190,8 +190,10 @@ STUDYHUB/
 ### 1. Authentication
 ```
 Register → Email Verification Token → sendVerificationEmail()
-         → /verify-email?token=X → JWT issued → localStorage
-         → Axios interceptor attaches Bearer token to all requests
+          → /verify-email?token=X → JWT issued → localStorage
+Login    → Dual Identifier Support (Email or Username)
+          → findByIdentifier() → SELECT * FROM users WHERE email = $1 OR username = $1
+          → Axios interceptor attaches Bearer token to all requests
 ```
 
 ### 2. File Upload & Caching
@@ -245,11 +247,11 @@ GET /api/leaderboard → Aggregate scores (Uploads*10 + RatingsAvg*5)
                      → Display in Leaderboard UI + Achievement Showcase
 ```
 
-### 9. Mock Database Initialization (v1.5.0)
+### 9. Mock Database Initialization (v1.5.1)
 ```
 Server Start → Check process.env.USE_MOCK_DB
              ├── true  → Initialize mockDb.js (Virtual JSON Store)
-             │         → Intercept database pool queries
+             │         → Intercept database pool queries (e.g., dual identifier login)
              │         → Return static demo data (Users, Rooms, Messages)
              └── false → Connect to live PostgreSQL / Redis
 ```

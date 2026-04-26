@@ -53,6 +53,20 @@ class User {
     }
 
     /**
+     * Find user by email or username
+     */
+    static async findByIdentifier(identifier) {
+        const result = await query(
+            `SELECT id, username, email, password_hash, role, full_name, 
+              avatar_url, is_verified, is_active
+       FROM users WHERE email = $1 OR username = $1`,
+            [identifier]
+        );
+
+        return result.rows[0];
+    }
+
+    /**
      * Find user by username
      */
     static async findByUsername(username) {

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import useAuthStore from '../stores/authStore';
-import { Mail, Lock, LogIn, BookOpen, Users, Sparkles, ArrowRight } from 'lucide-react';
+import { Mail, Lock, LogIn, BookOpen, Users, Sparkles, ArrowRight, User } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
 const INPUT_BASE =
@@ -14,11 +14,11 @@ const INPUT_BASE =
 export default function Login() {
     const navigate = useNavigate();
     const { login, loading } = useAuthStore();
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [formData, setFormData] = useState({ identifier: '', password: '' });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = await login(formData.email, formData.password);
+        const result = await login(formData.identifier, formData.password);
         if (result.success) {
             toast.success('Welcome back!');
             navigate('/dashboard');
@@ -89,14 +89,14 @@ export default function Login() {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
-                            <label className="block text-sm font-bold text-foreground mb-2">Email Address</label>
+                            <label className="block text-sm font-bold text-foreground mb-2">Email or Username</label>
                             <div className="relative">
-                                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                                <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                                 <input
-                                    type="email" name="email" value={formData.email}
+                                    type="text" name="identifier" value={formData.identifier}
                                     onChange={handleChange} required
                                     className={INPUT_BASE}
-                                    placeholder="you@example.com"
+                                    placeholder="you@example.com or username"
                                 />
                             </div>
                         </div>

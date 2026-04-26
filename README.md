@@ -1,6 +1,6 @@
 # STUDYHUB - Education Collaboration Platform
 
-![Version](https://img.shields.io/badge/version-1.5.0-orange.svg)
+![Version](https://img.shields.io/badge/version-1.5.1-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
 ![React](https://img.shields.io/badge/react-18.2.0-blue.svg)
@@ -142,6 +142,7 @@ STUDYHUB/
 - [x] Project setup with monorepo structure
 - [x] PostgreSQL & MySQL support with comprehensive schema
 - [x] Modern Glassmorphism Design Overhaul (v1.5.0)
+- [x] **Dual Identifier Login** (Email or Username)
 - [x] Direct messaging API & UI (Real-time Socket.io)
 - [x] Anonymous chat rooms with dynamic identity
 - [x] AI Content Recommendations & Smart PDF Summary

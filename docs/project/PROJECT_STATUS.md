@@ -1,7 +1,7 @@
 # StudyHub — Project Status
 
-**Platform Version:** 1.5.0  
-**Last Updated:** April 2026  
+**Platform Version:** 1.5.1  
+**Last Updated:** April 26, 2026  
 **Overall Status:** 🟢 Phase 5 Complete — Modern Design Rollout & AI Suite Active
 
 ---
@@ -23,6 +23,7 @@
 
 ### 🔐 Authentication & User Management
 - [x] JWT-based register / login / logout
+- [x] Dual Identifier Login (Email or Username)
 - [x] Email verification flow (token link, 24h expiry)
 - [x] Forgot password / Reset password (token link, 1h expiry)
 - [x] Role-based access control: `student`, `teacher`, `admin`

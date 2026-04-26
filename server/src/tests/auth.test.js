@@ -11,7 +11,8 @@ describe('Auth Endpoints', () => {
     const testUser = {
         username: 'test_user_' + Date.now(),
         email: `test${Date.now()}@example.com`,
-        password: 'password123'
+        password: 'password123',
+        role: 'student'
     };
 
     it('should register a new user', async () => {
@@ -23,31 +24,43 @@ describe('Auth Endpoints', () => {
             console.log('Register failed:', res.body);
         }
         expect(res.statusCode).toEqual(201);
-        expect(res.body).toHaveProperty('token');
-        expect(res.body.user).toHaveProperty('email', testUser.email);
+        expect(res.body.data).toHaveProperty('token');
+        expect(res.body.data.user).toHaveProperty('email', testUser.email);
     });
 
-    it('should login the user', async () => {
+    it('should login the user with email', async () => {
         const res = await request(app)
             .post('/api/auth/login')
             .send({
-                email: testUser.email,
+                identifier: testUser.email,
+                password: testUser.password
+            });
+ 
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.data).toHaveProperty('token');
+    });
+
+    it('should login the user with username', async () => {
+        const res = await request(app)
+            .post('/api/auth/login')
+            .send({
+                identifier: testUser.username,
                 password: testUser.password
             });
 
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('token');
+        expect(res.body.data).toHaveProperty('token');
     });
 
     it('should fail with invalid credentials', async () => {
         const res = await request(app)
             .post('/api/auth/login')
             .send({
-                email: testUser.email,
+                identifier: testUser.email,
                 password: 'wrongpassword'
             });
 
-        expect(res.statusCode).toEqual(400);
+        expect(res.statusCode).toEqual(401);
         expect(res.body.success).toBe(false);
     });
 });
